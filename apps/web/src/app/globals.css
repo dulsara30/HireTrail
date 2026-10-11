@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+:root {
+  /* Background */
+  --color-bg-page: #ffffff;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #fafafa;
+  --color-bg-muted: #f4f4f5;
+  --color-bg-inverse: #0d0d0d;
+  --color-bg-accent: #f5c518;
+  --color-bg-accent-subtle: #fef9e7;
+  --color-bg-success-subtle: #ecfdf5;
+  --color-bg-danger: #dc2626;
+  --color-bg-danger-subtle: #fef2f2;
+  --color-bg-disabled: #e4e4e7;
+
+  /* Text */
+  --color-text-primary: #0d0d0d;
+  --color-text-secondary: #71717a;
+  --color-text-tertiary: #a1a1aa;
+  --color-text-inverse: #ffffff;
+  --color-text-accent: #8a6d08;
+  --color-text-success: #047857;
+  --color-text-danger: #dc2626;
+  --color-text-disabled: #a1a1aa;
+
+  /* Border */
+  --color-border-default: #e4e4e7;
+  --color-border-strong: #d4d4d8;
+  --color-border-inverse: #0d0d0d;
+  --color-border-accent: #f5c518;
+  --color-border-danger: #fca5a5;
+
+  /* Tag Palette */
+  --color-tag-info-bg: #eff6ff;
+  --color-tag-info-text: #1d4ed8;
+  --color-tag-info-border: #bfdbfe;
+  --color-tag-purple-bg: #f5f3ff;
+  --color-tag-purple-text: #6d28d9;
+  --color-tag-purple-border: #ddd6fe;
+  --color-tag-success-border: #a7f3d0;
+  --color-tag-orange-bg: #fff7ed;
+  --color-tag-orange-text: #c2410c;
+  --color-tag-orange-border: #fed7aa;
+  --color-tag-teal-bg: #f0fdfa;
+  --color-tag-teal-text: #0f766e;
+  --color-tag-teal-border: #99f6e4;
+
+  /* Radius (from foundations) */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Elevation (exact Figma effects) */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 12px 32px -6px rgb(0 0 0 / 0.1);
+}
+
+@theme inline {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --spacing: 4px;
+
+  /* Colors */
+  --color-bg-page: var(--color-bg-page);
+  --color-bg-surface: var(--color-bg-surface);
+  --color-bg-subtle: var(--color-bg-subtle);
+  --color-bg-muted: var(--color-bg-muted);
+  --color-bg-inverse: var(--color-bg-inverse);
+  --color-bg-accent: var(--color-bg-accent);
+  --color-bg-accent-subtle: var(--color-bg-accent-subtle);
+  --color-bg-success-subtle: var(--color-bg-success-subtle);
+  --color-bg-danger: var(--color-bg-danger);
+  --color-bg-danger-subtle: var(--color-bg-danger-subtle);
+  --color-bg-disabled: var(--color-bg-disabled);
+
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-tertiary: var(--color-text-tertiary);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-text-accent: var(--color-text-accent);
+  --color-text-success: var(--color-text-success);
+  --color-text-danger: var(--color-text-danger);
+  --color-text-disabled: var(--color-text-disabled);
+
+  --color-border-default: var(--color-border-default);
+  --color-border-strong: var(--color-border-strong);
+  --color-border-inverse: var(--color-border-inverse);
+  --color-border-accent: var(--color-border-accent);
+  --color-border-danger: var(--color-border-danger);
+
+  --color-tag-info-bg: var(--color-tag-info-bg);
+  --color-tag-info-text: var(--color-tag-info-text);
+  --color-tag-info-border: var(--color-tag-info-border);
+  --color-tag-purple-bg: var(--color-tag-purple-bg);
+  --color-tag-purple-text: var(--color-tag-purple-text);
+  --color-tag-purple-border: var(--color-tag-purple-border);
+  --color-tag-success-border: var(--color-tag-success-border);
+  --color-tag-orange-bg: var(--color-tag-orange-bg);
+  --color-tag-orange-text: var(--color-tag-orange-text);
+  --color-tag-orange-border: var(--color-tag-orange-border);
+  --color-tag-teal-bg: var(--color-tag-teal-bg);
+  --color-tag-teal-text: var(--color-tag-teal-text);
+  --color-tag-teal-border: var(--color-tag-teal-border);
+
+  /* Radius */
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Shadow */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+}
+
+body {
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

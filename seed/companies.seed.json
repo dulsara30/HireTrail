@@ -1,0 +1,4692 @@
+{
+  "generatedAt": "2026-10-11",
+  "count": 173,
+  "companies": [
+    {
+      "name": "10Q BIT",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://10qbit.com",
+      "contactEmail": "careers@10qbit.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "10q-bit",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "10X Creative",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://10xcreative.lk",
+      "contactEmail": "careers@10xcreative.lk",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "10x-creative",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "4Axis Solutions",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2012",
+      "status": "Active",
+      "website": "https://4axissolutions.com",
+      "contactEmail": "careers@4axissolutions.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "4axis-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "4Elements Media",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://4elements.lk",
+      "contactEmail": "hr@4elements.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.5
+      },
+      "slug": "4elements-media",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "99Nex",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Digital creative and AI tool integration.",
+      "website": "https://99nex.com",
+      "contactEmail": "careers@99nex.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "99nex",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "99x",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2000",
+      "status": "Active",
+      "website": "https://99x.io",
+      "careersUrl": "https://careers.99x.io",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 9.0,
+        "overall": 8.75,
+        "scale": 9.5
+      },
+      "conflicts": {
+        "foundedYear": ["2000", "Pre-2023"]
+      },
+      "description": "Scandinavian focus. High-end product engineering, flat hierarchy, modern JS/Cloud stacks. Excellent cultural emphasis on work-life balance.",
+      "slug": "99x",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Aalpha Info Systems",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2007",
+      "status": "Active",
+      "website": "https://aalpha.net",
+      "contactEmail": "careers@aalpha.net",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 6.75
+      },
+      "slug": "aalpha-info-systems",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Activ8 Asia",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://activ8.lk",
+      "contactEmail": "careers@activ8.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "activ8-asia",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Addix",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://addix.io",
+      "contactEmail": "careers@addix.io",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 7.5
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"],
+        "website": ["addix.io", "addix.lk"]
+      },
+      "description": "SMEs focus. Agile, custom web/mobile apps. High code ownership and hands-on development.",
+      "slug": "addix",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Adelphoi Limited",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2016",
+      "status": "Active",
+      "website": "https://adelphoi.com",
+      "contactEmail": "hr@adelphoi.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "adelphoi-limited",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Adveccio",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://adveccio.com",
+      "contactEmail": "careers@adveccio.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "adveccio",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Ahex Technologies",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2009",
+      "status": "Active",
+      "website": "https://ahex.co",
+      "contactEmail": "careers@ahex.co",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 6.75
+      },
+      "slug": "ahex-technologies",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Akkenum Interactive",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://akkenum.com",
+      "contactEmail": "hr@akkenum.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 6.75
+      },
+      "slug": "akkenum-interactive",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Allion Technologies",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2007",
+      "status": "Active",
+      "website": "https://alliontechnologies.com",
+      "contactEmail": "careers@alliontechnologies.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25,
+        "scale": 8.0
+      },
+      "conflicts": {
+        "foundedYear": ["2007", "Pre-2023"]
+      },
+      "description": "Strong emphasis on QA automation and structured offshore development for enterprise clients.",
+      "slug": "allion-technologies",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Amplifyn",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2017",
+      "status": "Active",
+      "website": "https://amplifyn.com",
+      "contactEmail": "careers@amplifyn.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "amplifyn",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Anyura",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Software Engineering Intern (Paid).",
+      "hiringModel": "Remote. Actively recruiting globally.",
+      "description": "Solid entry point for US market exposure.",
+      "ratings": {
+        "appeal": 8.0
+      },
+      "slug": "anyura",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Apptron",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "description": "Remote",
+      "website": "https://apptron.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "apptron",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Apptron Solutions",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://apptron.net",
+      "contactEmail": "hr@apptron.net",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "apptron-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Arimac",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2013",
+      "status": "Activ",
+      "website": "https://arima",
+      "careersUrl": "https://caree",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 8.0
+      },
+      "conflicts": {
+        "foundedYear": ["2013", "Pre-2023"],
+        "status": ["Activ", "Active"],
+        "website": ["arima", "arimac.io"]
+      },
+      "description": "Digital experiences, AR/VR, gaming, and creative tech. Unique, vibrant culture focused on immersive technology.",
+      "slug": "arimac",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Ascentic",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2017",
+      "status": "Active",
+      "website": "https://ascentic.lk",
+      "contactEmail": "careers@ascentic.lk",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.5
+      },
+      "slug": "ascentic",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "AspireX",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Odoo functional consulting and development .",
+      "website": "https://aspirex.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "aspirex",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "ASTA",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Modern JS stack (React, Node, Next.js, AWS). Ships client code rapidly. High impact environment with no \"toy projects\" for interns.",
+      "website": "https://asta.lk",
+      "contactEmail": "careers@asta.lk",
+      "ratings": {
+        "scale": 8.0
+      },
+      "slug": "asta",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Avenir IT",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "QA and BA internships in Kandy.",
+      "website": "https://avenir.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "avenir-it",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Axiata Digital Labs",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://axiatadigitallabs.com",
+      "contactEmail": "careers@axiatadigitallabs.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.25
+      },
+      "slug": "axiata-digital-labs",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "BeetleCode",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Remote project management and development .",
+      "website": "https://beetlecode.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "beetlecode",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Beezet Group",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Cutting-edge technology solutions and digital innovation.",
+      "website": "https://beezet.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "beezet-group",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "BISTEC Global",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "Australia (SL Hub)",
+      "techFocus": "Intern – QA / Software Engineering . Accounting tech.",
+      "hiringModel": "Remote / Hybrid. Strong Australian client base.",
+      "description": "Structured learning environment.",
+      "website": "https://bistecglobal.com",
+      "ratings": {
+        "appeal": 7.5
+      },
+      "slug": "bistec-global",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Bloom",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Software Engineer Intern. Focuses on React, TypeScript, Python, and integrating LLM/RAG services.",
+      "hiringModel": "Remote via EOR. High-growth AI startup offering stipends and potential full-time return offers (PPOs).",
+      "description": "Exceptional learning curve in AI; requires strong REST API and Python skills.",
+      "contactEmail": "careers@bloomhq.ai",
+      "ratings": {
+        "appeal": 9.0
+      },
+      "slug": "bloom",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "BusinessFocus360",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2017",
+      "status": "Active",
+      "website": "https://businessfocus360.com",
+      "contactEmail": "careers@businessfocus360.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2017", "Pre-2023"]
+      },
+      "description": "Full stack development for business process automation.",
+      "slug": "businessfocus360",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Calcey Technologies",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2002",
+      "status": "Active",
+      "website": "https://calcey.com",
+      "contactEmail": "careers@calcey.com",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 9.0,
+        "overall": 8.75,
+        "scale": 9.5
+      },
+      "conflicts": {
+        "foundedYear": ["2002", "Pre-2023"]
+      },
+      "description": "Boutique software engineering firm. High standards, agile MVP development, great culture for full-stack and design-focused developers.",
+      "slug": "calcey-technologies",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Cambio Software Engineering",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2005",
+      "status": "Active",
+      "website": "https://cambiogroup.com",
+      "contactEmail": "hr@cambio.lk",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5,
+        "scale": 8.5
+      },
+      "description": "Swedish healthcare IT. Deep focus on Electronic Medical Records (EMR), patient data security, and long-term product stability.",
+      "slug": "cambio-software-engineering",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Celestial BI",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Business intelligence, backend Node/NestJS, React frontend architectures.",
+      "website": "https://celestialbi.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "celestial-bi",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Ceymplon",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2010",
+      "status": "Active",
+      "website": "https://ceymplon.lk",
+      "contactEmail": "hr@ceymplon.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 6.75,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2010", "Pre-2023"]
+      },
+      "description": "Jaffna-based software engineering.",
+      "slug": "ceymplon",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Chakray Consulting",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://chakray.com",
+      "contactEmail": "hr@chakray.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 7.5
+      },
+      "conflicts": {
+        "foundedYear": ["2015", "Pre-2023"]
+      },
+      "description": "WSO partner. Specializes in API management, integrations, and enterprise middleware solutions.",
+      "slug": "chakray-consulting",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "ChiOX Software",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://chiox.com",
+      "contactEmail": "careers@chiox.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"]
+      },
+      "description": "Associate and intern software engineering.",
+      "slug": "chiox-software",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Cipher Labz",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "ERP, HRM custom software. Makers of OpenSky ERP.",
+      "website": "https://cipherlabz.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "cipher-labz",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Cloud Solutions Int.",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://cloudsolutions.lk",
+      "contactEmail": "careers@cloudsolutions.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "cloud-solutions-int",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Code94 Labs",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://code94labs.com",
+      "contactEmail": "hello@code94labs.com",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 9.0,
+        "overall": 8.75
+      },
+      "slug": "code94-labs",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "CodeGen International",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1999",
+      "status": "Active",
+      "website": "https://codegen.co.uk",
+      "contactEmail": "careers@codegen.net",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 9.0,
+        "overall": 8.5,
+        "scale": 8.5
+      },
+      "conflicts": {
+        "foundedYear": ["1999", "Pre-2023"]
+      },
+      "description": "Heavyweight in travel tech and AI. Complex algorithmic work, proprietary reservation systems.",
+      "slug": "codegen-international",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Codimite",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://codimite.ai",
+      "careersUrl": "https://codimite.ai/careers/",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 8.0
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"],
+        "website": ["codimite.ai", "codimite.com"]
+      },
+      "description": "GCP and Golang specialists. Actively integrates AI workflows (Gemini Pro, n8n) into development. Hybrid setup in Nugegoda.",
+      "contactEmail": "careers@codimite.com",
+      "slug": "codimite",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Codrizon",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Colombo-based software engineering.",
+      "website": "https://codrizon.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "codrizon",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Corzent",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://corzent.com",
+      "contactEmail": "careers@corzent.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0
+      },
+      "slug": "corzent",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Creative Software",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1999",
+      "status": "Active",
+      "website": "https://creativesoftware.com",
+      "contactEmail": "careers@creativesoftware.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 7.0,
+        "overall": 7.75,
+        "scale": 8.5
+      },
+      "conflicts": {
+        "foundedYear": ["1999", "Pre-2023"]
+      },
+      "description": "Long-standing dedicated offshore teams. Excellent stability, diverse technologies, primarily serving a Scandinavian client base.",
+      "slug": "creative-software",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "CreativeX Technology",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://creativex.lk",
+      "contactEmail": "careers@creativex.lk",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2019", "Pre-2023"]
+      },
+      "description": "IT sales and software development .",
+      "slug": "creativex-technology",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Cyber Concepts",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2001",
+      "status": "Active",
+      "website": "https://cyberconcepts.lk",
+      "contactEmail": "careers@cyberconcepts.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.5
+      },
+      "slug": "cyber-concepts",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "CyphLab",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Flutter and mobile development .",
+      "website": "https://cyphlab.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "cyphlab",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Cyrus Information Tech",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Systems integrator, managed services, tech support.",
+      "website": "https://cyrus.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "cyrus-information-tech",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "DartCodes",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://dartcodes.com",
+      "contactEmail": "hr@dartcodes.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.5,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2020", "Pre-2023"]
+      },
+      "description": "Remote teams. Focus on MERN/NestJS, ML integrations. Fast learning curve.",
+      "slug": "dartcodes",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Data Mgt. Systems",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1977",
+      "status": "Active",
+      "website": "https://dms.lk",
+      "contactEmail": "hr@dms.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 6.0,
+        "overall": 6.75
+      },
+      "slug": "data-mgt-systems",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Delmege Group (IT)",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1850",
+      "status": "Active",
+      "website": "https://delmege.com",
+      "contactEmail": "hr@delmege.com",
+      "ratings": {
+        "culture": 6.0,
+        "workExperience": 6.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.0
+      },
+      "slug": "delmege-group-it",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Dijital Team",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://dijitalteam.com",
+      "contactEmail": "careers@dijitalteam.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "dijital-team",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "DirectFN",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2000",
+      "status": "Active",
+      "website": "https://directfn.com",
+      "contactEmail": "careers@directfn.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 7.0,
+        "overall": 7.75,
+        "scale": 8.5
+      },
+      "conflicts": {
+        "foundedYear": ["2000", "Pre-2023"]
+      },
+      "description": "Heavy enterprise Java focus. Builds complex financial software, trading platforms, and market data solutions.",
+      "slug": "directfn",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "DirectPay",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Fast-growing local fintech startup (matured). Focus on secure payment gateways and financial compliance.",
+      "website": "https://directpay.lk",
+      "ratings": {
+        "scale": 8.0
+      },
+      "slug": "directpay",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Durowave",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://durowave.com",
+      "contactEmail": "hr@durowave.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2020", "Pre-2023"]
+      },
+      "description": "Cyber security (SOC) and engineering.",
+      "slug": "durowave",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "dxdy",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://dxdy.tech",
+      "contactEmail": "careers@dxdy.tech",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"]
+      },
+      "description": "Full stack and AI integration focused engineering.",
+      "slug": "dxdy",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "eBEYONDS",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2008",
+      "status": "Active",
+      "website": "https://ebeyonds.com",
+      "careersUrl": "https://ebeyonds.com/careers",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "ebeyonds",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "eFutures",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2000",
+      "status": "Active",
+      "website": "https://efuturesworld.com",
+      "contactEmail": "careers@efuturesworld.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5,
+        "scale": 7.5
+      },
+      "conflicts": {
+        "foundedYear": ["2000", "Pre-2023"]
+      },
+      "description": "Long-standing IT firm. Senior data engineering, Azure Databricks, PySpark.",
+      "slug": "efutures",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "eHealthcare Solutions",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://ehealthcare.lk",
+      "contactEmail": "hr@ehealthcare.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"]
+      },
+      "description": "Healthcare software products.",
+      "slug": "ehealthcare-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Enhanzer",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Digital solutions in Negombo.",
+      "website": "https://enhanzer.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "enhanzer",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Envision Studio",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Game development studio. Good for Unity/C# developers.",
+      "website": "https://envisionstudio.lk",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "envision-studio",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Epic Technology Group",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1998",
+      "status": "Active",
+      "website": "https://epictechnology.lk",
+      "contactEmail": "careers@epiclanka.net",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "epic-technology-group",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "EverestX",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://everestx.com",
+      "contactEmail": "careers@everestx.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"]
+      },
+      "description": "Odoo consulting and engineering.",
+      "slug": "everestx",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Excelly Labs",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://excelly.io",
+      "contactEmail": "hello@excelly.io",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "excelly-labs",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Exe.lk",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Python, FastAPI, React/Next.js stack. Remote-friendly, prototyping and R&D focus.",
+      "website": "https://exe.lk",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "exe-lk",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Exline Labs",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://exlinelabs.com",
+      "contactEmail": "careers@exlinelabs.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "exline-labs",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Eyepax IT Consulting",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Agile development with European roots. IOT, ML, Blockchain exposure.",
+      "website": "https://eyepax.com",
+      "ratings": {
+        "scale": 7.5
+      },
+      "slug": "eyepax-it-consulting",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Fcode Labs",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://fcodelabs.com",
+      "careersUrl": "https://fcodelabs.com/careers",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 9.0,
+        "overall": 8.5,
+        "scale": 8.5
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"]
+      },
+      "description": "Specializes in AI, IoT, and health-tech. Singapore/Sri Lanka based. High technical agility and hardware-soft ware integration.",
+      "slug": "fcode-labs",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "FinTech Hive (Moneta)",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Fast-growing local fintech. Modern architecture and agile delivery.",
+      "website": "https://moneta.lk",
+      "contactEmail": "hr@moneta.lk",
+      "ratings": {
+        "scale": 7.5
+      },
+      "slug": "fintech-hive-moneta",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Fortude",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2012",
+      "status": "Active",
+      "website": "https://fortude.co",
+      "contactEmail": "ftd-careers@fortude.co",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 8.0
+      },
+      "conflicts": {
+        "foundedYear": ["2012", "Pre-2023"]
+      },
+      "description": "Infor ERP ecosystem experts. Strong in business intelligence, manufacturing tech, and global implementations.",
+      "slug": "fortude",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Freeleaps",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Software Developer Intern.",
+      "hiringModel": "Fully Remote. Entry level.",
+      "description": "Good for initial remote experience.",
+      "ratings": {
+        "appeal": 7.0
+      },
+      "slug": "freeleaps",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Gapstars",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://gapstars.net",
+      "careersUrl": "https://gapstars.net/tech/careers",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 9.0,
+        "overall": 8.75
+      },
+      "slug": "gapstars",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Garlic Collective",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://garliccollective.com",
+      "contactEmail": "hr@garliccollective.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"]
+      },
+      "description": "Remote full stack software engineering.",
+      "slug": "garlic-collective",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Genesiis Software",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2000",
+      "status": "Active",
+      "website": "https://genesiis.com",
+      "contactEmail": "hr@genesiis.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "genesiis-software",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "GenO3",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://geno3.com",
+      "contactEmail": "careers@geno3.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25,
+        "scale": 6.5
+      },
+      "description": "Software engineering internships and business dev.",
+      "slug": "geno3",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Goodhope Asia",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2008",
+      "status": "Active",
+      "website": "https://goodhopeholdings.com",
+      "contactEmail": "hr@goodhopeholdings.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 6.0,
+        "overall": 6.75,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2008", "Pre-2023"]
+      },
+      "description": "Internal IT division of a large corporation. .NET full stack, stable environment.",
+      "slug": "goodhope-asia",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Graffon",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://graffon.lk",
+      "contactEmail": "careers@graffon.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 7.5
+      },
+      "conflicts": {
+        "foundedYear": ["2019", "Pre-2023"]
+      },
+      "description": "Polyglot development environment. Hybrid work, values rapid feature delivery and problem-solving over fixed tech stacks.",
+      "slug": "graffon",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "H Connect International",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2012",
+      "status": "Active",
+      "website": "https://hconnectint.com",
+      "contactEmail": "careers@hconnectint.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "h-connect-international",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "H2O.ai",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Global AI/ML product company with a strong Colombo presence. Highly technical environment for machine learning engineering.",
+      "website": "https://h2o.ai",
+      "ratings": {
+        "scale": 9.5
+      },
+      "slug": "h2o-ai",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Hatchyard",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://hatchyard.io",
+      "contactEmail": "hr@hatchyard.io",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2020", "Pre-2023"],
+        "website": ["hatchyard.io", "hatchyard.com"]
+      },
+      "description": "Node.js, AWS Cloud, serverless architectures.",
+      "slug": "hatchyard",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "hSenid",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1997",
+      "status": "Active",
+      "website": "https://hsenid.com",
+      "contactEmail": "careers@hsenid.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "hsenid",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "hSenid Mobile Solutions",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Core telecom and HRIS solutions. Legacy of strong software engineering practices in SL.",
+      "website": "https://hsenid.com",
+      "contactEmail": "itprofessionals@mobitel.lk",
+      "ratings": {
+        "scale": 8.5
+      },
+      "slug": "hsenid-mobile-solutions",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "i-HiddenTalent",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://ihiddentalent.com",
+      "contactEmail": "hr@ihiddentalent.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "i-hiddentalent",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "IFS",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1983",
+      "status": "Active",
+      "website": "https://ifs.com",
+      "careersUrl": "https://ifs.com/en/contact-us",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 10.0,
+        "learning": 8.0,
+        "overall": 8.75,
+        "scale": 9.5
+      },
+      "conflicts": {
+        "foundedYear": ["1983", "Pre-2023"]
+      },
+      "description": "Swedish ERP giant with a massive Colombo R&D center. Excellent for long-term career stability, enterprise software, and supply chain tech.",
+      "slug": "ifs",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "IGT1",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://igt1.com",
+      "contactEmail": "hr@igt1.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "igt1",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "iLabs",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "US Silicon Valley clients. Modern web/AI stacks. Works US hours, providing high remuneration (e.g., LKR 120,000 for juniors).",
+      "website": "https://ilabs.lk",
+      "contactEmail": "careers@ilabs.lk",
+      "ratings": {
+        "scale": 8.0
+      },
+      "slug": "ilabs",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Imigap",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://imigap.com",
+      "contactEmail": "careers@imigap.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 6.75
+      },
+      "slug": "imigap",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "InEight",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://ineight.com",
+      "contactEmail": "hr@ineight.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 7.0,
+        "overall": 7.75
+      },
+      "slug": "ineight",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Infinitude",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Kurunegala-based web, mobile, and AI solutions.",
+      "website": "https://infinitude.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "infinitude",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Informatics Group",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1983",
+      "status": "Active",
+      "website": "https://informatics.lk",
+      "contactEmail": "careers@informatics.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "informatics-group",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Infosoft",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Offshore software development focusing on custom telecom apps.",
+      "website": "https://infosoft.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "infosoft",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Insighture",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2016",
+      "status": "Active",
+      "website": "https://insighture.com",
+      "contactEmail": "careers@insighture.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 8.0
+      },
+      "conflicts": {
+        "foundedYear": ["2016", "Pre-2023"]
+      },
+      "description": "Cloud consulting and app modernization. Focus on legacy migration and modern cloud-native architecture.",
+      "slug": "insighture",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Intel Corporation",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Software Engineering - Intern, Graduate.",
+      "hiringModel": "Remote/Hy brid (Select global locations).",
+      "description": "Elite hardware/s oftware giant.",
+      "website": "https://intel.com",
+      "ratings": {
+        "appeal": 9.5
+      },
+      "slug": "intel-corporation",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "IT MARTX",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Web and mobile development with a decade of global client history.",
+      "website": "https://itmartx.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "it-martx",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "ITX Digital Services",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Tailored IT solutions for small businesses.",
+      "website": "https://itxdigital.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "itx-digital-services",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Jasmin Media",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://jasminmedia.com",
+      "contactEmail": "careers@jasminmedia.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "jasmin-media",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "JIT Resourcing",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2000",
+      "status": "Active",
+      "website": "https://jit.lk",
+      "contactEmail": "hr@jit.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2000", "Pre-2023"]
+      },
+      "description": "Middleware and platform engineering resourcing. Wide enterprise client base.",
+      "slug": "jit-resourcing",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Kaishi Innovations",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://kaishi.io",
+      "contactEmail": "careers@kaishi.io",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"]
+      },
+      "description": "Full-stack, mobile, UI/UX internships.",
+      "slug": "kaishi-innovations",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Konnect Net",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://konnectnet.com",
+      "contactEmail": "hr@konnectnet.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "konnect-net",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "LAMENEE",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States (NY)",
+      "techFocus": "Software Engineer Intern.",
+      "hiringModel": "Fully Remote. Fast-paced startup.",
+      "description": "Direct exposure to US startup culture.",
+      "ratings": {
+        "appeal": 7.5
+      },
+      "slug": "lamenee",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "LetX Technologies",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Scalable solutions from basic sites to advanced systems.",
+      "website": "https://letxtechnologies.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "letx-technologies",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "LKProfessionals",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Jaffna-based end-to-end IT services.",
+      "website": "https://lkprofessionals.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "lkprofessionals",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Loons Lab",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2016",
+      "status": "Active",
+      "website": "https://loonslab.com",
+      "contactEmail": "careers@loonslab.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 9.0,
+        "overall": 8.0,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2016", "Pre-2023"]
+      },
+      "description": "Custom software targeting SMEs and public sectors. Agile team.",
+      "slug": "loons-lab",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "LSEG Technology",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1996",
+      "status": "Active",
+      "website": "https://lseg.com",
+      "careersUrl": "https://lseg.com/careers",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 9.0,
+        "learning": 9.0,
+        "overall": 8.75,
+        "scale": 10.0
+      },
+      "conflicts": {
+        "foundedYear": ["1996", "Pre-2023"]
+      },
+      "description": "London Stock Exchange Group. Mission-critical financial systems, C++, Java. Unmatched focus on ultra-low latency and rigorous QA.",
+      "slug": "lseg-technology",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "LUNARTECH",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Software Engineering Internship.",
+      "hiringModel": "Fully Remote. Data and software engineering 26.",
+      "description": "Fast growing, modern data stacks.",
+      "ratings": {
+        "appeal": 7.5
+      },
+      "slug": "lunartech",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Maytech",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Australian subsidiary. Ecommerce, web dev, and IT project recovery.",
+      "website": "https://maytech.com.au",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "maytech",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "MCS Software",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2016",
+      "status": "Active",
+      "website": "https://mcs.lk",
+      "contactEmail": "careers@mcs.lk",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "mcs-software",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Microimage",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Pioneers in HR tech and broadcast solutions. Good stability and domain expertise.",
+      "website": "https://microimage.com",
+      "ratings": {
+        "scale": 8.0
+      },
+      "slug": "microimage",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Mitra Innovation",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2014",
+      "status": "Active",
+      "website": "https://mitrai.com",
+      "contactEmail": "careers@mitrai.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 8.5
+      },
+      "conflicts": {
+        "foundedYear": ["2014", "Pre-2023"]
+      },
+      "description": "Cloud-first approach. Heavy focus on AWS, middleware, and digital transformation for UK and global enterprises.",
+      "slug": "mitra-innovation",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Muve Mobility",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "DevOps and mobility solutions based in Kandy.",
+      "website": "https://muve.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "muve-mobility",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Neon Labz",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://neonlabz.com",
+      "contactEmail": "careers@neonlabz.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.0
+      },
+      "conflicts": {
+        "foundedYear": ["2020", "Pre-2023"]
+      },
+      "description": "Jaffna-based web and software internships.",
+      "slug": "neon-labz",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Nexzoa",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://nexzoa.dev",
+      "contactEmail": "careers@nexzoa.dev",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "nexzoa",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Nimi",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://nimi.com",
+      "contactEmail": "careers@nimi.com",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 8.0
+      },
+      "slug": "nimi",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Omnilogics Limited",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://omnilogics.com",
+      "contactEmail": "careers@omnilogics.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2015", "Pre-2023"],
+        "website": ["omnilogics.com", "omnilogics.lk"]
+      },
+      "description": "Business analysis and IT project management .",
+      "slug": "omnilogics-limited",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Orysys Limited",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://orysys.com",
+      "contactEmail": "careers@orysys.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "orysys-limited",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "ParentPay Group",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "EdTech platform engineering (Colombo Hybrid). Solid product-focused environment.",
+      "website": "https://parentpay.com",
+      "ratings": {
+        "scale": 8.0
+      },
+      "slug": "parentpay-group",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "PayHere",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Leading online payment gateway. High focus on API integrations ande-commerce tech.",
+      "website": "https://payhere.lk",
+      "ratings": {
+        "scale": 8.0
+      },
+      "slug": "payhere",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Pearson Lanka",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Global ed-tech leader. Heavy engineering focus on scalable educational platforms, big data analytics, and cloud infrastructure.",
+      "website": "https://pearson.com",
+      "ratings": {
+        "scale": 9.0
+      },
+      "slug": "pearson-lanka",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Pegotec",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Singaporean firm with SL base. Tailored web/mobile solutions.",
+      "website": "https://pegotec.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "pegotec",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "PickMe (Tech)",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://pickme.lk",
+      "contactEmail": "careers@pickme.lk",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 9.0,
+        "learning": 9.0,
+        "overall": 8.75
+      },
+      "slug": "pickme-tech",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "PragICTS",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2016",
+      "status": "Active",
+      "website": "https://pragicts.com",
+      "contactEmail": "careers@pragicts.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "pragicts",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Purple Software",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://purple.lk",
+      "contactEmail": "careers@purple.lk",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "purple-software",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Regalia Solutions",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Innovative business growth solutions and web tech.",
+      "website": "https://regaliasolutions.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "regalia-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Residue Solutions",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://residuesolutions.com",
+      "contactEmail": "hr@residuesolutions.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 7.5
+      },
+      "conflicts": {
+        "foundedYear": ["2019", "Pre-2023"]
+      },
+      "description": "Solid engineering firm in Ja-Ela. Active hiring for modern web (React, Spring Boot) and AI data roles. Great SDLC exposure.",
+      "slug": "residue-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Rootcode",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2014",
+      "status": "Active",
+      "website": "https://rootcode.ai",
+      "careersUrl": "https://rootcode.ai/careers",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 10.0,
+        "overall": 9.0,
+        "scale": 9.0
+      },
+      "conflicts": {
+        "foundedYear": ["2014", "Pre-2023"],
+        "website": ["rootcode.ai", "rootcode.io"]
+      },
+      "description": "Rapidly growing product engineering firm. Heavy integration of AI, excellent UI/UX focus, strong internship acceleration programs.",
+      "slug": "rootcode",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Sapirox",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Matara based. Regional tech company specializing in React, .NET, Azure.",
+      "website": "https://sapirox.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "sapirox",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Sathuta Builders (IT)",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2000",
+      "status": "Active",
+      "website": "https://sathuta.net",
+      "contactEmail": "hr@sathuta.net",
+      "ratings": {
+        "culture": 6.0,
+        "workExperience": 6.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.0
+      },
+      "slug": "sathuta-builders-it",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Sathuta International",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Kurunegala-based software development.",
+      "website": "https://sathuta.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "sathuta-international",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "ScriptForge Solutions",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://scriptforge.com",
+      "contactEmail": "careers@scriptforge.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"],
+        "website": ["scriptforge.com", "scriptforgesolutions.com"],
+        "contactEmail": ["careers@scriptforge.com", "careers@scriptforgesolutions.com"]
+      },
+      "description": "Focuses on Java, SDLC, MySQL. Fully remote internships available. Solid foundation building.",
+      "slug": "scriptforge-solutions",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Seya Solutions",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Digital partner fore-commerce and UI/UX.",
+      "website": "https://seyasolutions.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "seya-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Shift Solutions",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Embedded systems and machine learning engineering.",
+      "website": "https://shiftsolutions.lk",
+      "ratings": {
+        "scale": 7.5
+      },
+      "slug": "shift-solutions",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Silverline IT",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Remote QA and Flutter/iOS engineering.",
+      "website": "https://silverlineit.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "silverline-it",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "SiTechra",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Leading Jaffna-based software development firm.",
+      "website": "https://sitechra.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "sitechra",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Softmint Software",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Local software development agency.",
+      "website": "https://softmint.net",
+      "contactEmail": "careers@softmint.net",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "softmint-software",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "SpeedITnet",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Legacy IT firm in Jaffna.",
+      "website": "https://speeditnet.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "speeditnet",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "SPIL Labs",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Software and ML solutions. Nugegoda based. Good for blending web dev with Python ML.",
+      "website": "https://spillabs.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "spil-labs",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Surge Global",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2014",
+      "status": "Active",
+      "website": "https://surge.global",
+      "contactEmail": "careers@surge.global",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 8.5
+      },
+      "conflicts": {
+        "foundedYear": ["2014", "Pre-2023"]
+      },
+      "description": "Digital consulting and engineering. Works on high-visibility global projects. Fast-paced, modern web stacks, strong marketing-tech crossover.",
+      "slug": "surge-global",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Synapsys",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2006",
+      "status": "Active",
+      "website": "https://synapsys.lk",
+      "contactEmail": "hr@synapsys.lk",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "synapsys",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Synergen Health",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2011",
+      "status": "Active",
+      "website": "https://synergenhealth.com",
+      "contactEmail": "careers@synergenhealth.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 7.0,
+        "overall": 7.75
+      },
+      "slug": "synergen-health",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Syntelligence IT",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Gampaha-based web solutions provider.",
+      "website": "https://syntelligenceit.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "syntelligence-it",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Sysco LABS",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2013",
+      "status": "Active",
+      "website": "https://syscolabs.lk",
+      "contactEmail": "slinfo@sysco.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 10.0,
+        "learning": 9.0,
+        "overall": 9.0,
+        "scale": 10.0
+      },
+      "conflicts": {
+        "foundedYear": ["2013", "Pre-2023"],
+        "contactEmail": ["slinfo@sysco.com", "careers-sl@syscolabs.com"]
+      },
+      "description": "Global captive for Sysco. Deep Java, Node, CI/CD focus. Elite USD-pegged benefits, paid birthday leave. Steep learning curve in enterprise scaling.",
+      "careersUrl": "https://wd5.myworkdaysite.com/en-US/recruiting/sysco/syscocareers",
+      "slug": "sysco-labs",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "T S Technologies",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "IT support and infrastructure .",
+      "website": "https://tstechnologies.lk",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "t-s-technologies",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Tallium",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://tallium.com",
+      "contactEmail": "careers@tallium.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "tallium",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Talvin",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://talvin.ai",
+      "contactEmail": "careers@talvin.ai",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.0,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2020", "Pre-2023"],
+        "website": ["talvin.ai", "talvin.com"]
+      },
+      "description": "Senior engineering roles, Java, Spring Boot, IFS consulting.",
+      "slug": "talvin",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "TechGropse",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Mobile app development specialists (UAE roots).",
+      "website": "https://techgropse.com",
+      "ratings": {
+        "scale": 7.0
+      },
+      "slug": "techgropse",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Techno Ltd",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2010",
+      "status": "Active",
+      "website": "https://technoltd.com",
+      "contactEmail": "hr@technoltd.com",
+      "ratings": {
+        "culture": 6.0,
+        "workExperience": 6.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.0
+      },
+      "slug": "techno-ltd",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Techseya",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Gampaha-based software and digital innovation.",
+      "website": "https://techseya.com",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "techseya",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "TekGeeks",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2017",
+      "status": "Active",
+      "website": "https://tekgeeks.net",
+      "contactEmail": "hr@tekgeeks.net",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "tekgeeks",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Teknowledge",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://eteknowledge.com",
+      "contactEmail": "info@eteknowledge.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0
+      },
+      "slug": "teknowledge",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Telexar Technologies",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://telexar.com",
+      "contactEmail": "careers@telexar.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75
+      },
+      "slug": "telexar-technologies",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Tesla",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Internship, Fullstack Engineer, AI Tooling.",
+      "hiringModel": "Remote/Hy brid. Fast growing AI division.",
+      "description": "Pinnacle of AI tooling and automated systems.",
+      "website": "https://tesla.com",
+      "ratings": {
+        "appeal": 10.0
+      },
+      "slug": "tesla",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Theiavora",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://theiavora.com",
+      "contactEmail": "hr@theiavora.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25,
+        "scale": 6.0
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"]
+      },
+      "description": "Remote software developer internships.",
+      "slug": "theiavora",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "TryU Global",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://tryuglobal.com",
+      "contactEmail": "hr@tryuglobal.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"],
+        "website": ["tryuglobal.com", "tryu.global"]
+      },
+      "description": "Junior software engineering roles in Colombo.",
+      "slug": "tryu-global",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "VCNET Total IT",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Matara-based systems integration and web solutions.",
+      "website": "https://vcnet.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "vcnet-total-it",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Verdentra",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://verdentra.com",
+      "contactEmail": "careers@verdentra.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.75,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"]
+      },
+      "description": "Tech leads and engineering roles.",
+      "slug": "verdentra",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Veyrion",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Activ",
+      "website": "https://veyri",
+      "contactEmail": "hr@v",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"],
+        "status": ["Activ", "Active"],
+        "website": ["veyri", "veyrion.com"]
+      },
+      "description": "Full stack associate positions.",
+      "slug": "veyrion",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Vijins Lanka",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2015",
+      "status": "Active",
+      "website": "https://vijins.com",
+      "contactEmail": "careers@vijins.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.5,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2015", "Pre-2023"]
+      },
+      "description": "Python engineering internships.",
+      "slug": "vijins-lanka",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Virtusa",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "1996",
+      "status": "Active",
+      "website": "https://virtusa.com",
+      "careersUrl": "https://virtusa.com/careers",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 8.0,
+        "overall": 7.5,
+        "scale": 9.0
+      },
+      "conflicts": {
+        "foundedYear": ["1996", "Pre-2023"]
+      },
+      "description": "Massive global system integrator. Unmatched enterprise exposure across diverse domains (finance, healthcare). Highly structured environment.",
+      "slug": "virtusa",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Vital Systems Eng.",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "IT infrastructure and networking security.",
+      "website": "https://vitalsystems.lk",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "vital-systems-eng",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "VS ONEWORLD",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2017",
+      "status": "Active",
+      "website": "https://vsoneworld.com",
+      "contactEmail": "careers@vsoneworld.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25,
+        "scale": 7.5
+      },
+      "conflicts": {
+        "foundedYear": ["2017", "Pre-2023"]
+      },
+      "description": "Systems integrations and full-stack engineering. Strong regional presence.",
+      "slug": "vs-oneworld",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Vyzze Global",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://vyzzeglobal.com",
+      "contactEmail": "careers@vyzzeglobal.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "vyzze-global",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Waterlily Labs",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Activ",
+      "website": "https://water",
+      "contactEmail": "hr@w",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2021", "Pre-2023"],
+        "status": ["Activ", "Active"],
+        "website": ["water", "waterlilylabs.com"]
+      },
+      "description": "Focus on .NET and Mid-to-Senior level engineering. Good structural practices.",
+      "slug": "waterlily-labs",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Webtezza",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Remote UI/UX and QA.",
+      "website": "https://webtezza.com",
+      "ratings": {
+        "scale": 6.0
+      },
+      "slug": "webtezza",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "WEX",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "United States",
+      "techFocus": "Fullstack Software Engineer Intern. React, C#/.NET, Cloud microservices, TDD/BDD.",
+      "hiringModel": "Remote via EOR. 13-week paid summer internship program ($27-$35/hr equivalent) 0.",
+      "description": "Elite compensati on, massive global commerce platform, exceptional mentorship 0.",
+      "contactEmail": "gtaonboarding@wexinc.com",
+      "ratings": {
+        "appeal": 9.5
+      },
+      "slug": "wex",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "White Cloak Technologies",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "FOREIGN",
+      "country": "Philippines / US",
+      "techFocus": "Software Engineer Intern. Building production software.",
+      "hiringModel": "Remote. Premium, fast-growing tech firm.",
+      "description": "Strong cross-cultural engineering team.",
+      "ratings": {
+        "appeal": 8.0
+      },
+      "slug": "white-cloak-technologies",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "WSO2",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2005",
+      "status": "Active",
+      "website": "https://wso2.com",
+      "careersUrl": "https://wso2.com/careers",
+      "ratings": {
+        "culture": 9.0,
+        "workExperience": 10.0,
+        "salary": 9.0,
+        "learning": 10.0,
+        "overall": 9.5
+      },
+      "slug": "wso2",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Xaventra",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2020",
+      "status": "Active",
+      "website": "https://xaventra.com",
+      "contactEmail": "hr@xaventra.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "xaventra",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Xeynergy",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2021",
+      "status": "Active",
+      "website": "https://xeynergy.com",
+      "contactEmail": "careers@xeynergy.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.25
+      },
+      "slug": "xeynergy",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Xiteb",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2010",
+      "status": "Active",
+      "website": "https://xiteb.com",
+      "contactEmail": "careers@xiteb.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 6.0,
+        "learning": 6.0,
+        "overall": 6.5
+      },
+      "slug": "xiteb",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Xitricon",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://xitricon.com",
+      "contactEmail": "hr@xitricon.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 8.0,
+        "learning": 7.0,
+        "overall": 7.75,
+        "scale": 7.0
+      },
+      "conflicts": {
+        "foundedYear": ["2018", "Pre-2023"]
+      },
+      "description": "Enterprise solutions and structured software engineering.",
+      "slug": "xitricon",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "ZaVolt",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2018",
+      "status": "Active",
+      "website": "https://zavolt.com",
+      "contactEmail": "careers@zavolt.",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 8.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.5
+      },
+      "slug": "zavolt",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Zetta B",
+      "sources": [
+        "AI research report: Sri_Lanka_SE_Job_Search.pdf",
+        "AI research report: Sri_Lanka_SE_Job_Search_1.pdf"
+      ],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2019",
+      "status": "Active",
+      "website": "https://zettab.com",
+      "contactEmail": "careers@zettab.com",
+      "ratings": {
+        "culture": 7.0,
+        "workExperience": 7.0,
+        "salary": 7.0,
+        "learning": 7.0,
+        "overall": 7.0,
+        "scale": 6.5
+      },
+      "conflicts": {
+        "foundedYear": ["2019", "Pre-2023"]
+      },
+      "description": "Kandy-based software engineering.",
+      "slug": "zetta-b",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Zone24x7",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search_1.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "2004",
+      "status": "Active",
+      "website": "https://zone24x7.com",
+      "contactEmail": "careers@zone24x7.com",
+      "ratings": {
+        "culture": 8.0,
+        "workExperience": 9.0,
+        "salary": 8.0,
+        "learning": 8.0,
+        "overall": 8.25
+      },
+      "slug": "zone24x7",
+      "tier": "A",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    },
+    {
+      "name": "Zuse Technologies",
+      "sources": ["AI research report: Sri_Lanka_SE_Job_Search.pdf"],
+      "region": "LOCAL",
+      "country": "Sri Lanka",
+      "foundedYear": "Pre-2023",
+      "status": "Active",
+      "description": "Software engineering, heavy SLIIT alumni presence.",
+      "website": "https://zuse.lk",
+      "ratings": {
+        "scale": 6.5
+      },
+      "slug": "zuse-technologies",
+      "tier": "B",
+      "verification": {
+        "status": "UNVERIFIED",
+        "score": null,
+        "checkedAt": null,
+        "note": "Imported from an AI-written research report. Values may be wrong or outdated."
+      },
+      "isGlobal": true
+    }
+  ]
+}

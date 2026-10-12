@@ -15,6 +15,7 @@ import { Button } from '../../atoms/Button';
 import { Chip } from '../../atoms/Chip';
 import { Skeleton } from '../../atoms/Skeleton';
 import { Spinner } from '../../atoms/Spinner';
+import { ProLockBanner } from '../../molecules/ProLockBanner/ProLockBanner';
 import { CompanyCombobox } from './CompanyCombobox';
 import {
   draftToFormValues,
@@ -251,66 +252,73 @@ export const ApplicationCreateForm: React.FC<ApplicationCreateFormProps> = ({
     <AiContext.Provider value={{ draft, edited }}>
       <form onSubmit={handleSave} className="space-y-6">
         {/* AI autofill */}
-        <section
-          aria-labelledby="ai-box-title"
-          className="space-y-3 rounded-xl border border-border-accent bg-bg-accent-subtle p-4"
-        >
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-text-accent" aria-hidden="true" />
-            <h3 id="ai-box-title" className="text-sm font-bold text-text-primary">
-              Autofill with AI
-            </h3>
-            <Badge color="accent">PRO</Badge>
-          </div>
-          <p className="text-xs text-text-secondary">
-            Paste a job link or the whole job post. Every field below is filled for you to check.
-          </p>
-          <textarea
-            value={aiInput}
-            onChange={(e) => setAiInput(e.target.value)}
-            rows={4}
-            aria-label="Job link or job post text"
-            placeholder="https://… or paste the full job post here"
-            className={inputClass}
-            disabled={!isPro || autofill.isPending}
+        {!isPro ? (
+          <ProLockBanner
+            feature="Autofill with AI"
+            description="Paste a job link or the whole job post and every field is filled in for you to check."
           />
-          {autofill.isPending && (
-            <div className="space-y-2" role="status" aria-live="polite">
-              <p className="text-xs font-medium text-text-secondary">Reading the post…</p>
-              <Skeleton className="h-3 w-3/4" />
-              <Skeleton className="h-3 w-1/2" />
+        ) : (
+          <section
+            aria-labelledby="ai-box-title"
+            className="space-y-3 rounded-xl border border-border-accent bg-bg-accent-subtle p-4"
+          >
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4 text-text-accent" aria-hidden="true" />
+              <h3 id="ai-box-title" className="text-sm font-bold text-text-primary">
+                Autofill with AI
+              </h3>
+              <Badge color="accent">PRO</Badge>
             </div>
-          )}
-          {aiNotice && (
-            <p role="alert" className="text-xs text-text-accent">
-              {aiNotice}
+            <p className="text-xs text-text-secondary">
+              Paste a job link or the whole job post. Every field below is filled for you to check.
             </p>
-          )}
-          {aiErrorText && (
-            <p role="alert" className="text-xs text-text-danger">
-              {aiErrorText}
-            </p>
-          )}
-          <div className="flex justify-end">
-            {isPro ? (
-              <Button
-                type="button"
-                variant="accent"
-                size="sm"
-                onClick={runAutofill}
-                disabled={!aiInput.trim() || autofill.isPending}
-              >
-                <Sparkles className="h-4 w-4" aria-hidden="true" />
-                Autofill
-              </Button>
-            ) : (
-              <Button type="button" variant="secondary" size="sm" disabled title="PRO feature">
-                <Lock className="h-3.5 w-3.5" aria-hidden="true" />
-                PRO only
-              </Button>
+            <textarea
+              value={aiInput}
+              onChange={(e) => setAiInput(e.target.value)}
+              rows={4}
+              aria-label="Job link or job post text"
+              placeholder="https://… or paste the full job post here"
+              className={inputClass}
+              disabled={!isPro || autofill.isPending}
+            />
+            {autofill.isPending && (
+              <div className="space-y-2" role="status" aria-live="polite">
+                <p className="text-xs font-medium text-text-secondary">Reading the post…</p>
+                <Skeleton className="h-3 w-3/4" />
+                <Skeleton className="h-3 w-1/2" />
+              </div>
             )}
-          </div>
-        </section>
+            {aiNotice && (
+              <p role="alert" className="text-xs text-text-accent">
+                {aiNotice}
+              </p>
+            )}
+            {aiErrorText && (
+              <p role="alert" className="text-xs text-text-danger">
+                {aiErrorText}
+              </p>
+            )}
+            <div className="flex justify-end">
+              {isPro ? (
+                <Button
+                  type="button"
+                  variant="accent"
+                  size="sm"
+                  onClick={runAutofill}
+                  disabled={!aiInput.trim() || autofill.isPending}
+                >
+                  <Sparkles className="h-4 w-4" aria-hidden="true" />
+                  Autofill
+                </Button>
+              ) : (
+                <Button type="button" variant="secondary" size="sm" disabled title="PRO feature">
+                  <Lock className="h-3.5 w-3.5" aria-hidden="true" />
+                  PRO only
+                </Button>
+              )}
+            </div>
+          </section>
+        )}
 
         {isAiDraft && (
           <div

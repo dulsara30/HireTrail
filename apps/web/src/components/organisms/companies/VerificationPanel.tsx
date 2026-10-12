@@ -9,6 +9,7 @@ import { VerificationBadge } from '../../molecules/VerificationBadge/Verificatio
 import { Badge } from '../../atoms/Badge';
 import { Button } from '../../atoms/Button';
 import { Spinner } from '../../atoms/Spinner';
+import { ProLockBanner } from '../../molecules/ProLockBanner/ProLockBanner';
 import { FIELD_LABELS, daysAgo } from '../../../utils/helpers/verification';
 
 interface VerificationPanelProps {
@@ -84,6 +85,13 @@ export const VerificationPanel: React.FC<VerificationPanelProps> = ({ company })
           </Button>
         )}
       </div>
+
+      {!isPro && (
+        <ProLockBanner
+          feature="Company data accuracy check"
+          description="Compare a company's details with public sources and get an accuracy score."
+        />
+      )}
 
       {verifyMutation.isPending && (
         <p className="text-xs text-text-secondary" role="status">

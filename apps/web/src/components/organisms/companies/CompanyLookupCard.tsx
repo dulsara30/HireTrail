@@ -7,6 +7,7 @@ import { useCreateCompany } from '../../../api/hooks/mutations/useCreateCompany'
 import { Badge } from '../../atoms/Badge';
 import { Button } from '../../atoms/Button';
 import { Spinner } from '../../atoms/Spinner';
+import { ProLockBanner } from '../../molecules/ProLockBanner/ProLockBanner';
 
 interface CompanyLookupCardProps {
   name: string;
@@ -58,7 +59,14 @@ export const CompanyLookupCard: React.FC<CompanyLookupCardProps> = ({ name }) =>
         </h3>
       </div>
 
-      {!result && (
+      {!isPro && (
+        <ProLockBanner
+          feature="AI company lookup"
+          description="Find a company's website, location and a short profile from public sources."
+        />
+      )}
+
+      {isPro && !result && (
         <div className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"

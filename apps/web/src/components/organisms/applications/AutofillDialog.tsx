@@ -6,6 +6,7 @@ import { useAutofill } from '../../../api/hooks/mutations/useAutofill';
 import { Badge } from '../../atoms/Badge';
 import { Button } from '../../atoms/Button';
 import { Skeleton } from '../../atoms/Skeleton';
+import { ProLockBanner } from '../../molecules/ProLockBanner/ProLockBanner';
 
 interface AutofillDialogProps {
   onClose: () => void;
@@ -87,127 +88,141 @@ export const AutofillDialog: React.FC<AutofillDialogProps> = ({ onClose, onDraft
           </Button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-5 space-y-4">
-          <div role="tablist" className="inline-flex p-1 bg-bg-muted rounded-lg gap-1">
-            {(
-              [
-                ['text', 'Paste job post'],
-                ['url', 'Job link'],
-              ] as Array<[Tab, string]>
-            ).map(([key, label]) => (
-              <button
-                key={key}
-                type="button"
-                role="tab"
-                aria-selected={tab === key}
-                onClick={() => setTab(key)}
-                className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-                  tab === key
-                    ? 'bg-bg-accent text-text-primary'
-                    : 'text-text-secondary hover:text-text-primary'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
+        {!isPro ? (
+          <div className="space-y-4 p-5">
+            <ProLockBanner
+              feature="Autofill with AI"
+              description="Paste a job link or the whole job post and every field is filled in for you to check."
+            />
+            <div className="flex justify-end">
+              <Button type="button" variant="secondary" onClick={onClose}>
+                Close
+              </Button>
+            </div>
           </div>
-
-          {tab === 'text' ? (
-            <div className="space-y-1">
-              <label
-                htmlFor="autofill-text"
-                className="text-xs font-semibold uppercase text-text-secondary"
-              >
-                Job post text
-              </label>
-              <textarea
-                id="autofill-text"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                maxLength={AI_TEXT_MAX}
-                rows={9}
-                placeholder="Paste the full job post here…"
-                className={inputClass}
-              />
-              <p className="text-[11px] text-text-tertiary text-right">
-                {text.length.toLocaleString()} / {AI_TEXT_MAX.toLocaleString()}
-              </p>
+        ) : (
+          <form onSubmit={handleSubmit} className="p-5 space-y-4">
+            <div role="tablist" className="inline-flex p-1 bg-bg-muted rounded-lg gap-1">
+              {(
+                [
+                  ['text', 'Paste job post'],
+                  ['url', 'Job link'],
+                ] as Array<[Tab, string]>
+              ).map(([key, label]) => (
+                <button
+                  key={key}
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === key}
+                  onClick={() => setTab(key)}
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
+                    tab === key
+                      ? 'bg-bg-accent text-text-primary'
+                      : 'text-text-secondary hover:text-text-primary'
+                  }`}
+                >
+                  {label}
+                </button>
+              ))}
             </div>
-          ) : (
-            <div className="space-y-1">
-              <label
-                htmlFor="autofill-url"
-                className="text-xs font-semibold uppercase text-text-secondary"
-              >
-                Job link
-              </label>
-              <div className="relative">
-                <Link2
-                  className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-tertiary"
-                  aria-hidden="true"
+
+            {tab === 'text' ? (
+              <div className="space-y-1">
+                <label
+                  htmlFor="autofill-text"
+                  className="text-xs font-semibold uppercase text-text-secondary"
+                >
+                  Job post text
+                </label>
+                <textarea
+                  id="autofill-text"
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  maxLength={AI_TEXT_MAX}
+                  rows={9}
+                  placeholder="Paste the full job post here…"
+                  className={inputClass}
                 />
-                <input
-                  id="autofill-url"
-                  type="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="https://…"
-                  className={`${inputClass} pl-9`}
-                />
+                <p className="text-[11px] text-text-tertiary text-right">
+                  {text.length.toLocaleString()} / {AI_TEXT_MAX.toLocaleString()}
+                </p>
               </div>
-              <p className="text-[11px] text-text-secondary">
-                Some sites like LinkedIn block reading. If it fails, paste the text.
-              </p>
-            </div>
-          )}
+            ) : (
+              <div className="space-y-1">
+                <label
+                  htmlFor="autofill-url"
+                  className="text-xs font-semibold uppercase text-text-secondary"
+                >
+                  Job link
+                </label>
+                <div className="relative">
+                  <Link2
+                    className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-tertiary"
+                    aria-hidden="true"
+                  />
+                  <input
+                    id="autofill-url"
+                    type="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    placeholder="https://…"
+                    className={`${inputClass} pl-9`}
+                  />
+                </div>
+                <p className="text-[11px] text-text-secondary">
+                  Some sites like LinkedIn block reading. If it fails, paste the text.
+                </p>
+              </div>
+            )}
 
-          {notice && (
-            <p
-              role="alert"
-              className="text-xs text-text-accent bg-bg-accent-subtle border border-border-accent rounded-md px-3 py-2"
-            >
-              {notice}
-            </p>
-          )}
-          {errorText && (
-            <div
-              role="alert"
-              className="text-xs text-text-danger bg-bg-danger-subtle border border-border-danger rounded-md px-3 py-2 flex items-center justify-between gap-3"
-            >
-              <span>{errorText}</span>
-              {error?.code === 'AI_UNAVAILABLE' && (
-                <Button type="button" size="sm" variant="secondary" onClick={onManual}>
-                  Fill manually
+            {notice && (
+              <p
+                role="alert"
+                className="text-xs text-text-accent bg-bg-accent-subtle border border-border-accent rounded-md px-3 py-2"
+              >
+                {notice}
+              </p>
+            )}
+            {errorText && (
+              <div
+                role="alert"
+                className="text-xs text-text-danger bg-bg-danger-subtle border border-border-danger rounded-md px-3 py-2 flex items-center justify-between gap-3"
+              >
+                <span>{errorText}</span>
+                {error?.code === 'AI_UNAVAILABLE' && (
+                  <Button type="button" size="sm" variant="secondary" onClick={onManual}>
+                    Fill manually
+                  </Button>
+                )}
+              </div>
+            )}
+
+            {autofill.isPending && (
+              <div className="space-y-2" role="status" aria-live="polite">
+                <p className="text-xs font-medium text-text-secondary">Reading the post…</p>
+                <Skeleton className="h-4 w-3/4" />
+                <Skeleton className="h-4 w-1/2" />
+              </div>
+            )}
+
+            <div className="flex justify-end gap-2 pt-1">
+              <Button type="button" variant="ghost" onClick={onClose}>
+                Cancel
+              </Button>
+              {isPro ? (
+                <Button type="submit" variant="accent" disabled={!canSubmit || autofill.isPending}>
+                  <Sparkles className="h-4 w-4" aria-hidden="true" />
+                  Autofill
+                </Button>
+              ) : (
+                <Button type="button" variant="secondary" disabled title="PRO feature">
+                  <Lock className="h-4 w-4" aria-hidden="true" />
+                  PRO only
                 </Button>
               )}
             </div>
-          )}
-
-          {autofill.isPending && (
-            <div className="space-y-2" role="status" aria-live="polite">
-              <p className="text-xs font-medium text-text-secondary">Reading the post…</p>
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-4 w-1/2" />
-            </div>
-          )}
-
-          <div className="flex justify-end gap-2 pt-1">
-            <Button type="button" variant="ghost" onClick={onClose}>
-              Cancel
-            </Button>
-            {isPro ? (
-              <Button type="submit" variant="accent" disabled={!canSubmit || autofill.isPending}>
-                <Sparkles className="h-4 w-4" aria-hidden="true" />
-                Autofill
-              </Button>
-            ) : (
-              <Button type="button" variant="secondary" disabled title="PRO feature">
-                <Lock className="h-4 w-4" aria-hidden="true" />
-                PRO only
-              </Button>
-            )}
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </div>
   );

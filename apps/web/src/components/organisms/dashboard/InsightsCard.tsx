@@ -6,6 +6,7 @@ import { useRefreshInsights } from '../../../api/hooks/mutations/useRefreshInsig
 import { Badge } from '../../atoms/Badge';
 import { Button } from '../../atoms/Button';
 import { Spinner } from '../../atoms/Spinner';
+import { ProLockBanner } from '../../molecules/ProLockBanner/ProLockBanner';
 
 function refreshError(err: { code?: string; message?: string; details?: unknown }): string {
   if (err.code === 'RATE_LIMITED') {
@@ -66,9 +67,10 @@ export const InsightsCard: React.FC = () => {
       </div>
 
       {!isPro && (
-        <p className="text-sm text-text-secondary">
-          Upgrade to PRO for a short weekly read of what your numbers say and what to try next.
-        </p>
+        <ProLockBanner
+          feature="Weekly AI insights"
+          description="A short weekly read of what your numbers say and what to try next."
+        />
       )}
       {refresh.isPending && (
         <p role="status" className="text-xs text-text-secondary">

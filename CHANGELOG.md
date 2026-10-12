@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed (plan gating)
+
+- FREE users now see a clear locked "Upgrade to PRO to access AI features" banner instead of AI inputs (new-application AI box, Autofill dialog, company accuracy check, AI company lookup, weekly insights). The API already blocked these with `PLAN_REQUIRED`.
+
 ### Added (Phase 8 and 9)
 
 - **Admin** (`/api/v1/admin`, ADMIN only, enforced by the API): user list with search and filters, user detail (metadata and counts only), plan change and suspend/reactivate with a required reason (suspension revokes all sessions in the same transaction), global company list and merge, apply verification suggestions to global companies, audit-log viewer and AI usage totals. Every admin action writes an append-only audit log entry. Web: `/admin/users`, `/admin/companies`, `/admin/audit`, `/admin/ai-usage` with infinite-scroll lists and a sidebar Admin section.

@@ -125,3 +125,5 @@ Format: `[priority S=security / C=core / N=nice] what is tested - where`
 - [priority N] ImportWizard: upload, mapping suggestions, unknown-options notice, sample errors, result summary; file over 1 MB blocked client side - apps/web/src/components/organisms/applications/ImportWizard.test.tsx
 - [priority N] InsightsCard: PRO lock, refresh disabled until nextRefreshAt, RATE_LIMITED message; OnboardingTips dismiss persists - apps/web/src/components/organisms/dashboard/InsightsCard.test.tsx
 - [priority N] Mobile (360 px) and keyboard pass on sidebar, admin tables, import wizard and configuration page (Playwright) - apps/web/e2e/mobile.spec.ts
+- [priority N] FREE plan sees the ProLockBanner (no inputs, no AI calls) in the new-application form, Autofill dialog, company accuracy panel, AI company lookup and weekly insights; PRO plan sees the working feature - apps/web/src/components/molecules/ProLockBanner/ProLockBanner.test.tsx
+- [priority S] Every AI endpoint (autofill, verify, ai-lookup, insights, insights refresh) returns 403 PLAN_REQUIRED for a FREE user even when the UI is bypassed - apps/api/src/modules/ai/**tests**/ai.routes.test.ts

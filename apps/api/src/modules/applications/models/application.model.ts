@@ -61,6 +61,7 @@ export interface ApplicationDoc extends Document {
   coverLetter: boolean;
   contactEmail?: string;
   resumeUrl?: string;
+  resumeName?: string;
   jobUrl?: string;
   jobDescription?: {
     html?: string;
@@ -100,6 +101,7 @@ const applicationSchema = new Schema<ApplicationDoc>(
     coverLetter: { type: Boolean, default: false },
     contactEmail: { type: String, trim: true, lowercase: true, maxlength: 254 },
     resumeUrl: { type: String, trim: true, maxlength: 2000 },
+    resumeName: { type: String, trim: true, maxlength: 200 },
     jobUrl: { type: String, trim: true },
     jobDescription: {
       html: { type: String },

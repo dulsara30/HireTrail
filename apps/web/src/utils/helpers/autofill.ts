@@ -72,6 +72,7 @@ export interface DraftFormValues {
   jobUrl: string;
   contactEmail: string;
   resumeUrl: string;
+  resumeName: string;
   workModeId: string;
   jobTypeId: string;
   levelId: string;
@@ -98,6 +99,7 @@ export function draftToFormValues(draft: AutofillDraftDto, statusId: string): Dr
     jobUrl: draft.jobUrl ?? '',
     contactEmail: draft.contactEmail ?? '',
     resumeUrl: '',
+    resumeName: '',
     workModeId: draft.workModeId ?? '',
     jobTypeId: draft.jobTypeId ?? '',
     levelId: draft.levelId ?? '',
@@ -142,6 +144,7 @@ export function formValuesToCreateInput(
     jobUrl: values.jobUrl.trim() || null,
     contactEmail: values.contactEmail.trim() || null,
     resumeUrl: values.resumeUrl.trim() || null,
+    resumeName: values.resumeUrl.trim() ? values.resumeName.trim() || null : null,
     jobDescriptionHtml: description ? sourceTextToHtml(description) : null,
     salary: hasSalary
       ? {

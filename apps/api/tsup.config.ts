@@ -6,7 +6,7 @@ import { defineConfig } from 'tsup';
  */
 export default defineConfig({
   entry: { index: 'src/index.ts' },
-  outDir: 'api',
+  outDir: 'bundle',
   format: ['cjs'],
   platform: 'node',
   target: 'node22',

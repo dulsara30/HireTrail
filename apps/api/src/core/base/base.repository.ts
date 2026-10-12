@@ -1,4 +1,11 @@
-import { type Model, type FilterQuery, type UpdateQuery, type Document, Types } from 'mongoose';
+import {
+  type Model,
+  type FilterQuery,
+  type UpdateQuery,
+  type Document,
+  Types,
+  trusted,
+} from 'mongoose';
 import { type PageInfo, type CursorPaginationQuery, DEFAULT_PAGE_SIZE } from '@hiretrail/shared';
 import { ConflictError, NotFoundError } from '../errors/domain-errors';
 import { Cursor } from '../http/cursor';
@@ -38,7 +45,9 @@ export abstract class BaseRepository<TDoc extends VersionedDocument> {
     if (pagination.cursor) {
       const decoded = Cursor.decode<{ _id: string }>(pagination.cursor);
       if (decoded?._id && Types.ObjectId.isValid(decoded._id)) {
-        query._id = { $lt: new Types.ObjectId(decoded._id) } as unknown as FilterQuery<TDoc>['_id'];
+        query._id = trusted({
+          $lt: new Types.ObjectId(decoded._id),
+        }) as unknown as FilterQuery<TDoc>['_id'];
       }
     }
 

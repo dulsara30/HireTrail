@@ -65,7 +65,7 @@ Conventions:
 | POST   | `/applications/:id/undo-delete`          | 🔒    | allowed for 10 minutes                                                                                                                                                                                             |
 | GET    | `/applications/:id/activities`           | 🔒    | `?type=history\|all&cursor`                                                                                                                                                                                        |
 | GET    | `/applications/export`                   | 🔒    | same filters as list. Streams `text/csv` with formula-safe values                                                                                                                                                  |
-| POST   | `/applications/import/preview`           | 🔒    | multipart CSV ≤ 1 MB, ≤ 1,000 rows → parsed rows + errors + mapping suggestions                                                                                                                                    |
+| POST   | `/applications/import/preview`           | 🔒    | raw `text/csv` body (`?fileName=`) ≤ 1 MB, ≤ 1,000 rows → parsed rows + errors + mapping suggestions                                                                                                               |
 | POST   | `/applications/import/commit`            | 🔒    | `{ importId, mapping }`                                                                                                                                                                                            |
 
 ## Comments
@@ -89,7 +89,7 @@ Conventions:
 | PUT    | `/companies/:id/my-notes`                 | 🔒       | `{ myRating, notesHtml }`                                                                                                                                                                   |
 | POST   | `/companies/:id/verify`                   | 🔒 ⭐ ✉️ | Synchronous (up to ~60 s). 200 with the verification result. 429 `RATE_LIMITED` with `resetsAt` if this user re-checked it in the last 24 h. 502 `AI_UNAVAILABLE` on Gemini limits/timeouts |
 | GET    | `/companies/:id/verifications`            | 🔒       | history (PRO sees details, FREE sees status only)                                                                                                                                           |
-| POST   | `/companies/:id/verifications/:vid/apply` | 🔒       | owner of private company applies suggestions; global → admin route                                                                                                                          |
+| POST   | `/companies/:id/verifications/:vid/apply` | 🔒       | owner of private company applies suggestions; global → 403, use the admin route                                                                                                             |
 | POST   | `/companies/ai-lookup`                    | 🔒 ⭐ ✉️ | `{ name, hint? }` → AI profile draft with sources and `isAiResult: true` (not saved)                                                                                                        |
 
 ## AI
@@ -121,7 +121,7 @@ Conventions:
 | POST   | `/admin/companies` / PATCH `/admin/companies/:id` | global companies                                                        |
 | POST   | `/admin/companies/import`                         | seed JSON upload, dry-run first: `?dryRun=true`                         |
 | POST   | `/admin/companies/:id/merge`                      | `{ intoId }` moves applications and aliases                             |
-| POST   | `/admin/companies/:id/verifications/:vid/apply`   | apply suggestions to a global company                                   |
+| POST   | `/admin/companies/:id/verifications/:vid/apply`   | `{ fields, reason }` apply suggestions to a global company → audit log  |
 | GET    | `/admin/audit-logs`                               | cursor                                                                  |
 | GET    | `/admin/ai-usage`                                 | daily totals                                                            |
 

@@ -41,6 +41,39 @@ import { ApplicationCommandService } from '../../modules/applications/services/a
 import { ApplicationQueryService } from '../../modules/applications/services/application-query.service';
 import { ApplicationController } from '../../modules/applications/controllers/application.controller';
 
+import { UserCompanyNotesRepository } from '../../modules/companies/repositories/user-company-notes.repository';
+import { DashboardAggregationService } from '../../modules/dashboard/services/dashboard-aggregation.service';
+import { DashboardController } from '../../modules/dashboard/controllers/dashboard.controller';
+
+import { type AiProvider } from '../ports/ai-provider.port';
+import { type WebPageFetcher } from '../ports/web-page-fetcher.port';
+import { GeminiAiProvider } from '../../infrastructure/ai/gemini/gemini.ai-provider';
+import { UnconfiguredAiProvider } from '../../infrastructure/ai/unconfigured.ai-provider';
+import { SafeWebPageFetcher } from '../../infrastructure/fetcher/safe-web-page-fetcher';
+import { AiFeature } from '@hiretrail/shared';
+import { AiUsageRepository } from '../../modules/ai/repositories/ai-usage.repository';
+import { AiQuotaService } from '../../modules/ai/services/ai-quota.service';
+import { AutofillService } from '../../modules/ai/services/autofill.service';
+import { AiController } from '../../modules/ai/controllers/ai.controller';
+import { CompanyVerificationRepository } from '../../modules/companies/repositories/company-verification.repository';
+import { AiLookupCacheRepository } from '../../modules/companies/repositories/ai-lookup-cache.repository';
+import { CompanyVerificationService } from '../../modules/companies/services/company-verification.service';
+import { CompanyLookupService } from '../../modules/companies/services/company-lookup.service';
+import { CompanyAiController } from '../../modules/companies/controllers/company-ai.controller';
+
+import { AuditLogRepository } from '../../modules/admin/repositories/audit-log.repository';
+import { AdminUserService } from '../../modules/admin/services/admin-user.service';
+import { AdminCompanyService } from '../../modules/admin/services/admin-company.service';
+import { AdminReportsService } from '../../modules/admin/services/admin-reports.service';
+import { AdminController } from '../../modules/admin/controllers/admin.controller';
+import { ImportRepository } from '../../modules/applications/repositories/import.repository';
+import { ApplicationExportService } from '../../modules/applications/services/application-export.service';
+import { ApplicationImportService } from '../../modules/applications/services/application-import.service';
+import { ApplicationDataController } from '../../modules/applications/controllers/application-data.controller';
+import { AiInsightsRepository } from '../../modules/dashboard/repositories/ai-insights.repository';
+import { DashboardInsightsService } from '../../modules/dashboard/services/dashboard-insights.service';
+import { AccountService } from '../../modules/users/services/account.service';
+
 export class Container {
   private static instance: Container | null = null;
 
@@ -49,6 +82,8 @@ export class Container {
   public readonly passwordHasher: PasswordHasher;
   public readonly tokenSigner: TokenSigner;
   public readonly mailer: Mailer;
+  public readonly aiProvider: AiProvider;
+  public readonly webPageFetcher: WebPageFetcher;
 
   // Repositories
   public readonly userRepo: UserRepository;
@@ -56,6 +91,7 @@ export class Container {
   public readonly tokenRepo: OneTimeTokenRepository;
   public readonly optionRepo: OptionRepository;
   public readonly companyRepo: CompanyRepository;
+  public readonly companyNotesRepo: UserCompanyNotesRepository;
   public readonly activityRepo: ActivityRepository;
   public readonly commentRepo: CommentRepository;
   public readonly applicationRepo: ApplicationRepository;
@@ -70,6 +106,7 @@ export class Container {
   public readonly commentService: CommentService;
   public readonly applicationCommandService: ApplicationCommandService;
   public readonly applicationQueryService: ApplicationQueryService;
+  public readonly dashboardService: DashboardAggregationService;
 
   // Middleware
   public readonly authenticate: RequestHandler;
@@ -83,6 +120,11 @@ export class Container {
   public readonly activityController: ActivityController;
   public readonly commentController: CommentController;
   public readonly applicationController: ApplicationController;
+  public readonly dashboardController: DashboardController;
+  public readonly aiController: AiController;
+  public readonly companyAiController: CompanyAiController;
+  public readonly adminController: AdminController;
+  public readonly applicationDataController: ApplicationDataController;
 
   private constructor() {
     this.clock = new SystemClock();
@@ -102,11 +144,22 @@ export class Container {
       this.mailer = new ResendMailer(config.email.apiKey, config.email.from);
     }
 
+    this.aiProvider =
+      config.ai.enabled && config.ai.geminiApiKey
+        ? new GeminiAiProvider(
+            config.ai.geminiApiKey,
+            { extract: config.ai.modelExtract, grounded: config.ai.modelGrounded },
+            config.ai.toolsWithSchema,
+          )
+        : new UnconfiguredAiProvider();
+    this.webPageFetcher = new SafeWebPageFetcher();
+
     this.userRepo = new UserRepository();
     this.sessionRepo = new SessionRepository();
     this.tokenRepo = new OneTimeTokenRepository();
     this.optionRepo = new OptionRepository();
     this.companyRepo = new CompanyRepository();
+    this.companyNotesRepo = new UserCompanyNotesRepository();
     this.activityRepo = new ActivityRepository();
     this.commentRepo = new CommentRepository();
     this.applicationRepo = new ApplicationRepository();
@@ -115,7 +168,11 @@ export class Container {
 
     this.optionCommandService = new OptionCommandService(this.optionRepo);
     this.optionQueryService = new OptionQueryService(this.optionRepo);
-    this.companyService = new CompanyService(this.companyRepo);
+    this.companyService = new CompanyService(
+      this.companyRepo,
+      this.companyNotesRepo,
+      this.applicationRepo,
+    );
     this.commentService = new CommentService(this.commentRepo, this.activityRepo);
     this.applicationCommandService = new ApplicationCommandService(
       this.applicationRepo,
@@ -128,6 +185,7 @@ export class Container {
       this.optionRepo,
       this.companyRepo,
     );
+    this.dashboardService = new DashboardAggregationService();
 
     this.authCommandService = new AuthCommandService(
       this.userRepo,
@@ -166,11 +224,17 @@ export class Container {
       config.appEnv === 'production',
       config.cookieSecret,
     );
+    const exportService = new ApplicationExportService(
+      this.applicationQueryService,
+      this.optionRepo,
+    );
+    const accountService = new AccountService(exportService);
     this.meController = new MeController(
       this.userRepo,
       this.sessionRepo,
       this.authCommandService,
       this.passwordHasher,
+      accountService,
     );
     this.optionController = new OptionController(
       this.optionCommandService,
@@ -182,6 +246,69 @@ export class Container {
     this.applicationController = new ApplicationController(
       this.applicationCommandService,
       this.applicationQueryService,
+    );
+
+    const aiUsageRepo = new AiUsageRepository();
+    const aiQuotaService = new AiQuotaService(aiUsageRepo, this.clock, {
+      enabled: config.ai.enabled,
+      globalDailyLimit: config.ai.globalDailyLimit,
+      perFeature: {
+        [AiFeature.AUTOFILL]: config.ai.quotas.autofill,
+        [AiFeature.COMPANY_VERIFY]: config.ai.quotas.companyVerify,
+        [AiFeature.COMPANY_LOOKUP]: config.ai.quotas.companyLookup,
+        [AiFeature.INSIGHTS]: config.ai.quotas.insights,
+      },
+    });
+    const autofillService = new AutofillService(
+      this.aiProvider,
+      this.webPageFetcher,
+      aiQuotaService,
+      this.optionRepo,
+      this.companyRepo,
+    );
+    this.aiController = new AiController(autofillService, aiQuotaService);
+
+    this.dashboardController = new DashboardController(
+      this.dashboardService,
+      this.activityRepo,
+      new DashboardInsightsService(
+        this.aiProvider,
+        aiQuotaService,
+        this.dashboardService,
+        new AiInsightsRepository(),
+        this.clock,
+      ),
+    );
+
+    this.applicationDataController = new ApplicationDataController(
+      exportService,
+      new ApplicationImportService(
+        new ImportRepository(),
+        this.optionRepo,
+        this.optionCommandService,
+        this.applicationCommandService,
+      ),
+    );
+
+    const verificationService = new CompanyVerificationService(
+      this.aiProvider,
+      this.webPageFetcher,
+      aiQuotaService,
+      this.companyRepo,
+      new CompanyVerificationRepository(),
+    );
+    const lookupService = new CompanyLookupService(
+      this.aiProvider,
+      aiQuotaService,
+      new AiLookupCacheRepository(),
+    );
+    this.companyAiController = new CompanyAiController(verificationService, lookupService);
+
+    const auditRepo = new AuditLogRepository();
+    this.adminController = new AdminController(
+      new AdminUserService(this.sessionRepo, auditRepo),
+      new AdminCompanyService(verificationService, auditRepo),
+      new AdminReportsService(auditRepo),
     );
   }
 

@@ -2,19 +2,45 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { Menu } from 'lucide-react';
 import { useAuthStore } from '../../store/auth.store';
 import { useMe } from '../../api/hooks/queries/useMe';
 import { useLogout } from '../../api/hooks/mutations/useLogout';
 import { Spinner } from '../../components/atoms/Spinner';
 import { Button } from '../../components/atoms/Button';
-import { Badge } from '../../components/atoms/Badge';
+import { HireTrailLogo } from '../../components/atoms/HireTrailLogo';
+import { AppSidebar } from '../../components/organisms/navigation/AppSidebar';
 import { ROUTES } from '../../constants/routes';
+
+const COLLAPSE_KEY = 'ht_sidebar_collapsed';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const { data: user, isLoading, isError } = useMe();
   const logoutMutation = useLogout();
+  const [collapsed, setCollapsed] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    try {
+      setCollapsed(window.localStorage.getItem(COLLAPSE_KEY) === '1');
+    } catch {
+      // storage unavailable: expanded by default
+    }
+  }, []);
+
+  const toggleCollapsed = () => {
+    setCollapsed((current) => {
+      const next = !current;
+      try {
+        window.localStorage.setItem(COLLAPSE_KEY, next ? '1' : '0');
+      } catch {
+        // storage unavailable: keep in memory only
+      }
+      return next;
+    });
+  };
 
   // If not authenticated in store, redirect to login
   React.useEffect(() => {
@@ -44,27 +70,32 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-bg-page flex flex-col">
-      <header className="h-14 border-b border-border-default bg-bg-surface px-6 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <span className="font-bold tracking-tight text-text-primary">HireTrail</span>
-          <span className="text-xs text-text-tertiary">|</span>
-          <span className="text-sm font-medium text-text-secondary">Job Pipeline</span>
-        </div>
-        <div className="flex items-center gap-4">
-          <Badge color={user.plan === 'PRO' ? 'accent' : 'neutral'}>{user.plan}</Badge>
-          <span className="text-sm text-text-primary font-medium">{user.name}</span>
-          <Button
-            size="sm"
-            variant="ghost"
-            onClick={() => logoutMutation.mutate()}
-            disabled={logoutMutation.isPending}
+    <div className="min-h-screen bg-bg-canvas md:flex">
+      <AppSidebar
+        user={user}
+        collapsed={collapsed}
+        onToggleCollapsed={toggleCollapsed}
+        mobileOpen={mobileOpen}
+        onCloseMobile={() => setMobileOpen(false)}
+        onSignOut={() => logoutMutation.mutate()}
+        isSigningOut={logoutMutation.isPending}
+      />
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        <header className="sticky top-0 z-20 flex h-14 items-center gap-3 border-b border-border-default border-t-4 border-t-border-accent bg-bg-surface px-4 md:hidden">
+          <button
+            type="button"
+            onClick={() => setMobileOpen(true)}
+            className="rounded-md p-1.5 text-text-primary hover:bg-bg-muted"
+            aria-label="Open navigation"
           >
-            Sign out
-          </Button>
-        </div>
-      </header>
-      <main className="flex-1 p-6 max-w-7xl w-full mx-auto">{children}</main>
+            <Menu className="h-5 w-5" />
+          </button>
+          <HireTrailLogo size="sm" />
+        </header>
+
+        <main className="w-full min-w-0 flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+      </div>
     </div>
   );
 }

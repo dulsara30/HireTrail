@@ -36,6 +36,20 @@ export function errorHandlerMiddleware(
     return;
   }
 
+  // Body parser: payload over the limit (for example a CSV above 1 MB)
+  if ((err as { type?: string })?.type === 'entity.too.large') {
+    res
+      .status(413)
+      .json(
+        createErrorResponse(
+          ErrorCode.VALIDATION_FAILED,
+          'The file is too large (max 1 MB)',
+          requestId,
+        ),
+      );
+    return;
+  }
+
   // 3. Mongoose ValidationError
   if (err instanceof mongoose.Error.ValidationError) {
     const details = Object.values(err.errors).map((item) => ({

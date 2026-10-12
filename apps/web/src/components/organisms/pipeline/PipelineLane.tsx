@@ -57,11 +57,11 @@ export const PipelineLane: React.FC<PipelineLaneProps> = ({
   return (
     <div
       ref={setNodeRef}
-      className={`flex flex-col w-72 flex-shrink-0 bg-bg-subtle/50 rounded-lg border p-2.5 transition-colors max-h-[calc(100vh-140px)] ${
-        isOver ? 'border-accent bg-accent-subtle/20' : 'border-border'
+      className={`flex flex-col w-80 flex-shrink-0 bg-bg-surface rounded-xl border shadow-sm p-3 transition-colors max-h-[calc(100vh-140px)] ${
+        isOver ? 'border-border-accent bg-bg-accent-subtle' : 'border-border-default'
       }`}
     >
-      <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-border/60">
+      <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-border-default">
         <div className="flex items-center gap-2">
           <Badge color={lane.status.color} dot className="text-xs font-semibold">
             {lane.status.label}

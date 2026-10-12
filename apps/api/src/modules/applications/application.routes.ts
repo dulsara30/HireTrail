@@ -1,4 +1,5 @@
-import { Router } from 'express';
+import express, { Router } from 'express';
+import { ApplicationDataController } from './controllers/application-data.controller';
 import { ApplicationController } from './controllers/application.controller';
 import { CommentController } from '../comments/controllers/comment.controller';
 import { ActivityController } from '../activities/controllers/activity.controller';
@@ -11,12 +12,14 @@ import {
   boardQuerySchema,
   laneQuerySchema,
   createCommentSchema,
+  importCommitSchema,
 } from '@hiretrail/shared';
 
 export function createApplicationRoutes(
   appController: ApplicationController,
   commentController: CommentController,
   activityController: ActivityController,
+  dataController: ApplicationDataController,
 ): Router {
   const router = Router();
 
@@ -26,6 +29,19 @@ export function createApplicationRoutes(
     '/board/lane/:statusId',
     validate({ query: laneQuerySchema }),
     appController.getLaneItems,
+  );
+
+  // Export / import (declared before /:id). Import takes the raw CSV text, max 1 MB.
+  router.get('/export', validate({ query: listApplicationsQuerySchema }), dataController.exportCsv);
+  router.post(
+    '/import/preview',
+    express.text({ type: ['text/csv', 'text/plain'], limit: '1mb' }),
+    dataController.importPreview,
+  );
+  router.post(
+    '/import/commit',
+    validate({ body: importCommitSchema }),
+    dataController.importCommit,
   );
 
   // Table & general listing

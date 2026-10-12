@@ -44,14 +44,15 @@ Locked PRO features show a small "PRO" badge and an explanation, never a broken 
 | Company         | reference to a company, plus a name snapshot                       | Yes      | Pick from directory or type a new name (creates a private company)                 |
 | Role title      | text, 2 to 150 chars                                               | Yes      |                                                                                    |
 | Status          | option (type STATUS)                                               | Yes      | Defaults to the user's first status (Saved)                                        |
-| Priority        | option (PRIORITY)                                                  | No       | Defaults: Low, Medium, High, Dream                                                 |
+| Priority        | option (PRIORITY)                                                  | No       | Defaults: High, Medium, Low                                                        |
 | Labels          | many options (LABEL)                                               | No       | Free tags like "Java", "Referral", "Remote"                                        |
 | Work mode       | option (WORK_MODE)                                                 | No       | Onsite, Hybrid, Remote                                                             |
 | Job type        | option (JOB_TYPE)                                                  | No       | Internship, Full-time, Contract, Part-time                                         |
-| Level           | option (LEVEL)                                                     | No       | Intern, Associate, Junior, Mid                                                     |
+| Level           | option (LEVEL)                                                     | No       | Intern, Junior, Mid, Senior                                                        |
 | Source          | option (SOURCE)                                                    | No       | LinkedIn, Company website, TopJobs, ITPro, Referral, Email, Other                  |
 | CV version      | option (CV_VERSION)                                                | No       | Master, Java-Spring, Frontend-React, Full-Stack                                    |
 | Location        | text                                                               | No       |                                                                                    |
+| Cover Letter    | boolean (Yes / No)                                                 | No       | Default No. Shown as "Cover Letter" (Yes/No) in the panel, table column and export |
 | Job link        | URL (http/https only)                                              | No       |                                                                                    |
 | Job description | rich text, one field                                               | No       | Stored exactly as pasted (sanitised HTML + plain text copy). Never rewritten by AI |
 | Salary          | min, max, currency, period (MONTH/YEAR/HOUR), and "my expectation" | No       | Stored as integers in minor units (cents) to avoid float errors                    |
@@ -101,20 +102,21 @@ Settings → Pipeline & fields lets the user manage each option type: STATUS, PR
 - Deleting an option that is in use asks which option to move those applications to. Then it's archived (kept for history), not hard-deleted.
 - Statuses also have a **category** that drives the dashboard, so renaming a status never breaks KPIs. Categories: `SAVED`, `APPLIED`, `IN_PROGRESS`, `INTERVIEW`, `OFFER`, `ACCEPTED`, `CLOSED`. A status in `CLOSED` also has a reason: `REJECTED`, `WITHDRAWN`, `DECLINED`, `GHOSTED`, `OTHER`.
 - At least one status must stay in `SAVED` or `APPLIED`, so new applications always have a home.
-- "Reset to defaults" per type (only adds missing defaults back; never deletes the user's custom ones).
+- "Reset to defaults" per type (only adds missing defaults back, matched by name case-insensitively so nothing is duplicated; never deletes the user's custom ones).
+- The page is the sidebar section **Configuration**, with one tab per type plus a Cover Letter note. An option used by existing applications can only be removed after choosing another option to move them to.
 
 Defaults created at sign-up:
 
-| Type       | Defaults (in order)                                                                                                                                                                                                                |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| STATUS     | Saved (SAVED), Applied (APPLIED), Screening (IN_PROGRESS), Assessment (IN_PROGRESS), Interview (INTERVIEW), Offer (OFFER), Accepted (ACCEPTED), Rejected (CLOSED/REJECTED), Withdrawn (CLOSED/WITHDRAWN), Ghosted (CLOSED/GHOSTED) |
-| PRIORITY   | Low, Medium, High, Dream                                                                                                                                                                                                           |
-| WORK_MODE  | Onsite, Hybrid, Remote                                                                                                                                                                                                             |
-| JOB_TYPE   | Internship, Full-time, Contract, Part-time                                                                                                                                                                                         |
-| LEVEL      | Intern, Associate, Junior, Mid                                                                                                                                                                                                     |
-| SOURCE     | LinkedIn, Company website, TopJobs, ITPro, Referral, Email, Other                                                                                                                                                                  |
-| CV_VERSION | Master                                                                                                                                                                                                                             |
-| LABEL      | none                                                                                                                                                                                                                               |
+| Type       | Defaults (in order)                                                                                                                                                                                                                                               |
+| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| STATUS     | Saved (SAVED), Applied (APPLIED), Screening (IN_PROGRESS), Interview 1 (INTERVIEW), Interview 2 (INTERVIEW), Technical Test (IN_PROGRESS), Offer (OFFER), Accepted (ACCEPTED), Rejected (CLOSED/REJECTED), Ghosted (CLOSED/GHOSTED), Withdrawn (CLOSED/WITHDRAWN) |
+| PRIORITY   | High, Medium, Low                                                                                                                                                                                                                                                 |
+| JOB_TYPE   | Internship, Full-time, Contract, Part-time                                                                                                                                                                                                                        |
+| LEVEL      | Intern, Junior, Mid, Senior                                                                                                                                                                                                                                       |
+| WORK_MODE  | Onsite, Hybrid, Remote                                                                                                                                                                                                                                            |
+| SOURCE     | LinkedIn, Company Website, Referral, Job Board, Email, University/Career Fair, Other                                                                                                                                                                              |
+| CV_VERSION | Master, Java-Spring, Frontend-React, Full-Stack, .NET, Other, Customized                                                                                                                                                                                          |
+| LABEL      | none                                                                                                                                                                                                                                                              |
 
 Later (not v1): user-defined custom fields (text, number, date, select) per application.
 

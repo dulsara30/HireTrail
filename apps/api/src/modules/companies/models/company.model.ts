@@ -22,6 +22,15 @@ export interface CompanyDoc extends Document {
   description?: string;
   hiringModel?: string;
   tier?: 'A' | 'B' | null;
+  reportRatings?: {
+    culture?: number;
+    workExperience?: number;
+    salary?: number;
+    learning?: number;
+    overall?: number;
+    scale?: number;
+    appeal?: number;
+  };
   source: {
     type: 'SEED' | 'USER' | 'AI_LOOKUP' | 'ADMIN';
     ref?: string;
@@ -62,6 +71,15 @@ const companySchema = new Schema<CompanyDoc>(
     description: { type: String, maxlength: 2000 },
     hiringModel: { type: String },
     tier: { type: String, enum: ['A', 'B', null], default: null },
+    reportRatings: {
+      culture: { type: Number },
+      workExperience: { type: Number },
+      salary: { type: Number },
+      learning: { type: Number },
+      overall: { type: Number },
+      scale: { type: Number },
+      appeal: { type: Number },
+    },
     source: {
       type: {
         type: String,

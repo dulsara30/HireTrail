@@ -1,4 +1,4 @@
-import { ClientSession, Types } from 'mongoose';
+import { ClientSession, Types, trusted } from 'mongoose';
 import {
   OneTimeTokenDoc,
   OneTimeTokenModel,
@@ -41,7 +41,7 @@ export class OneTimeTokenRepository {
       tokenHash,
       purpose,
       usedAt: null,
-      expiresAt: { $gt: new Date() },
+      expiresAt: trusted({ $gt: new Date() }),
     }).session(session ?? null);
   }
 

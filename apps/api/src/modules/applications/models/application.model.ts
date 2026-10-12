@@ -58,6 +58,7 @@ export interface ApplicationDoc extends Document {
   cvVersionId: Types.ObjectId | null;
   labelIds: Types.ObjectId[];
   location?: string;
+  coverLetter: boolean;
   jobUrl?: string;
   jobDescription?: {
     html?: string;
@@ -94,6 +95,7 @@ const applicationSchema = new Schema<ApplicationDoc>(
     cvVersionId: { type: Schema.Types.ObjectId, ref: 'Option', default: null },
     labelIds: { type: [{ type: Schema.Types.ObjectId, ref: 'Option' }], default: [] },
     location: { type: String, trim: true, maxlength: 120 },
+    coverLetter: { type: Boolean, default: false },
     jobUrl: { type: String, trim: true },
     jobDescription: {
       html: { type: String },
@@ -142,6 +144,8 @@ const applicationSchema = new Schema<ApplicationDoc>(
     lastActivityAt: { type: Date, default: Date.now, index: true },
     archivedAt: { type: Date, default: null },
     deletedAt: { type: Date, default: null },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

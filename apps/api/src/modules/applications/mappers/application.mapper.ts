@@ -1,12 +1,25 @@
 import { ApplicationDoc } from '../models/application.model';
 import {
   ApplicationDto,
+  ApplicationDatesDto,
   ApplicationListItemDto,
   OptionDto,
   CompanySummaryDto,
 } from '@hiretrail/shared';
 
 export class ApplicationMapper {
+  /** Applied date falls back to the milestone, so moving a card to Applied still shows a date. */
+  private static mapDates(doc: ApplicationDoc): ApplicationDatesDto {
+    return {
+      savedAt: doc.dates?.savedAt?.toISOString() || null,
+      appliedAt:
+        doc.dates?.appliedAt?.toISOString() || doc.milestones?.appliedAt?.toISOString() || null,
+      deadlineAt: doc.dates?.deadlineAt?.toISOString() || null,
+      followUpAt: doc.dates?.followUpAt?.toISOString() || null,
+      nextInterviewAt: doc.dates?.nextInterviewAt?.toISOString() || null,
+    };
+  }
+
   public static toListItemDto(
     doc: ApplicationDoc,
     optionsMap: Map<string, OptionDto> = new Map(),
@@ -30,15 +43,8 @@ export class ApplicationMapper {
       priorityId: doc.priorityId ? doc.priorityId.toString() : null,
       labelIds: (doc.labelIds || []).map((id) => id.toString()),
       location: doc.location || null,
-      dates: doc.dates
-        ? {
-            savedAt: doc.dates.savedAt?.toISOString() || null,
-            appliedAt: doc.dates.appliedAt?.toISOString() || null,
-            deadlineAt: doc.dates.deadlineAt?.toISOString() || null,
-            followUpAt: doc.dates.followUpAt?.toISOString() || null,
-            nextInterviewAt: doc.dates.nextInterviewAt?.toISOString() || null,
-          }
-        : undefined,
+      coverLetter: doc.coverLetter ?? false,
+      dates: ApplicationMapper.mapDates(doc),
       lastActivityAt: doc.lastActivityAt.toISOString(),
       archivedAt: doc.archivedAt ? doc.archivedAt.toISOString() : null,
       version: doc.version,
@@ -84,6 +90,7 @@ export class ApplicationMapper {
       cvVersionId: doc.cvVersionId ? doc.cvVersionId.toString() : null,
       labelIds: (doc.labelIds || []).map((id) => id.toString()),
       location: doc.location || null,
+      coverLetter: doc.coverLetter ?? false,
       jobUrl: doc.jobUrl || null,
       jobDescription: doc.jobDescription,
       salary: doc.salary
@@ -95,15 +102,7 @@ export class ApplicationMapper {
             expected: doc.salary.expected ?? null,
           }
         : undefined,
-      dates: doc.dates
-        ? {
-            savedAt: doc.dates.savedAt?.toISOString() || null,
-            appliedAt: doc.dates.appliedAt?.toISOString() || null,
-            deadlineAt: doc.dates.deadlineAt?.toISOString() || null,
-            followUpAt: doc.dates.followUpAt?.toISOString() || null,
-            nextInterviewAt: doc.dates.nextInterviewAt?.toISOString() || null,
-          }
-        : undefined,
+      dates: ApplicationMapper.mapDates(doc),
       milestones: doc.milestones
         ? {
             appliedAt: doc.milestones.appliedAt?.toISOString() || null,

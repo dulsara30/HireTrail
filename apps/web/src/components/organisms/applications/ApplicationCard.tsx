@@ -2,6 +2,7 @@ import React from 'react';
 import { ApplicationListItemDto } from '@hiretrail/shared';
 import { StatusPill } from '../../molecules/StatusPill/StatusPill';
 import { PriorityChip } from '../../molecules/PriorityChip/PriorityChip';
+import { OPTION_COLOR_STYLES } from '../../../constants/option-colors';
 
 interface ApplicationCardProps {
   application: ApplicationListItemDto;
@@ -14,18 +15,19 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
   onClick,
   isDragging = false,
 }) => {
+  const tone = OPTION_COLOR_STYLES[application.resolvedStatus?.color ?? 'neutral'];
   return (
     <div
       onClick={onClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
-      className={`group relative flex flex-col gap-2 p-3.5 rounded-md border border-border bg-bg shadow-sm transition-all hover:border-border-interactive hover:shadow-md cursor-pointer select-none ${
-        isDragging ? 'opacity-40 rotate-1 scale-95 ring-2 ring-accent' : ''
+      className={`group relative flex flex-col gap-2 p-3.5 rounded-lg border border-l-4 ${tone.border} bg-bg-surface shadow-sm transition-all hover:border-border-interactive hover:shadow-md cursor-pointer select-none ${
+        isDragging ? 'opacity-40 rotate-1 scale-95 ring-2 ring-border-accent' : ''
       }`}
     >
       <div className="flex items-start justify-between gap-2">
-        <h4 className="text-sm font-semibold text-text line-clamp-1 group-hover:text-accent transition-colors">
+        <h4 className="text-sm font-semibold text-text line-clamp-1 group-hover:text-text-accent transition-colors">
           {application.roleTitle}
         </h4>
         <PriorityChip priority={application.resolvedPriority} />
@@ -38,7 +40,7 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
         )}
       </div>
 
-      <div className="flex items-center justify-between pt-1 border-t border-border-subtle text-[11px] text-text-muted">
+      <div className="flex items-center justify-between pt-1 border-t border-border-default text-[11px] text-text-muted">
         <span>
           {application.dates?.appliedAt
             ? `Applied ${new Date(application.dates.appliedAt).toLocaleDateString()}`

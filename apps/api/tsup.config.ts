@@ -1,0 +1,20 @@
+import { defineConfig } from 'tsup';
+
+/**
+ * Bundles our own code into one CommonJS file that Vercel runs as a serverless function.
+ * Dependencies stay external (tsup default) and are traced from node_modules by Vercel.
+ */
+export default defineConfig({
+  entry: { index: 'src/index.ts' },
+  outDir: 'api',
+  format: ['cjs'],
+  platform: 'node',
+  target: 'node22',
+  splitting: false,
+  sourcemap: false,
+  clean: true,
+  // Vercel calls the module export as the request handler: make the Express app the export itself
+  footer: { js: 'module.exports = module.exports.default;' },
+  // the workspace package is bundled so the function does not depend on workspace symlinks
+  noExternal: ['@hiretrail/shared'],
+});

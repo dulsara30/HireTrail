@@ -90,14 +90,26 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
   return (
     <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className="flex h-full gap-4 overflow-x-auto pb-4 pt-1 items-start">
-        {board?.lanes.map((lane) => (
-          <PipelineLane
-            key={lane.status.id}
-            lane={lane}
-            onSelectApplication={onSelectApplication}
-            onNewApplicationInLane={onNewApplicationInLane}
-          />
-        ))}
+        {board && board.lanes.length > 0 ? (
+          board.lanes.map((lane) => (
+            <PipelineLane
+              key={lane.status.id}
+              lane={lane}
+              onSelectApplication={onSelectApplication}
+              onNewApplicationInLane={onNewApplicationInLane}
+            />
+          ))
+        ) : (
+          <div className="flex w-full h-64 items-center justify-center border-2 border-dashed border-border-default rounded-xl p-8 text-center bg-bg-surface/50">
+            <div>
+              <p className="text-sm font-semibold text-text-primary">Pipeline is empty</p>
+              <p className="text-xs text-text-secondary mt-1">
+                Configure your pipeline stages in Settings or click "New Application" to add your
+                first job.
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       <DragOverlay>

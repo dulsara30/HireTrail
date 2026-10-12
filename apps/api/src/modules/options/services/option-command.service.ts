@@ -13,7 +13,7 @@ import { OptionMapper } from '../mappers/option.mapper';
 import { FractionalOrder } from '../../../core/value-objects/fractional-order';
 import { NotFoundError, OptionInUseError } from '../../../core/errors/domain-errors';
 import { withTransaction } from '../../../core/db/transaction';
-import { OptionModel } from '../models/option.model';
+import { ApplicationModel } from '../../applications/models/application.model';
 
 export class OptionCommandService {
   constructor(private readonly optionRepository: OptionRepository) {}
@@ -105,56 +105,54 @@ export class OptionCommandService {
       }
 
       await withTransaction(async (session) => {
-        const db = OptionModel.db;
-        const appCollection = db.collection('applications');
         const userObjectId = new Types.ObjectId(userId);
         const sourceObjectId = new Types.ObjectId(id);
         const targetObjectId = new Types.ObjectId(input.reassignToId);
 
         // Update applications matching single option fields
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, statusId: sourceObjectId },
           { $set: { statusId: targetObjectId } },
           { session },
         );
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, priorityId: sourceObjectId },
           { $set: { priorityId: targetObjectId } },
           { session },
         );
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, workModeId: sourceObjectId },
           { $set: { workModeId: targetObjectId } },
           { session },
         );
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, jobTypeId: sourceObjectId },
           { $set: { jobTypeId: targetObjectId } },
           { session },
         );
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, levelId: sourceObjectId },
           { $set: { levelId: targetObjectId } },
           { session },
         );
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, sourceId: sourceObjectId },
           { $set: { sourceId: targetObjectId } },
           { session },
         );
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, cvVersionId: sourceObjectId },
           { $set: { cvVersionId: targetObjectId } },
           { session },
         );
 
         // For labels array: pull old, add new
-        await appCollection.updateMany(
+        await ApplicationModel.updateMany(
           { userId: userObjectId, labelIds: sourceObjectId },
           {
-            $pull: { labelIds: sourceObjectId as any },
-            $addToSet: { labelIds: targetObjectId as any },
-          } as any,
+            $pull: { labelIds: sourceObjectId },
+            $addToSet: { labelIds: targetObjectId },
+          },
           { session },
         );
 
@@ -184,10 +182,16 @@ export class OptionCommandService {
     input: ResetDefaultOptionsInput,
   ): Promise<OptionDto[]> {
     const existing = await this.optionRepository.findByType(userId, input.type, true);
-    const existingKeys = new Set(existing.map((o) => o.key));
+    // Match by name (label or key), case-insensitive, so renamed or already-present defaults are never duplicated
+    const existingNames = new Set(
+      existing.flatMap((o) => [o.label.trim().toLowerCase(), o.key.trim().toLowerCase()]),
+    );
 
     const defaultsToAdd = DEFAULT_OPTIONS.filter(
-      (def) => def.type === input.type && !existingKeys.has(def.key),
+      (def) =>
+        def.type === input.type &&
+        !existingNames.has(def.label.trim().toLowerCase()) &&
+        !existingNames.has(def.key.toLowerCase()),
     );
 
     if (defaultsToAdd.length === 0) {

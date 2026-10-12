@@ -17,6 +17,7 @@ import {
   ValidationError,
 } from '../../../core/errors/domain-errors';
 import { AuthCommandService } from '../../auth/services/auth-command.service';
+import { AccountService } from '../services/account.service';
 
 export class MeController extends BaseController {
   constructor(
@@ -24,6 +25,7 @@ export class MeController extends BaseController {
     private readonly sessionRepo: SessionRepository,
     private readonly authCommandService: AuthCommandService,
     private readonly passwordHasher: PasswordHasher,
+    private readonly accountService: AccountService,
   ) {
     super();
   }
@@ -155,15 +157,34 @@ export class MeController extends BaseController {
         }
       }
 
-      // Revoke all sessions and delete user
-      await this.sessionRepo.revokeAllUserSessions(req.user._id, 'LOGOUT_ALL');
-      await this.userRepo.deletePermanently(req.user._id);
+      // One transaction removes the user and every collection registered in account-data.registry
+      await this.accountService.deleteAccount(req.user.id as string);
 
       res.clearCookie('ht_rt');
       res.clearCookie('ht_signed_in');
 
       this.noContent(res);
     } catch (err) {
+      next(err);
+    }
+  };
+
+  exportData = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      if (!req.user) {
+        throw new AuthenticationError('Authentication required', ErrorCode.UNAUTHENTICATED);
+      }
+      const stamp = new Date().toISOString().slice(0, 10);
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', `attachment; filename="hiretrail-export-${stamp}.zip"`);
+      res.setHeader('Cache-Control', 'no-store');
+      await this.accountService.writeExportZip(req.user, res);
+    } catch (err) {
+      // Headers may already be sent while streaming: abort the response instead of a JSON error
+      if (res.headersSent) {
+        res.destroy(err as Error);
+        return;
+      }
       next(err);
     }
   };

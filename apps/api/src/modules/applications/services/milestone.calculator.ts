@@ -6,6 +6,7 @@ export class MilestoneCalculator {
     currentMilestones: ApplicationMilestones = {},
     newCategory: StatusCategory,
     appliedDate?: Date,
+    closedReason?: ClosedReason,
   ): ApplicationMilestones {
     const updated: ApplicationMilestones = { ...currentMilestones };
     const now = new Date();
@@ -16,13 +17,14 @@ export class MilestoneCalculator {
     }
 
     // 2. IN_PROGRESS, INTERVIEW, OFFER, ACCEPTED, or CLOSED with reason REJECTED sets firstResponseAt
-    const isResponseCategory = [
-      StatusCategory.SCREENING,
-      StatusCategory.INTERVIEW,
-      StatusCategory.OFFER,
-      StatusCategory.REJECTED,
-      StatusCategory.GHOSTED,
-    ].includes(newCategory);
+    const isResponseCategory =
+      [
+        StatusCategory.IN_PROGRESS,
+        StatusCategory.INTERVIEW,
+        StatusCategory.OFFER,
+        StatusCategory.ACCEPTED,
+      ].includes(newCategory) ||
+      (newCategory === StatusCategory.CLOSED && closedReason === ClosedReason.REJECTED);
 
     if (isResponseCategory && !updated.firstResponseAt) {
       updated.firstResponseAt = now;
@@ -33,20 +35,24 @@ export class MilestoneCalculator {
       updated.firstInterviewAt = now;
     }
 
-    // 4. OFFER
-    if (newCategory === StatusCategory.OFFER && !updated.offerAt) {
+    // 4. OFFER (an accepted application also had an offer)
+    if (
+      (newCategory === StatusCategory.OFFER || newCategory === StatusCategory.ACCEPTED) &&
+      !updated.offerAt
+    ) {
       updated.offerAt = now;
     }
 
-    // 5. REJECTED or GHOSTED (Closed status)
-    if (newCategory === StatusCategory.REJECTED) {
+    // 5. ACCEPTED
+    if (newCategory === StatusCategory.ACCEPTED && !updated.acceptedAt) {
+      updated.acceptedAt = now;
+    }
+
+    // 6. CLOSED records closedAt and the reason; moving back to an active state clears both
+    if (newCategory === StatusCategory.CLOSED) {
       updated.closedAt = now;
-      updated.closedReason = ClosedReason.REJECTED;
-    } else if (newCategory === StatusCategory.GHOSTED) {
-      updated.closedAt = now;
-      updated.closedReason = ClosedReason.GHOSTED;
+      updated.closedReason = closedReason ?? ClosedReason.OTHER;
     } else {
-      // Moving back to active states clears closedAt and closedReason
       updated.closedAt = undefined;
       updated.closedReason = undefined;
     }

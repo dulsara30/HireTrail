@@ -45,6 +45,18 @@
   --color-tag-teal-bg: #f0fdfa;
   --color-tag-teal-text: #0f766e;
   --color-tag-teal-border: #99f6e4;
+  --color-tag-pink-bg: #fdf2f8;
+  --color-tag-pink-text: #be185d;
+  --color-tag-pink-border: #fbcfe8;
+  --color-tag-lime-bg: #f7fee7;
+  --color-tag-lime-text: #4d7c0f;
+  --color-tag-lime-border: #d9f99d;
+  --color-tag-sky-bg: #f0f9ff;
+  --color-tag-sky-text: #0369a1;
+  --color-tag-sky-border: #bae6fd;
+  --color-tag-indigo-bg: #eef2ff;
+  --color-tag-indigo-text: #4338ca;
+  --color-tag-indigo-border: #c7d2fe;
 
   /* Radius (from foundations) */
   --radius-sm: 6px;
@@ -84,11 +96,27 @@
   --color-text-danger: var(--color-text-danger);
   --color-text-disabled: var(--color-text-disabled);
 
+  /* Border */
   --color-border-default: var(--color-border-default);
   --color-border-strong: var(--color-border-strong);
   --color-border-inverse: var(--color-border-inverse);
   --color-border-accent: var(--color-border-accent);
   --color-border-danger: var(--color-border-danger);
+
+  /* Shorthand / Compatibility utility aliases */
+  --color-border: var(--color-border-default);
+  --color-border-subtle: var(--color-bg-muted);
+  --color-border-interactive: var(--color-border-strong);
+  --color-bg: var(--color-bg-surface);
+  --color-text: var(--color-text-primary);
+  --color-text-muted: var(--color-text-secondary);
+  --color-accent: var(--color-bg-accent);
+  --color-bg-canvas: var(--color-bg-accent-subtle);
+  --color-bg-surface-raised: var(--color-bg-muted);
+  --color-border-focus: var(--color-border-accent);
+  --color-accent-subtle: var(--color-bg-accent-subtle);
+  --color-danger: var(--color-text-danger);
+  --color-success: var(--color-text-success);
 
   --color-tag-info-bg: var(--color-tag-info-bg);
   --color-tag-info-text: var(--color-tag-info-text);
@@ -103,6 +131,18 @@
   --color-tag-teal-bg: var(--color-tag-teal-bg);
   --color-tag-teal-text: var(--color-tag-teal-text);
   --color-tag-teal-border: var(--color-tag-teal-border);
+  --color-tag-pink-bg: var(--color-tag-pink-bg);
+  --color-tag-pink-text: var(--color-tag-pink-text);
+  --color-tag-pink-border: var(--color-tag-pink-border);
+  --color-tag-lime-bg: var(--color-tag-lime-bg);
+  --color-tag-lime-text: var(--color-tag-lime-text);
+  --color-tag-lime-border: var(--color-tag-lime-border);
+  --color-tag-sky-bg: var(--color-tag-sky-bg);
+  --color-tag-sky-text: var(--color-tag-sky-text);
+  --color-tag-sky-border: var(--color-tag-sky-border);
+  --color-tag-indigo-bg: var(--color-tag-indigo-bg);
+  --color-tag-indigo-text: var(--color-tag-indigo-text);
+  --color-tag-indigo-border: var(--color-tag-indigo-border);
 
   /* Radius */
   --radius-sm: var(--radius-sm);

@@ -4,3 +4,7 @@ export * from './option.schema';
 export * from './company.schema';
 export * from './application.schema';
 export * from './comment.schema';
+export * from './dashboard.schema';
+export * from './ai.schema';
+export * from './admin.schema';
+export * from './data-transfer.schema';

@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-bg-page text-text-primary antialiased">
         <QueryProvider>
           <AuthBootstrap>{children}</AuthBootstrap>

@@ -4,10 +4,22 @@ import { TEXT_LIMITS } from '../constants/limits';
 
 import { objectIdSchema } from './common.schema';
 
-export const optionColorSchema = yup
-  .mixed<OptionColor>()
-  .oneOf(['neutral', 'accent', 'info', 'purple', 'success', 'danger', 'orange', 'teal'])
-  .required();
+export const OPTION_COLORS: OptionColor[] = [
+  'neutral',
+  'accent',
+  'info',
+  'purple',
+  'success',
+  'danger',
+  'orange',
+  'teal',
+  'pink',
+  'lime',
+  'sky',
+  'indigo',
+];
+
+export const optionColorSchema = yup.mixed<OptionColor>().oneOf(OPTION_COLORS).required();
 
 export const createOptionSchema = yup.object({
   type: yup.mixed<OptionType>().oneOf(Object.values(OptionType)).required('Type is required'),
@@ -27,13 +39,10 @@ export const createOptionSchema = yup.object({
 
 export const updateOptionSchema = yup.object({
   label: yup.string().trim().min(1).max(TEXT_LIMITS.OPTION_LABEL_MAX).optional(),
-  color: yup
-    .mixed<OptionColor>()
-    .oneOf(['neutral', 'accent', 'info', 'purple', 'success', 'danger', 'orange', 'teal'])
-    .optional(),
+  color: yup.mixed<OptionColor>().oneOf(OPTION_COLORS).optional(),
   meta: yup.object().optional(),
   aliases: yup.array().of(yup.string().trim().max(TEXT_LIMITS.OPTION_LABEL_MAX)).optional(),
-  version: yup.number().integer().min(1).required('Version is required'),
+  version: yup.number().integer().min(0).required('Version is required'),
 });
 
 export const moveOptionSchema = yup.object({

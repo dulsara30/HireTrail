@@ -13,9 +13,12 @@ import { createHealthRouter } from './modules/health/health.routes';
 import { createAuthRoutes } from './modules/auth/auth.routes';
 import { createMeRoutes } from './modules/users/me.routes';
 import { createOptionRoutes } from './modules/options/option.routes';
+import { createAdminRoutes } from './modules/admin/admin.routes';
+import { createAiRoutes } from './modules/ai/ai.routes';
 import { createCompanyRoutes } from './modules/companies/company.routes';
 import { createCommentRoutes } from './modules/comments/comment.routes';
 import { createApplicationRoutes } from './modules/applications/application.routes';
+import { createDashboardRoutes } from './modules/dashboard/dashboard.routes';
 
 export function createApp(): Express {
   const app = express();
@@ -66,7 +69,7 @@ export function createApp(): Express {
   app.use(
     '/api/v1/companies',
     container.authenticate,
-    createCompanyRoutes(container.companyController),
+    createCompanyRoutes(container.companyController, container.companyAiController),
   );
   app.use(
     '/api/v1/comments',
@@ -80,7 +83,15 @@ export function createApp(): Express {
       container.applicationController,
       container.commentController,
       container.activityController,
+      container.applicationDataController,
     ),
+  );
+  app.use('/api/v1/admin', container.authenticate, createAdminRoutes(container.adminController));
+  app.use('/api/v1/ai', container.authenticate, createAiRoutes(container.aiController));
+  app.use(
+    '/api/v1/dashboard',
+    container.authenticate,
+    createDashboardRoutes(container.dashboardController),
   );
 
   // 9. notFound: route not found envelope

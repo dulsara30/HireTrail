@@ -33,6 +33,15 @@ export class HistoryDiff {
       }
     }
 
+    // Boolean field, shown with a human label and Yes/No values
+    if (Boolean(before.coverLetter) !== Boolean(after.coverLetter)) {
+      changes.push({
+        field: 'coverLetter',
+        from: before.coverLetter ? 'Yes' : 'No',
+        to: after.coverLetter ? 'Yes' : 'No',
+      });
+    }
+
     // Option fields
     const optionFields: Array<keyof ApplicationDoc> = [
       'statusId',

@@ -60,11 +60,19 @@ export const createApplicationSchema = yup.object({
     .default([]),
   location: yup.string().trim().max(TEXT_LIMITS.LOCATION_MAX).nullable().optional(),
   jobUrl: urlSchema.nullable().optional(),
+  coverLetter: yup.boolean().default(false),
   jobDescriptionHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   notesHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   salary: salarySchema.nullable().optional(),
   dates: datesSchema.nullable().optional(),
   contacts: yup.array().of(contactSchema).max(10).default([]),
+  ai: yup
+    .object({
+      aiUsageId: objectIdSchema.nullable().optional(),
+      aiFilledFields: yup.array().of(yup.string().max(40).required()).max(20).default([]),
+    })
+    .nullable()
+    .optional(),
 });
 
 export const updateApplicationSchema = yup.object({
@@ -81,6 +89,7 @@ export const updateApplicationSchema = yup.object({
   labelIds: yup.array().of(objectIdSchema).max(MAX_LABELS).optional(),
   location: yup.string().trim().max(TEXT_LIMITS.LOCATION_MAX).nullable().optional(),
   jobUrl: urlSchema.nullable().optional(),
+  coverLetter: yup.boolean().optional(),
   jobDescriptionHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   notesHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   salary: salarySchema.nullable().optional(),
@@ -89,7 +98,7 @@ export const updateApplicationSchema = yup.object({
   version: yup
     .number()
     .integer()
-    .min(1)
+    .min(0)
     .required('Version is required for optimistic concurrency check'),
 });
 
@@ -100,7 +109,7 @@ export const moveApplicationSchema = yup.object({
   version: yup
     .number()
     .integer()
-    .min(1)
+    .min(0)
     .required('Version is required for optimistic concurrency check'),
 });
 

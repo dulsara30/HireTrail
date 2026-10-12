@@ -1,4 +1,4 @@
-import { Types, type FilterQuery } from 'mongoose';
+import { Types, type FilterQuery, trusted } from 'mongoose';
 import { BaseRepository } from '../../../core/base/base.repository';
 import { ApplicationModel, type ApplicationDoc } from '../models/application.model';
 
@@ -41,8 +41,22 @@ export class ApplicationRepository extends BaseRepository<ApplicationDoc> {
       .find({
         userId: new Types.ObjectId(userId),
         deletedAt: null,
-        createdAt: { $gte: since },
+        createdAt: trusted({ $gte: since }),
       })
       .exec();
+  }
+
+  public async listUserApplications(
+    userId: string,
+    filter: { companyId?: string } = {},
+  ): Promise<ApplicationDoc[]> {
+    const query: FilterQuery<ApplicationDoc> = {
+      userId: new Types.ObjectId(userId),
+      deletedAt: null,
+    };
+    if (filter.companyId && Types.ObjectId.isValid(filter.companyId)) {
+      query.companyId = new Types.ObjectId(filter.companyId);
+    }
+    return this.model.find(query).sort({ updatedAt: -1 }).exec();
   }
 }

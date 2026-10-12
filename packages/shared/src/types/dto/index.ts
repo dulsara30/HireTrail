@@ -10,3 +10,7 @@ export * from './company.dto';
 export * from './application.dto';
 export * from './board.dto';
 export * from './comment.dto';
+export * from './dashboard.dto';
+export * from './ai.dto';
+export * from './admin.dto';
+export * from './data-transfer.dto';

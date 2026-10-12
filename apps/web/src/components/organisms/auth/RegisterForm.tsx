@@ -28,11 +28,12 @@ export function RegisterForm() {
     <div className="space-y-6">
       <GoogleAuthButton label="Sign up with Google" />
 
-      <div className="relative flex items-center justify-center">
-        <div className="border-t border-border-default w-full" />
-        <span className="bg-bg-surface px-3 text-xs text-text-tertiary uppercase tracking-wider relative">
+      <div className="flex items-center gap-3" role="separator" aria-label="Or continue with email">
+        <span className="h-px flex-1 bg-border-default" />
+        <span className="whitespace-nowrap text-xs font-medium uppercase tracking-wider text-text-tertiary">
           Or with email
         </span>
+        <span className="h-px flex-1 bg-border-default" />
       </div>
 
       <Formik

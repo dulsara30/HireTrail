@@ -23,7 +23,7 @@ export const updateCommentSchema = yup.object({
   bodyHtml: yup.string().trim().min(1).max(TEXT_LIMITS.COMMENT_MAX).optional(),
   dueAt: yup.date().nullable().optional(),
   done: yup.boolean().optional(),
-  version: yup.number().integer().min(1).required('Version is required'),
+  version: yup.number().integer().min(0).required('Version is required'),
 });
 
 export type CreateCommentInput = yup.InferType<typeof createCommentSchema>;

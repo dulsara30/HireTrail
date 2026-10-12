@@ -5,10 +5,14 @@ import {
   MoveApplicationInput,
   CreateApplicationResultDto,
   ApplicationDto,
-  StatusCategory,
+  normalizeStatusMeta,
 } from '@hiretrail/shared';
 import { ApplicationRepository } from '../repositories/application.repository';
-import { ApplicationModel, ApplicationDoc } from '../models/application.model';
+import {
+  ApplicationModel,
+  ApplicationDoc,
+  ApplicationMilestones,
+} from '../models/application.model';
 import { OptionRepository } from '../../options/repositories/option.repository';
 import { CompanyRepository } from '../../companies/repositories/company.repository';
 import { ActivityRepository } from '../../activities/repositories/activity.repository';
@@ -40,7 +44,7 @@ export class ApplicationCommandService {
       throw new NotFoundError(undefined, 'Status option not found');
     }
 
-    const statusCategory = (statusOption.meta?.category as StatusCategory) || StatusCategory.SAVED;
+    const { category: statusCategory, closedReason } = normalizeStatusMeta(statusOption.meta);
 
     const lastInLane = await this.applicationRepository.findLastInLane(userId, input.statusId);
     const boardOrder = FractionalOrder.between(lastInLane?.boardOrder, null);
@@ -58,7 +62,12 @@ export class ApplicationCommandService {
       : undefined;
 
     const appliedDate = input.dates?.appliedAt ? new Date(input.dates.appliedAt) : undefined;
-    const milestones = MilestoneCalculator.calculateMilestones({}, statusCategory, appliedDate);
+    const milestones = MilestoneCalculator.calculateMilestones(
+      {},
+      statusCategory,
+      appliedDate,
+      closedReason,
+    );
 
     const savedDoc = await withTransaction(async (session) => {
       let finalCompanyId = input.companyId ? new Types.ObjectId(input.companyId) : null;
@@ -105,6 +114,7 @@ export class ApplicationCommandService {
             cvVersionId: input.cvVersionId ? new Types.ObjectId(input.cvVersionId) : null,
             labelIds: (input.labelIds || []).map((id) => new Types.ObjectId(id)),
             location: input.location || undefined,
+            coverLetter: input.coverLetter ?? false,
             jobUrl: input.jobUrl || undefined,
             jobDescription: cleanJobDescHtml
               ? {
@@ -144,6 +154,14 @@ export class ApplicationCommandService {
               linkedinUrl: c.linkedinUrl || undefined,
             })),
             notesHtml: cleanNotesHtml,
+            ai: input.ai
+              ? {
+                  aiUsageId: input.ai.aiUsageId
+                    ? new Types.ObjectId(input.ai.aiUsageId)
+                    : undefined,
+                  aiFilledFields: input.ai.aiFilledFields ?? [],
+                }
+              : undefined,
             lastActivityAt: new Date(),
           },
         ],
@@ -203,6 +221,7 @@ export class ApplicationCommandService {
     if (input.companyName !== undefined) changes.companyName = input.companyName;
     if (input.roleTitle !== undefined) changes.roleTitle = input.roleTitle;
     if (input.location !== undefined) changes.location = input.location;
+    if (input.coverLetter !== undefined) changes.coverLetter = input.coverLetter;
     if (input.jobUrl !== undefined) changes.jobUrl = input.jobUrl;
     if (input.companyId !== undefined) {
       changes.companyId = input.companyId ? new Types.ObjectId(input.companyId) : null;
@@ -261,14 +280,23 @@ export class ApplicationCommandService {
       if (!newStatusOption) {
         throw new NotFoundError(undefined, 'Status option not found');
       }
-      const category = (newStatusOption.meta?.category as StatusCategory) || StatusCategory.SAVED;
+      const { category, closedReason } = normalizeStatusMeta(newStatusOption.meta);
       changes.statusId = new Types.ObjectId(input.statusId);
       changes.statusCategory = category;
       changes.milestones = MilestoneCalculator.calculateMilestones(
         existing.milestones,
         category,
         existing.dates?.appliedAt,
+        closedReason,
       );
+    }
+
+    // Keep the applied milestone (used by the dashboard) in step with an edited applied date
+    if (input.dates?.appliedAt) {
+      const base = (changes.milestones as ApplicationMilestones | undefined) ?? {
+        ...(existing.toObject().milestones ?? {}),
+      };
+      changes.milestones = { ...base, appliedAt: new Date(input.dates.appliedAt) };
     }
 
     changes.lastActivityAt = new Date();
@@ -352,7 +380,7 @@ export class ApplicationCommandService {
 
     const newOrder = FractionalOrder.between(beforeOrder, afterOrder);
 
-    const newCategory = (statusOption.meta?.category as StatusCategory) || StatusCategory.SAVED;
+    const { category: newCategory, closedReason } = normalizeStatusMeta(statusOption.meta);
     const isStatusChanged = existing.statusId.toString() !== input.statusId;
 
     const milestones = isStatusChanged
@@ -360,6 +388,7 @@ export class ApplicationCommandService {
           existing.milestones,
           newCategory,
           existing.dates?.appliedAt,
+          closedReason,
         )
       : existing.milestones;
 

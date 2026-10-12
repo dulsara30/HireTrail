@@ -1,169 +1,71 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useOptions } from '../../../../api/hooks/queries/useOptions';
-import { optionsService } from '../../../../api/services/options.service';
+import React from 'react';
 import { OptionType } from '@hiretrail/shared';
-import { Badge } from '../../../../components/atoms/Badge';
-import { Button } from '../../../../components/atoms/Button';
-import { Spinner } from '../../../../components/atoms/Spinner';
-import { Plus, RotateCcw, Archive } from 'lucide-react';
-import { useQueryClient } from '@tanstack/react-query';
-import { optionKeys } from '../../../../api/query-keys/options.keys';
+import { OptionManager } from '../../../../components/organisms/settings/OptionManager';
 
-export default function PipelineFieldsPage() {
-  const queryClient = useQueryClient();
-  const [selectedType, setSelectedType] = useState<OptionType>(OptionType.STATUS);
-  const [newLabel, setNewLabel] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isResetting, setIsResetting] = useState(false);
+type TabKey = OptionType | 'COVER_LETTER';
 
-  const { data: options = [], isLoading } = useOptions(selectedType, true);
-  const optionList = Array.isArray(options) ? options : [];
+const TABS: Array<{ key: TabKey; label: string }> = [
+  { key: OptionType.STATUS, label: 'Status' },
+  { key: OptionType.PRIORITY, label: 'Priority' },
+  { key: OptionType.JOB_TYPE, label: 'Job Type' },
+  { key: OptionType.LEVEL, label: 'Level' },
+  { key: OptionType.WORK_MODE, label: 'Work Mode' },
+  { key: OptionType.SOURCE, label: 'Source' },
+  { key: OptionType.CV_VERSION, label: 'CV Version' },
+  { key: OptionType.LABEL, label: 'Labels' },
+  { key: 'COVER_LETTER', label: 'Cover Letter' },
+];
 
-  const handleCreateOption = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newLabel.trim()) return;
-
-    setIsSubmitting(true);
-    try {
-      await optionsService.create({
-        type: selectedType,
-        label: newLabel.trim(),
-        color: 'accent',
-      });
-      setNewLabel('');
-      queryClient.invalidateQueries({ queryKey: optionKeys.all });
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleArchiveOption = async (id: string) => {
-    try {
-      await optionsService.archive(id, {});
-      queryClient.invalidateQueries({ queryKey: optionKeys.all });
-    } catch (err: unknown) {
-      const errorMsg =
-        (err as { response?: { data?: { error?: { message?: string } } }; message?: string })
-          ?.response?.data?.error?.message ||
-        (err as Error)?.message ||
-        'Cannot archive option';
-      alert(errorMsg);
-    }
-  };
-
-  const handleRestoreOption = async (id: string) => {
-    await optionsService.restore(id);
-    queryClient.invalidateQueries({ queryKey: optionKeys.all });
-  };
-
-  const handleResetDefaults = async () => {
-    if (!confirm(`Reset default options for ${selectedType}? Missing defaults will be restored.`))
-      return;
-
-    setIsResetting(true);
-    try {
-      await optionsService.resetDefaults({ type: selectedType });
-      queryClient.invalidateQueries({ queryKey: optionKeys.all });
-    } finally {
-      setIsResetting(false);
-    }
-  };
+export default function ConfigurationPage() {
+  const [tab, setTab] = React.useState<TabKey>(OptionType.STATUS);
+  const current = TABS.find((t) => t.key === tab) ?? TABS[0]!;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold text-text">Pipeline & Fields</h1>
-          <p className="text-xs text-text-muted">
-            Manage status lanes, priorities, work modes, and tags
-          </p>
-        </div>
-        <Button variant="secondary" size="sm" onClick={handleResetDefaults} disabled={isResetting}>
-          <RotateCcw className="h-3.5 w-3.5 mr-1.5" />
-          {isResetting ? 'Resetting…' : 'Restore Defaults'}
-        </Button>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight text-text-primary">Configuration</h1>
+        <p className="mt-1 text-sm text-text-secondary">
+          Shape the pipeline and the fields to match how you search for jobs.
+        </p>
       </div>
 
-      {/* Option Type Tabs */}
-      <div className="flex flex-wrap gap-1 border-b border-border pb-2">
-        {Object.values(OptionType).map((type) => (
+      <div
+        role="tablist"
+        aria-label="Configuration sections"
+        className="flex flex-wrap gap-1.5 rounded-xl border border-border-default bg-bg-surface p-1.5 shadow-sm"
+      >
+        {TABS.map((t) => (
           <button
-            key={type}
+            key={t.key}
             type="button"
-            onClick={() => setSelectedType(type)}
-            className={`px-3 py-1.5 text-xs font-semibold rounded-md transition-colors ${
-              selectedType === type
-                ? 'bg-accent text-accent-fg'
-                : 'text-text-muted hover:text-text hover:bg-bg-subtle'
+            role="tab"
+            aria-selected={tab === t.key}
+            onClick={() => setTab(t.key)}
+            className={`rounded-lg px-3.5 py-2 text-sm font-semibold transition-colors ${
+              tab === t.key
+                ? 'bg-bg-accent text-text-primary shadow-sm'
+                : 'text-text-secondary hover:bg-bg-accent-subtle hover:text-text-primary'
             }`}
           >
-            {type}
+            {t.label}
           </button>
         ))}
       </div>
 
-      {/* Add new option form */}
-      <form onSubmit={handleCreateOption} className="flex gap-2">
-        <input
-          type="text"
-          value={newLabel}
-          onChange={(e) => setNewLabel(e.target.value)}
-          placeholder={`Add new ${selectedType.toLowerCase()}…`}
-          className="flex-1 px-3 py-1.5 text-sm bg-bg border border-border rounded-sm focus:outline-none focus:ring-1 focus:ring-accent"
-        />
-        <Button
-          type="submit"
-          variant="primary"
-          size="sm"
-          disabled={isSubmitting || !newLabel.trim()}
-        >
-          <Plus className="h-4 w-4 mr-1" />
-          Add
-        </Button>
-      </form>
-
-      {/* List */}
-      <div className="rounded-md border border-border bg-bg divide-y divide-border">
-        {isLoading ? (
-          <div className="p-8 flex justify-center">
-            <Spinner size="md" />
+      <div role="tabpanel">
+        {tab === 'COVER_LETTER' ? (
+          <div className="rounded-xl border border-border-default bg-bg-surface p-6 shadow-sm">
+            <h2 className="text-base font-bold text-text-primary">Cover Letter</h2>
+            <p className="mt-2 text-sm text-text-secondary">
+              Cover letter is a simple Yes / No field on every application, so there is nothing to
+              configure. Set it when you create an application or any time from the side panel, and
+              show or hide it as a column in the Applications table.
+            </p>
           </div>
-        ) : optionList.length === 0 ? (
-          <div className="p-8 text-center text-xs text-text-muted">No options configured</div>
         ) : (
-          optionList.map((opt) => (
-            <div key={opt.id} className="flex items-center justify-between p-3">
-              <div className="flex items-center gap-3">
-                <Badge color={opt.color} dot>
-                  {opt.label}
-                </Badge>
-                {opt.archivedAt && (
-                  <span className="text-[10px] text-text-muted bg-bg-subtle px-1.5 py-0.5 rounded border border-border">
-                    Archived
-                  </span>
-                )}
-              </div>
-              <div>
-                {opt.archivedAt ? (
-                  <Button variant="ghost" size="sm" onClick={() => handleRestoreOption(opt.id)}>
-                    Restore
-                  </Button>
-                ) : (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-text-muted hover:text-danger"
-                    onClick={() => handleArchiveOption(opt.id)}
-                    aria-label={`Archive ${opt.label}`}
-                  >
-                    <Archive className="h-3.5 w-3.5" />
-                  </Button>
-                )}
-              </div>
-            </div>
-          ))
+          <OptionManager key={tab} type={tab} title={current.label} />
         )}
       </div>
     </div>

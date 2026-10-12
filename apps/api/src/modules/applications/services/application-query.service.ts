@@ -1,4 +1,4 @@
-import { Types, FilterQuery } from 'mongoose';
+import { Types, FilterQuery, trusted } from 'mongoose';
 import {
   ListApplicationsQuery,
   BoardQuery,
@@ -16,6 +16,7 @@ import { ApplicationRepository } from '../repositories/application.repository';
 import { ApplicationDoc, ApplicationModel } from '../models/application.model';
 import { OptionRepository } from '../../options/repositories/option.repository';
 import { CompanyRepository } from '../../companies/repositories/company.repository';
+import { OptionSeedService } from '../../auth/services/option-seed.service';
 import { CompanyModel } from '../../companies/models/company.model';
 import { ApplicationMapper } from '../mappers/application.mapper';
 
@@ -47,7 +48,7 @@ export class ApplicationQueryService {
     if (query.cursor) {
       const decoded = Cursor.decode<{ _id: string }>(query.cursor);
       if (decoded?._id && Types.ObjectId.isValid(decoded._id)) {
-        filter._id = { $lt: new Types.ObjectId(decoded._id) };
+        filter._id = trusted({ $lt: new Types.ObjectId(decoded._id) });
       }
     }
 
@@ -69,7 +70,7 @@ export class ApplicationQueryService {
     const companyIds = items
       .map((i) => i.companyId)
       .filter((id): id is Types.ObjectId => Boolean(id));
-    const companies = await CompanyModel.find({ _id: { $in: companyIds } }).exec();
+    const companies = await CompanyModel.find({ _id: trusted({ $in: companyIds }) }).exec();
     const companiesMap = new Map<string, CompanySummaryDto>(
       companies.map((c) => [c._id.toString(), CompanyMapper.toSummaryDto(c)]),
     );
@@ -89,7 +90,18 @@ export class ApplicationQueryService {
   }
 
   public async getBoard(userId: string, query: BoardQuery): Promise<BoardDto> {
-    const statuses = await this.optionRepository.findByType(userId, OptionType.STATUS, false);
+    let statuses = await this.optionRepository.findByType(userId, OptionType.STATUS, false);
+
+    // If user was created before options seeding or has no options, ensure defaults
+    if (statuses.length === 0) {
+      const existingAny = await this.optionRepository.findAllForUser(userId, true);
+      if (existingAny.length === 0) {
+        const seedService = new OptionSeedService();
+        await seedService.seedDefaultsForUser(userId);
+        statuses = await this.optionRepository.findByType(userId, OptionType.STATUS, false);
+      }
+    }
+
     const options = await this.optionRepository.findAllForUser(userId, true);
     const optionsMap = new Map(options.map((o) => [o._id.toString(), OptionMapper.toDto(o)]));
 
@@ -124,7 +136,7 @@ export class ApplicationQueryService {
       const companyIds = resultItems
         .map((i) => i.companyId)
         .filter((id): id is Types.ObjectId => Boolean(id));
-      const companies = await CompanyModel.find({ _id: { $in: companyIds } }).exec();
+      const companies = await CompanyModel.find({ _id: trusted({ $in: companyIds }) }).exec();
       const companiesMap = new Map<string, CompanySummaryDto>(
         companies.map((c) => [c._id.toString(), CompanyMapper.toSummaryDto(c)]),
       );
@@ -154,7 +166,7 @@ export class ApplicationQueryService {
     if (query.cursor) {
       const decoded = Cursor.decode<{ _id: string }>(query.cursor);
       if (decoded?._id && Types.ObjectId.isValid(decoded._id)) {
-        filter._id = { $gt: new Types.ObjectId(decoded._id) };
+        filter._id = trusted({ $gt: new Types.ObjectId(decoded._id) });
       }
     }
 
@@ -176,7 +188,7 @@ export class ApplicationQueryService {
     const companyIds = resultItems
       .map((i) => i.companyId)
       .filter((id): id is Types.ObjectId => Boolean(id));
-    const companies = await CompanyModel.find({ _id: { $in: companyIds } }).exec();
+    const companies = await CompanyModel.find({ _id: trusted({ $in: companyIds }) }).exec();
     const companiesMap = new Map<string, CompanySummaryDto>(
       companies.map((c) => [c._id.toString(), CompanyMapper.toSummaryDto(c)]),
     );
@@ -213,14 +225,14 @@ export class ApplicationQueryService {
     );
   }
 
-  private buildFilter(
+  public buildFilter(
     userId: string,
     query: Partial<ListApplicationsQuery>,
   ): FilterQuery<ApplicationDoc> {
     const filter: FilterQuery<ApplicationDoc> = {
       userId: new Types.ObjectId(userId),
       deletedAt: null,
-      archivedAt: query.archived ? { $ne: null } : null,
+      archivedAt: query.archived ? trusted({ $ne: null }) : null,
     };
 
     if (query.q) {
@@ -229,43 +241,43 @@ export class ApplicationQueryService {
     }
 
     if (query.statusIds && query.statusIds.length > 0) {
-      filter.statusId = {
+      filter.statusId = trusted({
         $in: query.statusIds
           .filter((id): id is string => Boolean(id))
           .map((id) => new Types.ObjectId(id)),
-      };
+      });
     }
 
     if (query.priorityIds && query.priorityIds.length > 0) {
-      filter.priorityId = {
+      filter.priorityId = trusted({
         $in: query.priorityIds
           .filter((id): id is string => Boolean(id))
           .map((id) => new Types.ObjectId(id)),
-      };
+      });
     }
 
     if (query.workModeIds && query.workModeIds.length > 0) {
-      filter.workModeId = {
+      filter.workModeId = trusted({
         $in: query.workModeIds
           .filter((id): id is string => Boolean(id))
           .map((id) => new Types.ObjectId(id)),
-      };
+      });
     }
 
     if (query.sourceIds && query.sourceIds.length > 0) {
-      filter.sourceId = {
+      filter.sourceId = trusted({
         $in: query.sourceIds
           .filter((id): id is string => Boolean(id))
           .map((id) => new Types.ObjectId(id)),
-      };
+      });
     }
 
     if (query.labelIds && query.labelIds.length > 0) {
-      filter.labelIds = {
+      filter.labelIds = trusted({
         $in: query.labelIds
           .filter((id): id is string => Boolean(id))
           .map((id) => new Types.ObjectId(id)),
-      };
+      });
     }
 
     if (query.companyId) {
@@ -276,11 +288,11 @@ export class ApplicationQueryService {
       const dateFilter: Record<string, Date> = {};
       if (query.appliedFrom) dateFilter.$gte = new Date(query.appliedFrom);
       if (query.appliedTo) dateFilter.$lte = new Date(query.appliedTo);
-      filter['dates.appliedAt'] = dateFilter;
+      filter['dates.appliedAt'] = trusted(dateFilter);
     }
 
     if (query.followUpDue) {
-      filter['dates.followUpAt'] = { $lte: new Date() };
+      filter['dates.followUpAt'] = trusted({ $lte: new Date() });
     }
 
     return filter;

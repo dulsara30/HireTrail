@@ -47,4 +47,24 @@ export const OPTION_COLOR_STYLES: Record<OptionColor, TagStyle> = {
     text: 'text-tag-teal-text',
     border: 'border-tag-teal-border',
   },
+  pink: {
+    bg: 'bg-tag-pink-bg',
+    text: 'text-tag-pink-text',
+    border: 'border-tag-pink-border',
+  },
+  lime: {
+    bg: 'bg-tag-lime-bg',
+    text: 'text-tag-lime-text',
+    border: 'border-tag-lime-border',
+  },
+  sky: {
+    bg: 'bg-tag-sky-bg',
+    text: 'text-tag-sky-text',
+    border: 'border-tag-sky-border',
+  },
+  indigo: {
+    bg: 'bg-tag-indigo-bg',
+    text: 'text-tag-indigo-text',
+    border: 'border-tag-indigo-border',
+  },
 };

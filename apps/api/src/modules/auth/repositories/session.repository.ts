@@ -1,4 +1,4 @@
-import { ClientSession, Types } from 'mongoose';
+import { ClientSession, Types, trusted } from 'mongoose';
 import { RevokeReason, SessionDoc, SessionModel } from '../models/session.model';
 
 export class SessionRepository {
@@ -117,7 +117,7 @@ export class SessionRepository {
     return SessionModel.find({
       userId,
       revokedAt: null,
-      expiresAt: { $gt: new Date() },
+      expiresAt: trusted({ $gt: new Date() }),
     }).sort({ lastUsedAt: -1 });
   }
 }

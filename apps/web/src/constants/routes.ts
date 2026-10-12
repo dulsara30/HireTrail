@@ -15,6 +15,7 @@ export const ROUTES = {
     security: '/settings/security',
     pipelineFields: '/settings/pipeline-fields',
     plan: '/settings/plan',
+    account: '/settings/account',
   },
   admin: {
     users: '/admin/users',

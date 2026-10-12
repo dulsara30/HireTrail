@@ -55,9 +55,10 @@ const activitySchema = new Schema<ActivityDoc>(
       default: [],
     },
     summary: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now },
   },
   {
-    timestamps: { createdAt: true, updatedAt: false },
+    timestamps: false,
   },
 );
 

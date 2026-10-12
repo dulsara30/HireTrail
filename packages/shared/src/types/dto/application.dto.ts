@@ -58,6 +58,7 @@ export interface ApplicationDto {
   cvVersionId?: string | null;
   labelIds: string[];
   location?: string | null;
+  coverLetter: boolean;
   jobUrl?: string | null;
   jobDescription?: {
     html?: string;
@@ -97,6 +98,7 @@ export interface ApplicationListItemDto {
   priorityId?: string | null;
   labelIds: string[];
   location?: string | null;
+  coverLetter: boolean;
   dates?: ApplicationDatesDto;
   lastActivityAt: string;
   archivedAt?: string | null;

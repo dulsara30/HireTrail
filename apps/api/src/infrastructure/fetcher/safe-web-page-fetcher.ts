@@ -53,10 +53,16 @@ export class SafeWebPageFetcher implements WebPageFetcher {
         throw new SourceUnreachableError('The page is not a readable HTML or text document');
       }
 
-      const extracted =
-        type === 'text/plain'
-          ? ContentExtractor.fromPlain(res.body)
-          : ContentExtractor.fromHtml(res.body, current.toString());
+      let extracted;
+      try {
+        extracted =
+          type === 'text/plain'
+            ? ContentExtractor.fromPlain(res.body)
+            : await ContentExtractor.fromHtml(res.body, current.toString());
+      } catch {
+        // The page could not be parsed: callers fall back to pasted text or the AI URL reader
+        throw new SourceUnreachableError('The page could not be read');
+      }
       return { title: extracted.title, textContent: extracted.text, finalUrl: current.toString() };
     }
 

@@ -247,7 +247,7 @@ export class AutofillService {
     usage: UsageAccumulator,
   ): Promise<{ text: string; url: string | null; merged: boolean }> {
     if (input.text) {
-      let text = ContentExtractor.stripHtml(input.text).slice(0, AI_TEXT_MAX);
+      let text = (await ContentExtractor.stripHtml(input.text)).slice(0, AI_TEXT_MAX);
       let url: string | null = null;
       let merged = false;
       const link = text.length < SHORT_TEXT_CHARS ? LINK_REGEX.exec(text)?.[0] : undefined;
@@ -295,7 +295,7 @@ export class AutofillService {
         timeoutMs: 30_000,
       });
       usage.add(res.modelId, res.usage);
-      return ContentExtractor.stripHtml(res.data?.text ?? '');
+      return await ContentExtractor.stripHtml(res.data?.text ?? '');
     } catch (err) {
       if (err instanceof AiToolUnavailableError) return '';
       throw err;

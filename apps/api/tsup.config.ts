@@ -15,6 +15,6 @@ export default defineConfig({
   clean: true,
   // Vercel calls the module export as the request handler: make the Express app the export itself
   footer: { js: 'module.exports = module.exports.default;' },
-  // the workspace package is bundled so the function does not depend on workspace symlinks
-  noExternal: ['@hiretrail/shared'],
+  // bundled: the workspace package, and ESM-only packages that a CommonJS file cannot require()
+  noExternal: ['@hiretrail/shared', 'fractional-indexing', 'archiver'],
 });

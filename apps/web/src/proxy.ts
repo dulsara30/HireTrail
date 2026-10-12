@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 /**
- * Next.js middleware / proxy redirect:
+ * Next.js 16 proxy (formerly middleware): one exported function named `proxy`.
  * Inspects the non-HttpOnly signed-in hint cookie (`ht_signed_in`).
  *
  * Rules:
@@ -14,7 +14,7 @@ import type { NextRequest } from 'next/server';
  * Note: This check is purely for frontend UX optimization. Real security is enforced
  * by the API server on every authenticated request.
  */
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl;
   const hasSignedInHint = request.cookies.has('ht_signed_in');
 
@@ -38,9 +38,6 @@ export function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
-
-export const proxy = middleware;
-export default middleware;
 
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],

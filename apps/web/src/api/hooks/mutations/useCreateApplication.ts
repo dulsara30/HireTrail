@@ -10,7 +10,7 @@ export function useCreateApplication() {
     mutationFn: (input) => applicationsService.create(input),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: applicationKeys.lists() });
-      queryClient.invalidateQueries({ queryKey: applicationKeys.board() });
+      queryClient.invalidateQueries({ queryKey: applicationKeys.boards() });
     },
   });
 }

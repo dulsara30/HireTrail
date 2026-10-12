@@ -46,7 +46,7 @@ export default function PipelinePage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] space-y-3">
+    <div className="flex flex-col h-[calc(100dvh-6rem)] md:h-full space-y-3">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-xl font-bold text-text">Pipeline</h1>
@@ -77,7 +77,7 @@ export default function PipelinePage() {
         )}
       </div>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="min-h-0 flex-1 overflow-hidden">
         <PipelineBoard
           board={board}
           isLoading={isLoading}

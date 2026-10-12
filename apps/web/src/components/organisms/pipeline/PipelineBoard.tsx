@@ -112,7 +112,7 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
       onDragEnd={handleDragEnd}
       onDragCancel={() => setActiveDragId(null)}
     >
-      <div className="flex h-full gap-4 overflow-x-auto pb-4 pt-1 items-start">
+      <div className="flex h-full gap-4 overflow-x-auto pb-2 pt-1 items-start">
         {board && board.lanes.length > 0 ? (
           board.lanes.map((lane) => (
             <PipelineLane

@@ -1,19 +1,19 @@
 import { useEffect, useRef } from 'react';
 
 interface UseInfiniteScrollOptions {
-  hasNextPage?: boolean;
-  isFetchingNextPage?: boolean;
+  hasNextPage: boolean | undefined;
+  isFetchingNextPage: boolean;
   onLoadMore: () => void;
   rootMargin?: string;
 }
 
-export function useInfiniteScroll<T extends HTMLElement = HTMLDivElement>({
+export function useInfiniteScroll({
   hasNextPage,
   isFetchingNextPage,
   onLoadMore,
   rootMargin = '200px',
 }: UseInfiniteScrollOptions) {
-  const sentinelRef = useRef<T | null>(null);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -23,8 +23,7 @@ export function useInfiniteScroll<T extends HTMLElement = HTMLDivElement>({
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const [entry] = entries;
-        if (entry?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+        if (entries[0]?.isIntersecting && hasNextPage && !isFetchingNextPage) {
           onLoadMore();
         }
       },
@@ -32,7 +31,10 @@ export function useInfiniteScroll<T extends HTMLElement = HTMLDivElement>({
     );
 
     observer.observe(sentinel);
-    return () => observer.disconnect();
+
+    return () => {
+      observer.disconnect();
+    };
   }, [hasNextPage, isFetchingNextPage, onLoadMore, rootMargin]);
 
   return { sentinelRef };

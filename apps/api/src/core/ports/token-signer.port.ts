@@ -1,13 +1,11 @@
-export interface TokenPayload {
-  sub: string;
-  email: string;
-  role: string;
-  plan: string;
-  emailVerified: boolean;
-  sessionId?: string;
+export interface AccessTokenPayload {
+  sub: string; // userId
+  sid: string; // sessionId
+  iss?: string;
+  aud?: string;
 }
 
 export interface TokenSigner {
-  signAccessToken(payload: TokenPayload): string;
-  verifyAccessToken(token: string): TokenPayload;
+  signAccessToken(payload: { userId: string; sessionId: string }): string;
+  verifyAccessToken(token: string): AccessTokenPayload;
 }

@@ -5,3 +5,5 @@ export class IpHash {
     return crypto.createHmac('sha256', salt).update(ip).digest('hex');
   }
 }
+
+export const hashIp = IpHash.hash;

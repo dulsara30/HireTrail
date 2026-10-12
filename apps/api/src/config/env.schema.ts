@@ -66,7 +66,12 @@ export const envSchema = yup.object({
   AI_QUOTA_COMPANY_LOOKUP: yup.number().integer().positive().default(20),
   AI_QUOTA_INSIGHTS: yup.number().integer().positive().default(1),
 
-  EMAIL_API_KEY: yup.string().optional(),
+  EMAIL_API_KEY: yup.string().when('APP_ENV', {
+    is: 'production',
+    then: (schema) =>
+      schema.required('EMAIL_API_KEY (or RESEND_API_KEY) is required in production'),
+    otherwise: (schema) => schema.optional(),
+  }),
   EMAIL_FROM: yup.string().default('HireTrail <no-reply@hiretrail.local>'),
   SENTRY_DSN: yup.string().optional(),
 });

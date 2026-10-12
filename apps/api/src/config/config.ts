@@ -45,7 +45,11 @@ export interface AppConfig {
 
 export function loadConfig(rawEnv: NodeJS.ProcessEnv = process.env): AppConfig {
   try {
-    const validated = envSchema.validateSync(rawEnv, {
+    const envWithAlias = {
+      ...rawEnv,
+      EMAIL_API_KEY: rawEnv.EMAIL_API_KEY || rawEnv.RESEND_API_KEY,
+    };
+    const validated = envSchema.validateSync(envWithAlias, {
       abortEarly: false,
       stripUnknown: true,
     });

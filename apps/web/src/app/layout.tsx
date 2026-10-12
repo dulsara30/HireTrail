@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from '../providers/QueryProvider';
+import { AuthBootstrap } from '../providers/AuthBootstrap';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +23,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen bg-bg-page text-text-primary antialiased">
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <AuthBootstrap>{children}</AuthBootstrap>
+        </QueryProvider>
       </body>
     </html>
   );

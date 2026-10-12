@@ -4,5 +4,7 @@ packages:
 allowBuilds:
   esbuild: true
   mongodb-memory-server: true
+  argon2: true
 overrides:
   postcss: '>=8.5.23'
+  underscore: '>=1.13.8'

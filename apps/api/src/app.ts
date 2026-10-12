@@ -5,14 +5,24 @@ import cookieParser from 'cookie-parser';
 import { config } from './config/config';
 import { requestIdMiddleware } from './core/middleware/request-id.middleware';
 import { httpLoggerMiddleware } from './core/middleware/http-logger.middleware';
-import { ipRateLimitMiddleware } from './core/middleware/rate-limit.middleware';
+import { globalApiRateLimit } from './core/middleware/rate-limit.middleware';
 import { notFoundMiddleware } from './core/middleware/not-found.middleware';
 import { errorHandlerMiddleware } from './core/middleware/error-handler.middleware';
 import { container } from './core/container/container';
 import { createHealthRouter } from './modules/health/health.routes';
+import { createAuthRoutes } from './modules/auth/auth.routes';
+import { createMeRoutes } from './modules/users/me.routes';
+import { createOptionRoutes } from './modules/options/option.routes';
+import { createCompanyRoutes } from './modules/companies/company.routes';
+import { createCommentRoutes } from './modules/comments/comment.routes';
+import { createApplicationRoutes } from './modules/applications/application.routes';
 
 export function createApp(): Express {
   const app = express();
+
+  // TODO: Verify real-IP forwarded header on first Vercel preview deployment
+  // Options: 'x-forwarded-for', 'x-real-ip', 'x-vercel-forwarded-for'
+  app.set('trust proxy', 1);
 
   // 1. requestId: assign / echo x-request-id
   app.use(requestIdMiddleware);
@@ -40,13 +50,38 @@ export function createApp(): Express {
   // 6. cookie-parser
   app.use(cookieParser(config.cookieSecret));
 
-  // 7. ipRateLimit
-  app.use(ipRateLimitMiddleware);
+  // 7. ipRateLimit: global 300 req / 5 min
+  app.use(globalApiRateLimit);
 
   // 8. routes
   app.use('/api/v1/health', createHealthRouter(container.healthController));
-  // Mount /health alias for direct root health checks
   app.use('/health', createHealthRouter(container.healthController));
+  app.use('/api/v1/auth', createAuthRoutes(container.authController, container.authenticate));
+  app.use('/api/v1/me', createMeRoutes(container.meController, container.authenticate));
+  app.use(
+    '/api/v1/options',
+    container.authenticate,
+    createOptionRoutes(container.optionController),
+  );
+  app.use(
+    '/api/v1/companies',
+    container.authenticate,
+    createCompanyRoutes(container.companyController),
+  );
+  app.use(
+    '/api/v1/comments',
+    container.authenticate,
+    createCommentRoutes(container.commentController),
+  );
+  app.use(
+    '/api/v1/applications',
+    container.authenticate,
+    createApplicationRoutes(
+      container.applicationController,
+      container.commentController,
+      container.activityController,
+    ),
+  );
 
   // 9. notFound: route not found envelope
   app.use(notFoundMiddleware);

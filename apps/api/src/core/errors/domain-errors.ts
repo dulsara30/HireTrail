@@ -73,6 +73,34 @@ export class ForbiddenError extends AppError {
   }
 }
 
+export class AuthenticationError extends AppError {
+  readonly code: ErrorCode;
+  readonly status = 401;
+
+  constructor(
+    message = 'Authentication required',
+    code: ErrorCode = ErrorCode.UNAUTHENTICATED,
+    details?: unknown,
+  ) {
+    super(message, details);
+    this.code = code;
+  }
+}
+
+export class AuthorizationError extends AppError {
+  readonly code: ErrorCode;
+  readonly status = 403;
+
+  constructor(
+    message = 'Permission denied',
+    code: ErrorCode = ErrorCode.FORBIDDEN,
+    details?: unknown,
+  ) {
+    super(message, details);
+    this.code = code;
+  }
+}
+
 export class PlanRequiredError extends AppError {
   readonly code = ErrorCode.PLAN_REQUIRED;
   readonly status = 403;

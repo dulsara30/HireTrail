@@ -12,7 +12,8 @@ declare global {
 
     interface Request {
       requestId: string;
-      user?: RequestUser;
+      sessionId?: string;
+      user?: import('../modules/auth/models/user.model').UserDoc;
       validated?: {
         body?: unknown;
         query?: unknown;

@@ -9,3 +9,6 @@ export class TokenHash {
     return crypto.randomBytes(bytes).toString('hex');
   }
 }
+
+export const hashToken = TokenHash.hash;
+export const generateSecureToken = TokenHash.generateSecureToken;

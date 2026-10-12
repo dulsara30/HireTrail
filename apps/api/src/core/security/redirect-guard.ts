@@ -32,3 +32,6 @@ export class RedirectGuard {
     return fallback;
   }
 }
+
+export const sanitizeRedirectPath = RedirectGuard.sanitizeRedirectPath.bind(RedirectGuard);
+export const isValidRelativePath = RedirectGuard.isValidRelativePath.bind(RedirectGuard);

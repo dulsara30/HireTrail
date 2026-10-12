@@ -9,15 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Phase 0 foundation: pnpm + Turborepo monorepo setup (`apps/web`, `apps/api`, `packages/shared`).
-- Shared package with common schemas, limits, default options, and error code catalogue.
-- Express 5 API skeleton with strict middleware chain (`requestId`, `httpLogger`, `helmet`, `cors`, `express.json`, `cookieParser`, `notFound`, `errorHandler`).
-- Pino logger with sensitive header, cookie, and credential redaction.
-- Yup environment configuration validation and frozen config object.
-- Cached Mongoose database connection with `softDelete` and `toJSON` plugins.
-- `GET /health` endpoint with active database ping and status check.
-- Core architecture primitives: `BaseRepository`, `BaseController`, AppError hierarchy, value objects (`Money`, `Cursor`, `FractionalOrder`), and security helpers (`CsvEscaper`, `RedirectGuard`, `HtmlSanitizer`).
-- Next.js App Router application with exact design tokens, typography scale, and 4-point spacing grid.
-- Atomic components: `Button`, `Input`, `Badge`, `Chip`, `Spinner`, `Skeleton`, `FormField`, `EmptyState`.
-- Frontend API client skeleton with Axios instance, error transformer, TanStack Query, and `useHealth` hook.
-- GitHub Actions CI/CD workflow, Vercel configuration files, and Architecture Decision Records (ADR 0001–0005).
+- **Phase 1 (Authentication)**:
+  - Full auth flows: register, login, refresh with token rotation and reuse detection, logout, logout-all, `/me`, active sessions.
+  - Email verification and forgot/reset password with secure one-time tokens.
+  - Google OAuth 2.0 with PKCE and ID token verification.
+  - In-transaction seeding of default options on registration.
+  - Web auth pages (Formik + Yup), AuthBootstrap, and proxy/middleware UX guards.
+- **Phase 2 & 3 (Pipeline & Applications)**:
+  - Options module: CRUD, move (fractional indexing), archive with reassignment guard (`OPTION_IN_USE`), restore, reset defaults.
+  - Settings -> Pipeline & fields page (`/settings/pipeline-fields`).
+  - Companies module (minimal): create private company, search visible companies (owned + global).
+  - Applications module:
+    - Repository on `BaseRepository` with `userId` scoping.
+    - Command service: optimistic locking with `version`, duplicate warning detection within 90 days, milestone transitions (`appliedAt`, `firstResponseAt`, `firstInterviewAt`, `offerAt`, `closedAt`), HTML sanitization, in-transaction activity history diff logging.
+    - Query service: cursor pagination table listing with filters and sorting, Kanban board view with lane totals and per-lane load more.
+  - Comments module (notes, follow-ups with due/done toggling, interview notes) and Activity feed.
+  - Frontend components:
+    - `InlineEditField` molecule with debounced/queue save and conflict detection banner.
+    - `ApplicationsTable` with column sorting and infinite scroll.
+    - `PipelineBoard` with `@dnd-kit`: mouse/touch/keyboard sensors, optimistic drag-and-drop with rollback, mobile support.
+    - `ApplicationPanel` organism: Create and View/edit modes with two-column layout, TipTap rich text support, and bottom Activity/Comments timeline.
+  - Web pages: `/applications` and `/pipeline`.

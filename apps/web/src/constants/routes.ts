@@ -7,6 +7,9 @@ export const ROUTES = {
   company: (slug: string) => `/companies/${slug}`,
   login: '/login',
   register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  verifyEmail: '/verify-email',
   settings: {
     profile: '/settings/profile',
     security: '/settings/security',

@@ -13,6 +13,7 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "test:e2e": "node -e \"console.log('no e2e tests yet'); process.exit(0);\"",
+    "user:grant": "pnpm --filter @hiretrail/api exec tsx scripts/user-grant.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "node -e \"if (!process.env.CI && !process.env.VERCEL) { try { require('child_process').execSync('husky', { stdio: 'inherit' }); } catch {} }\""

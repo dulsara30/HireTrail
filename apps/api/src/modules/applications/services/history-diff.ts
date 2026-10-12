@@ -23,6 +23,7 @@ export class HistoryDiff {
       'jobUrl',
       'contactEmail',
       'resumeUrl',
+      'resumeName',
     ];
 
     for (const field of simpleFields) {

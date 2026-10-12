@@ -94,6 +94,7 @@ export class ApplicationMapper {
       jobUrl: doc.jobUrl || null,
       contactEmail: doc.contactEmail || null,
       resumeUrl: doc.resumeUrl || null,
+      resumeName: doc.resumeName || null,
       jobDescription: doc.jobDescription,
       salary: doc.salary
         ? {

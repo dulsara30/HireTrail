@@ -12,6 +12,7 @@ import { useOptions } from '../../../api/hooks/queries/useOptions';
 import { useComments } from '../../../api/hooks/queries/useComments';
 import { useActivitiesInfinite } from '../../../api/hooks/queries/useActivitiesInfinite';
 import { useUpdateApplicationField } from '../../../api/hooks/mutations/useUpdateApplicationField';
+import { DriveResumePicker } from '../../molecules/DriveResumePicker/DriveResumePicker';
 import { Button } from '../../atoms/Button';
 import { Spinner } from '../../atoms/Spinner';
 import { X, AlertCircle, ExternalLink, Trash2 } from 'lucide-react';
@@ -93,7 +94,11 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
     ? optionsData.filter((o) => o.type === 'CV_VERSION')
     : optionsRecord?.CV_VERSION || [];
 
-  const handleUpdateField = async (fieldName: string, value: unknown) => {
+  const handleUpdateField = async (
+    fieldName: string,
+    value: unknown,
+    extra: Record<string, unknown> = {},
+  ) => {
     if (!application) return;
     try {
       setHasConflict(false);
@@ -101,6 +106,7 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
         id: application.id,
         input: {
           [fieldName]: value,
+          ...extra,
           version: application.version,
         },
       });
@@ -289,12 +295,25 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
                     placeholder="Add location (e.g. Remote, San Francisco, CA)…"
                     onSave={(val) => handleUpdateField('location', val)}
                   />
-                  <InlineEditField
-                    label="Job Link"
-                    value={application.jobUrl || ''}
-                    placeholder="https://..."
-                    onSave={(val) => handleUpdateField('jobUrl', val)}
-                  />
+                  <div className="space-y-1">
+                    <InlineEditField
+                      label="Job Link"
+                      value={application.jobUrl || ''}
+                      placeholder="https://..."
+                      onSave={(val) => handleUpdateField('jobUrl', val)}
+                    />
+                    {application.jobUrl && /^https?:\/\//i.test(application.jobUrl) && (
+                      <a
+                        href={application.jobUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-text-accent hover:underline"
+                      >
+                        Open job post
+                        <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
                   <InlineEditField
                     label="Contact Email"
                     value={application.contactEmail || ''}
@@ -306,7 +325,7 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
                       label="Resume (Google Drive link)"
                       value={application.resumeUrl || ''}
                       placeholder="https://drive.google.com/file/d/..."
-                      onSave={(val) => handleUpdateField('resumeUrl', val)}
+                      onSave={(val) => handleUpdateField('resumeUrl', val, { resumeName: null })}
                     />
                     {application.resumeUrl && (
                       <a
@@ -315,10 +334,17 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
                         rel="noopener noreferrer nofollow"
                         className="inline-flex items-center gap-1 text-xs font-semibold text-text-accent hover:underline"
                       >
-                        Open resume in Google Drive
+                        {application.resumeName
+                          ? `Open ${application.resumeName}`
+                          : 'Open resume in Google Drive'}
                         <ExternalLink className="h-3 w-3" aria-hidden="true" />
                       </a>
                     )}
+                    <DriveResumePicker
+                      onPick={(file) =>
+                        handleUpdateField('resumeUrl', file.url, { resumeName: file.name })
+                      }
+                    />
                   </div>
                   <JobDescriptionField
                     value={application.jobDescription?.html || ''}

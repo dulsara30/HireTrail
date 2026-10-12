@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (Google Drive resume picker)
+
+- "Choose from Google Drive" on the application form and side panel. Uses Google's Picker with the `drive.file` scope in the browser; the server stores only the link and the file name (`resumeName`), never a Google token. Pasting a link still works. Needs `NEXT_PUBLIC_GOOGLE_CLIENT_ID`, `NEXT_PUBLIC_GOOGLE_API_KEY` and `NEXT_PUBLIC_GOOGLE_APP_ID`; the button is hidden when they are missing.
+
 ### Added (search and filters)
 
 - **Applications table**: search by role or company, plus filters for company, status and priority, with a "No applications match" empty state and Clear. **Pipeline**: one global search (role or company) and filters for priority, work mode and source, with a match count.

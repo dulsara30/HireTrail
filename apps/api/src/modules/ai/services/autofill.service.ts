@@ -60,7 +60,7 @@ export class AutofillService {
       system: AUTOFILL_SYSTEM_PROMPT,
       content: source.text,
       jsonSchema: AUTOFILL_JSON_SCHEMA,
-      timeoutMs: 30_000,
+      timeoutMs: 25_000,
     });
     usage.add(extraction.modelId, extraction.usage);
 

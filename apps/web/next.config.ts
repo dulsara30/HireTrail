@@ -20,6 +20,8 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   transpilePackages: ['@hiretrail/shared'],
+  // The default proxy timeout is 30 s; AI calls can take longer than that when a model is slow
+  experimental: { proxyTimeout: 60_000 },
   async rewrites() {
     return [
       {

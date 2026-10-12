@@ -119,6 +119,7 @@ export class ApplicationCommandService {
             coverLetter: input.coverLetter ?? false,
             contactEmail: input.contactEmail || undefined,
             resumeUrl: input.resumeUrl || undefined,
+            resumeName: input.resumeName || undefined,
             jobUrl: input.jobUrl || undefined,
             jobDescription: cleanJobDescHtml
               ? {
@@ -227,6 +228,7 @@ export class ApplicationCommandService {
     if (input.coverLetter !== undefined) changes.coverLetter = input.coverLetter;
     if (input.contactEmail !== undefined) changes.contactEmail = input.contactEmail;
     if (input.resumeUrl !== undefined) changes.resumeUrl = input.resumeUrl;
+    if (input.resumeName !== undefined) changes.resumeName = input.resumeName;
     if (input.jobUrl !== undefined) changes.jobUrl = input.jobUrl;
     if (input.companyId !== undefined) {
       changes.companyId = input.companyId ? new Types.ObjectId(input.companyId) : null;

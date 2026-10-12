@@ -61,6 +61,7 @@ export interface ApplicationDto {
   coverLetter: boolean;
   contactEmail?: string | null;
   resumeUrl?: string | null;
+  resumeName?: string | null;
   jobUrl?: string | null;
   jobDescription?: {
     html?: string;

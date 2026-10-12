@@ -26,6 +26,9 @@ interface CallResult {
 
 const BUSY_MESSAGE = 'AI is busy right now, try again in a minute';
 
+/** A model that has not answered within this time is skipped, so one slow model cannot use the whole budget. */
+const PER_ATTEMPT_MS = 12000;
+
 export class GeminiAiProvider implements AiProvider {
   private readonly client: GoogleGenAI;
 
@@ -150,7 +153,12 @@ ${req.content}
         config: {
           systemInstruction: req.system,
           temperature: 0,
-          abortSignal: AbortSignal.timeout(Math.max(1000, deadline - Date.now())),
+          abortSignal: AbortSignal.timeout(
+            Math.max(
+              1000,
+              Math.min(deadline - Date.now(), tools.length === 0 ? PER_ATTEMPT_MS : Infinity),
+            ),
+          ),
           ...(sdkTools.length > 0 ? { tools: sdkTools } : {}),
           ...(json
             ? { responseMimeType: 'application/json', responseJsonSchema: req.jsonSchema }
@@ -167,8 +175,12 @@ ${req.content}
         lastError = first;
         this.logFailure(candidate, first);
         const status = this.statusOf(first);
-        // A network hiccup is retried once on the same model; overload, quota and 404 move to the next model
-        if (status === undefined && Date.now() < deadline) {
+        const timedOut =
+          first instanceof Error &&
+          /abort|timeout|timed out/i.test(`${first.name} ${first.message}`);
+        // A short network hiccup is retried once on the same model. A timeout, overload, quota error
+        // or missing model moves straight to the next model (a slow model must not use the whole budget).
+        if (status === undefined && !timedOut && Date.now() < deadline) {
           await new Promise((r) => setTimeout(r, 500));
           try {
             return { res: await run(candidate), model: candidate };
@@ -176,7 +188,7 @@ ${req.content}
             lastError = second;
             this.logFailure(candidate, second);
           }
-        } else if (!this.isRetryable(first) && !this.isModelMissing(first)) {
+        } else if (!timedOut && !this.isRetryable(first) && !this.isModelMissing(first)) {
           throw this.mapError(first, tools.length > 0);
         }
       }

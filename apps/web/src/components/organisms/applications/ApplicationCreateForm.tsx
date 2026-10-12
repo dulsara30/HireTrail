@@ -17,6 +17,7 @@ import { Skeleton } from '../../atoms/Skeleton';
 import { Spinner } from '../../atoms/Spinner';
 import { ProLockBanner } from '../../molecules/ProLockBanner/ProLockBanner';
 import { CompanyCombobox } from './CompanyCombobox';
+import { DriveResumePicker } from '../../molecules/DriveResumePicker/DriveResumePicker';
 import {
   draftToFormValues,
   emptyDraft,
@@ -174,6 +175,7 @@ export const ApplicationCreateForm: React.FC<ApplicationCreateFormProps> = ({
           coverLetter: current.coverLetter,
           appliedAt: current.appliedAt,
           resumeUrl: current.resumeUrl,
+          resumeName: current.resumeName,
         }));
         setAiInput('');
       },
@@ -449,12 +451,26 @@ export const ApplicationCreateForm: React.FC<ApplicationCreateFormProps> = ({
               id="cf-resume"
               type="url"
               value={values.resumeUrl}
-              onChange={(e) => set('resumeUrl')(e.target.value)}
+              onChange={(e) => {
+                set('resumeUrl')(e.target.value);
+                set('resumeName')('');
+              }}
               placeholder="https://drive.google.com/file/d/..."
               className={inputClass}
             />
+            {values.resumeName && (
+              <p className="text-xs font-medium text-text-secondary">
+                Selected: {values.resumeName}
+              </p>
+            )}
+            <DriveResumePicker
+              onPick={(file) => {
+                set('resumeUrl')(file.url);
+                set('resumeName')(file.name);
+              }}
+            />
             <p className="text-[11px] text-text-tertiary">
-              Share the file in Drive first, then paste its link.
+              Pick a file from Drive, or paste a link. Share the file so reviewers can open it.
             </p>
           </Field>
           <Field label="Applied date" htmlFor="cf-applied">

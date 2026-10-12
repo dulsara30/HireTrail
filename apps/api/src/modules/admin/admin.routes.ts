@@ -44,6 +44,7 @@ export function createAdminRoutes(controller: AdminController): Router {
   );
 
   router.get('/audit-logs', validate({ query: adminAuditLogsQuerySchema }), controller.auditLogs);
+  router.get('/ai-health', controller.aiHealth);
   router.get('/ai-usage', validate({ query: adminAiUsageQuerySchema }), controller.aiUsage);
 
   return router;

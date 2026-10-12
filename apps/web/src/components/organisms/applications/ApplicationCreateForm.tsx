@@ -173,6 +173,7 @@ export const ApplicationCreateForm: React.FC<ApplicationCreateFormProps> = ({
           cvVersionId: current.cvVersionId,
           coverLetter: current.coverLetter,
           appliedAt: current.appliedAt,
+          resumeUrl: current.resumeUrl,
         }));
         setAiInput('');
       },
@@ -433,6 +434,29 @@ export const ApplicationCreateForm: React.FC<ApplicationCreateFormProps> = ({
           <Field label="CV version" htmlFor="cf-cv">
             {optionSelect('cf-cv', 'cvVersionId', cvVersions)}
           </Field>
+          <Field label="Contact email" aiKey="contactEmail" htmlFor="cf-email">
+            <input
+              id="cf-email"
+              type="email"
+              value={values.contactEmail}
+              onChange={(e) => set('contactEmail', 'contactEmail')(e.target.value)}
+              placeholder="recruiter@company.com"
+              className={inputClass}
+            />
+          </Field>
+          <Field label="Resume (Google Drive link)" htmlFor="cf-resume">
+            <input
+              id="cf-resume"
+              type="url"
+              value={values.resumeUrl}
+              onChange={(e) => set('resumeUrl')(e.target.value)}
+              placeholder="https://drive.google.com/file/d/..."
+              className={inputClass}
+            />
+            <p className="text-[11px] text-text-tertiary">
+              Share the file in Drive first, then paste its link.
+            </p>
+          </Field>
           <Field label="Applied date" htmlFor="cf-applied">
             <input
               id="cf-applied"
@@ -442,7 +466,7 @@ export const ApplicationCreateForm: React.FC<ApplicationCreateFormProps> = ({
               className={inputClass}
             />
             <p className="text-[11px] text-text-tertiary">
-              Leave empty to use today when the status is Applied or later.
+              Today by default. Change it if you applied on another day.
             </p>
           </Field>
           <Field label="Deadline" aiKey="deadlineAt" htmlFor="cf-deadline">

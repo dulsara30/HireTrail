@@ -59,6 +59,8 @@ export interface ApplicationDoc extends Document {
   labelIds: Types.ObjectId[];
   location?: string;
   coverLetter: boolean;
+  contactEmail?: string;
+  resumeUrl?: string;
   jobUrl?: string;
   jobDescription?: {
     html?: string;
@@ -96,6 +98,8 @@ const applicationSchema = new Schema<ApplicationDoc>(
     labelIds: { type: [{ type: Schema.Types.ObjectId, ref: 'Option' }], default: [] },
     location: { type: String, trim: true, maxlength: 120 },
     coverLetter: { type: Boolean, default: false },
+    contactEmail: { type: String, trim: true, lowercase: true, maxlength: 254 },
+    resumeUrl: { type: String, trim: true, maxlength: 2000 },
     jobUrl: { type: String, trim: true },
     jobDescription: {
       html: { type: String },

@@ -21,6 +21,8 @@ export class HistoryDiff {
       'companyName',
       'location',
       'jobUrl',
+      'contactEmail',
+      'resumeUrl',
     ];
 
     for (const field of simpleFields) {

@@ -14,7 +14,8 @@ import { useActivitiesInfinite } from '../../../api/hooks/queries/useActivitiesI
 import { useUpdateApplicationField } from '../../../api/hooks/mutations/useUpdateApplicationField';
 import { Button } from '../../atoms/Button';
 import { Spinner } from '../../atoms/Spinner';
-import { X, AlertCircle } from 'lucide-react';
+import { X, AlertCircle, ExternalLink, Trash2 } from 'lucide-react';
+import { useDeleteApplicationPermanently } from '../../../api/hooks/mutations/useDeleteApplicationPermanently';
 
 export type ApplicationPanelMode = 'create' | 'view' | 'ai-preview';
 
@@ -39,6 +40,8 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
 
   // Concurrency conflict banner state
   const [hasConflict, setHasConflict] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const deleteMutation = useDeleteApplicationPermanently();
 
   // Queries
   const {
@@ -153,10 +156,75 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
               </div>
             )}
           </div>
-          <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close panel">
-            <X className="h-4 w-4" />
-          </Button>
+          <div className="flex items-center gap-1">
+            {!isCreate && application && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setConfirmDelete(true)}
+                aria-label="Delete application"
+                className="text-text-secondary hover:text-text-danger"
+              >
+                <Trash2 className="h-4 w-4" />
+              </Button>
+            )}
+            <Button variant="ghost" size="sm" onClick={onClose} aria-label="Close panel">
+              <X className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
+
+        {confirmDelete && application && (
+          <div
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-app-title"
+            className="absolute inset-0 z-30 flex items-center justify-center bg-bg-inverse/50 p-4"
+          >
+            <div className="w-full max-w-md space-y-4 rounded-xl border border-border-danger bg-bg-surface p-5 shadow-lg">
+              <h3 id="delete-app-title" className="text-base font-bold text-text-primary">
+                Delete this application permanently?
+              </h3>
+              <p className="text-sm text-text-secondary">
+                “{application.roleTitle}” at {application.companyName}, with all its comments and
+                history, will be removed for good. This cannot be undone.
+              </p>
+              {deleteMutation.isError && (
+                <p role="alert" className="text-xs text-text-danger">
+                  {deleteMutation.error.message}
+                </p>
+              )}
+              <div className="flex justify-end gap-2">
+                <Button
+                  variant="ghost"
+                  onClick={() => setConfirmDelete(false)}
+                  disabled={deleteMutation.isPending}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="danger"
+                  disabled={deleteMutation.isPending}
+                  onClick={() =>
+                    deleteMutation.mutate(application.id, {
+                      onSuccess: () => {
+                        setConfirmDelete(false);
+                        onClose();
+                      },
+                    })
+                  }
+                >
+                  {deleteMutation.isPending ? (
+                    <Spinner size="sm" />
+                  ) : (
+                    <Trash2 className="h-4 w-4" />
+                  )}
+                  Delete permanently
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* CONFLICT Banner */}
         {hasConflict && (
@@ -227,6 +295,31 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
                     placeholder="https://..."
                     onSave={(val) => handleUpdateField('jobUrl', val)}
                   />
+                  <InlineEditField
+                    label="Contact Email"
+                    value={application.contactEmail || ''}
+                    placeholder="recruiter@company.com"
+                    onSave={(val) => handleUpdateField('contactEmail', val)}
+                  />
+                  <div className="space-y-1">
+                    <InlineEditField
+                      label="Resume (Google Drive link)"
+                      value={application.resumeUrl || ''}
+                      placeholder="https://drive.google.com/file/d/..."
+                      onSave={(val) => handleUpdateField('resumeUrl', val)}
+                    />
+                    {application.resumeUrl && (
+                      <a
+                        href={application.resumeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-text-accent hover:underline"
+                      >
+                        Open resume in Google Drive
+                        <ExternalLink className="h-3 w-3" aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
                   <JobDescriptionField
                     value={application.jobDescription?.html || ''}
                     onSave={(html) => handleUpdateField('jobDescriptionHtml', html)}

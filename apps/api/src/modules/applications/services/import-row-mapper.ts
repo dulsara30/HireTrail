@@ -29,6 +29,8 @@ const SYNONYMS: Record<ImportField, string[]> = {
   coverLetter: ['coverletter'],
   location: ['location', 'city'],
   jobUrl: ['joblink', 'jobUrl', 'link', 'url', 'joburl'],
+  contactEmail: ['contactemail', 'email', 'recruiteremail', 'hremail'],
+  resumeUrl: ['resumelink', 'resumeurl', 'cvlink', 'resumedrive'],
   salaryMin: ['salarymin', 'minsalary', 'minimumsalary'],
   salaryMax: ['salarymax', 'maxsalary', 'maximumsalary'],
   salaryCurrency: ['salarycurrency', 'currency'],
@@ -90,6 +92,8 @@ export interface MappedRow {
   coverLetter: boolean;
   location?: string;
   jobUrl?: string;
+  contactEmail?: string;
+  resumeUrl?: string;
   jobDescription?: string;
   notes?: string;
   salary?: {
@@ -132,6 +136,8 @@ export class ImportRowMapper {
 
     if (get('location')) mapped.location = get('location');
     if (get('jobUrl')) mapped.jobUrl = get('jobUrl');
+    if (get('contactEmail')) mapped.contactEmail = get('contactEmail');
+    if (get('resumeUrl')) mapped.resumeUrl = get('resumeUrl');
     if (get('jobDescription')) mapped.jobDescription = get('jobDescription');
     if (get('notes')) mapped.notes = get('notes');
 

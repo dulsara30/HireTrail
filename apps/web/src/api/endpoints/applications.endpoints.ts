@@ -8,6 +8,7 @@ export const APPLICATION_ENDPOINTS = {
   archive: (id: string) => `/applications/${id}/archive`,
   restore: (id: string) => `/applications/${id}/restore`,
   delete: (id: string) => `/applications/${id}`,
+  deletePermanently: (id: string) => `/applications/${id}/permanent`,
   undoDelete: (id: string) => `/applications/${id}/undo-delete`,
   comments: (id: string) => `/applications/${id}/comments`,
   activities: (id: string) => `/applications/${id}/activities`,

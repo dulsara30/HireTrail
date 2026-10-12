@@ -1,5 +1,5 @@
 import React from 'react';
-import { Columns3 } from 'lucide-react';
+import { Columns3, Trash2 } from 'lucide-react';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { ApplicationListItemDto } from '@hiretrail/shared';
 
@@ -18,6 +18,10 @@ interface ApplicationsTableProps {
   onLoadMore: () => void;
   onSelectApplication: (id: string) => void;
   onNewApplication: () => void;
+  onDelete?: (application: ApplicationListItemDto) => void;
+  /** True when a search or filter is active (changes the empty message). */
+  isFiltered?: boolean;
+  onClearFilters?: () => void;
 }
 
 type ColumnKey =
@@ -58,6 +62,9 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
   onLoadMore,
   onSelectApplication,
   onNewApplication,
+  onDelete,
+  isFiltered = false,
+  onClearFilters,
 }) => {
   const { sentinelRef } = useInfiniteScroll({
     hasNextPage,
@@ -91,6 +98,20 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
       <div className="flex h-64 items-center justify-center">
         <Spinner size="lg" />
       </div>
+    );
+  }
+
+  if (items.length === 0 && isFiltered) {
+    return (
+      <EmptyState
+        title="No applications match your search"
+        description="Try a different word, or clear the filters."
+        action={
+          <Button variant="secondary" onClick={onClearFilters}>
+            Clear filters
+          </Button>
+        }
+      />
     );
   }
 
@@ -155,6 +176,11 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
               {show('location') && <th className="px-4 py-3">Location</th>}
               {show('appliedDate') && <th className="px-4 py-3">Applied Date</th>}
               {show('coverLetter') && <th className="px-4 py-3">Cover Letter</th>}
+              {onDelete && (
+                <th className="px-4 py-3">
+                  <span className="sr-only">Actions</span>
+                </th>
+              )}
             </tr>
           </thead>
           <tbody className="divide-y divide-border-default">
@@ -195,6 +221,21 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                     <Badge color={app.coverLetter ? 'success' : 'neutral'}>
                       {app.coverLetter ? 'Yes' : 'No'}
                     </Badge>
+                  </td>
+                )}
+                {onDelete && (
+                  <td className="px-2 py-3 text-right">
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDelete(app);
+                      }}
+                      aria-label={`Delete ${app.roleTitle} at ${app.companyName}`}
+                      className="rounded-md p-1.5 text-text-tertiary transition-colors hover:bg-bg-danger-subtle hover:text-text-danger focus:outline-none focus-visible:ring-2 focus-visible:ring-border-accent"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
                   </td>
                 )}
               </tr>

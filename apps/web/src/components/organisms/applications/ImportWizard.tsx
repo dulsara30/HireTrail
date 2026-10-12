@@ -30,6 +30,8 @@ const FIELD_LABELS: Record<ImportField, string> = {
   coverLetter: 'Cover letter (Yes/No)',
   location: 'Location',
   jobUrl: 'Job link',
+  contactEmail: 'Contact email',
+  resumeUrl: 'Resume link (Google Drive)',
   salaryMin: 'Salary min',
   salaryMax: 'Salary max',
   salaryCurrency: 'Currency',

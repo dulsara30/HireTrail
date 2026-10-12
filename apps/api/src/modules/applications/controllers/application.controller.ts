@@ -26,7 +26,7 @@ export class ApplicationController extends BaseController {
     try {
       const result = await this.queryService.list(
         req.user!.id,
-        req.query as unknown as ListApplicationsQuery,
+        (req.validated?.query ?? req.query) as unknown as ListApplicationsQuery,
       );
       this.ok(res, result);
     } catch (err) {
@@ -38,7 +38,7 @@ export class ApplicationController extends BaseController {
     try {
       const result = await this.queryService.getBoard(
         req.user!.id,
-        req.query as unknown as BoardQuery,
+        (req.validated?.query ?? req.query) as unknown as BoardQuery,
       );
       this.ok(res, result);
     } catch (err) {
@@ -51,7 +51,7 @@ export class ApplicationController extends BaseController {
       const result = await this.queryService.getLaneItems(
         req.user!.id,
         req.params.statusId as string,
-        req.query as unknown as import('@hiretrail/shared').LaneQuery,
+        (req.validated?.query ?? req.query) as unknown as import('@hiretrail/shared').LaneQuery,
       );
       this.ok(res, result);
     } catch (err) {
@@ -119,6 +119,19 @@ export class ApplicationController extends BaseController {
   public delete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await this.commandService.delete(req.user!.id, req.params.id as string);
+      this.noContent(res);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  public deletePermanently = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<void> => {
+    try {
+      await this.commandService.deletePermanently(req.user!.id, req.params.id as string);
       this.noContent(res);
     } catch (err) {
       next(err);

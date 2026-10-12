@@ -21,7 +21,7 @@ export class OptionController extends BaseController {
 
   public getOptions = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const query = req.query as unknown as ListOptionsQuery;
+      const query = (req.validated?.query ?? req.query) as unknown as ListOptionsQuery;
       const options = await this.queryService.list(req.user!.id, query.type, query.includeArchived);
       this.ok(res, options);
     } catch (err) {

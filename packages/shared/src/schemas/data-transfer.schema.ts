@@ -18,6 +18,8 @@ export const IMPORT_FIELDS = [
   'coverLetter',
   'location',
   'jobUrl',
+  'contactEmail',
+  'resumeUrl',
   'salaryMin',
   'salaryMax',
   'salaryCurrency',

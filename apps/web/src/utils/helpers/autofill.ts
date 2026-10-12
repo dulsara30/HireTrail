@@ -28,6 +28,13 @@ export function looksLikeUrl(input: string): boolean {
   return /^https?:\/\/\S+$/i.test(trimmed);
 }
 
+/** Today as YYYY-MM-DD in the user's own time zone (the default applied date). */
+export function todayInput(now: Date = new Date()): string {
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
 /** A blank draft: the manual "create" form uses the same form as the AI preview. */
 export function emptyDraft(): AutofillDraftDto {
   return {
@@ -41,6 +48,7 @@ export function emptyDraft(): AutofillDraftDto {
     roleTitle: null,
     location: null,
     jobUrl: null,
+    contactEmail: null,
     workModeId: null,
     jobTypeId: null,
     levelId: null,
@@ -62,6 +70,8 @@ export interface DraftFormValues {
   priorityId: string;
   location: string;
   jobUrl: string;
+  contactEmail: string;
+  resumeUrl: string;
   workModeId: string;
   jobTypeId: string;
   levelId: string;
@@ -86,6 +96,8 @@ export function draftToFormValues(draft: AutofillDraftDto, statusId: string): Dr
     priorityId: '',
     location: draft.location ?? '',
     jobUrl: draft.jobUrl ?? '',
+    contactEmail: draft.contactEmail ?? '',
+    resumeUrl: '',
     workModeId: draft.workModeId ?? '',
     jobTypeId: draft.jobTypeId ?? '',
     levelId: draft.levelId ?? '',
@@ -96,7 +108,7 @@ export function draftToFormValues(draft: AutofillDraftDto, statusId: string): Dr
     salaryMax: minorToDollars(draft.salary?.max),
     currency: draft.salary?.currency ?? '',
     period: draft.salary?.period ?? '',
-    appliedAt: '',
+    appliedAt: todayInput(),
     deadlineAt: draft.deadlineAt ?? '',
     jobDescription: draft.sourceText,
   };
@@ -128,6 +140,8 @@ export function formValuesToCreateInput(
     labelIds: [],
     location: values.location.trim() || null,
     jobUrl: values.jobUrl.trim() || null,
+    contactEmail: values.contactEmail.trim() || null,
+    resumeUrl: values.resumeUrl.trim() || null,
     jobDescriptionHtml: description ? sourceTextToHtml(description) : null,
     salary: hasSalary
       ? {

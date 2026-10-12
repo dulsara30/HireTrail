@@ -112,6 +112,10 @@ export class AdminController extends BaseController {
     this.ok(res, await this.reports.auditLogs(this.query<AdminAuditLogsQuery>(req)));
   });
 
+  public aiHealth = this.wrap(async (_req, res) => {
+    this.ok(res, await this.reports.aiHealth());
+  });
+
   public aiUsage = this.wrap(async (req, res) => {
     this.ok(res, await this.reports.aiUsage(this.query<AdminAiUsageQuery>(req)));
   });

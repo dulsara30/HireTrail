@@ -253,7 +253,10 @@ export class CompanyVerificationService {
       const validSources = (claim?.sourceUrls ?? []).filter((u) =>
         matchesGroundingSource(u, sources),
       );
-      let verdict: VerificationFieldResultDto['verdict'] = 'NOT_FOUND';
+      // Without the search check we did not look at this field: say so instead of claiming it was not found
+      let verdict: VerificationFieldResultDto['verdict'] = searchCheckAvailable
+        ? 'NOT_FOUND'
+        : 'NOT_CHECKED';
       let foundValue: string | null = null;
 
       if (
@@ -280,7 +283,8 @@ export class CompanyVerificationService {
       results.push({ field, storedValue, foundValue, verdict, sources: fieldSources });
     }
 
-    const companyExists = ai?.companyExists ?? 'UNSURE';
+    // A live website on the stored domain is direct evidence that the company exists
+    const companyExists = ai?.companyExists ?? (direct.size > 0 ? 'YES' : 'UNSURE');
     const score = VerificationScorer.score({
       companyExists,
       fields: results.map((r) => ({ field: r.field, verdict: r.verdict })),

@@ -98,6 +98,10 @@ export class AutofillService {
     const jobType = keep('jobType', 'jobTypeId');
     const level = keep('level', 'levelId');
     const applyUrl = keep('applyUrl', 'jobUrl');
+    const rawEmail = keep('applyEmail', 'contactEmail');
+    const contactEmail =
+      rawEmail && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(rawEmail) ? rawEmail.toLowerCase() : null;
+    if (rawEmail && !contactEmail) delete evidence.contactEmail;
     const salaryText = keep('salaryText', 'salary');
     const deadlineText = keep('deadlineText', 'deadlineAt');
 
@@ -188,6 +192,7 @@ export class AutofillService {
       roleTitle,
       location,
       jobUrl: applyUrl ?? source.url,
+      contactEmail,
       workModeId,
       jobTypeId,
       levelId,
@@ -207,6 +212,7 @@ export class AutofillService {
         ['jobTypeId', jobTypeId],
         ['levelId', levelId],
         ['jobUrl', applyUrl],
+        ['contactEmail', contactEmail],
         ['salary', salary],
         ['deadlineAt', deadlineAt],
       ] as Array<[AutofillFieldKey, unknown]>
@@ -228,6 +234,7 @@ export class AutofillService {
       roleTitle: null,
       location: null,
       jobUrl: null,
+      contactEmail: null,
       workModeId: null,
       jobTypeId: null,
       levelId: null,

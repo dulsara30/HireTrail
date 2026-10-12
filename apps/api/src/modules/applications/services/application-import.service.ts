@@ -214,6 +214,8 @@ export class ApplicationImportService {
       labelIds: [],
       location: mapped.location ?? null,
       jobUrl: mapped.jobUrl ?? null,
+      contactEmail: mapped.contactEmail ?? null,
+      resumeUrl: mapped.resumeUrl ?? null,
       jobDescriptionHtml: mapped.jobDescription ? textToHtml(mapped.jobDescription) : null,
       notesHtml: mapped.notes ? textToHtml(mapped.notes) : null,
       salary: mapped.salary ?? null,

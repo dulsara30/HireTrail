@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trash2 } from 'lucide-react';
 import { ApplicationListItemDto } from '@hiretrail/shared';
 import { StatusPill } from '../../molecules/StatusPill/StatusPill';
 import { PriorityChip } from '../../molecules/PriorityChip/PriorityChip';
@@ -8,12 +9,15 @@ interface ApplicationCardProps {
   application: ApplicationListItemDto;
   onClick: () => void;
   isDragging?: boolean;
+  /** Shows a delete button on hover or focus. */
+  onDelete?: () => void;
 }
 
 export const ApplicationCard: React.FC<ApplicationCardProps> = ({
   application,
   onClick,
   isDragging = false,
+  onDelete,
 }) => {
   const tone = OPTION_COLOR_STYLES[application.resolvedStatus?.color ?? 'neutral'];
   return (
@@ -26,6 +30,21 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
         isDragging ? 'opacity-40 rotate-1 scale-95 ring-2 ring-border-accent' : ''
       }`}
     >
+      {onDelete && (
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onDelete();
+          }}
+          onPointerDown={(e) => e.stopPropagation()}
+          onKeyDown={(e) => e.stopPropagation()}
+          aria-label={`Delete ${application.roleTitle}`}
+          className="absolute right-1.5 top-1.5 z-10 rounded-md bg-bg-surface p-1 text-text-tertiary opacity-0 shadow-sm transition-opacity hover:bg-bg-danger-subtle hover:text-text-danger focus:opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-border-accent group-hover:opacity-100"
+        >
+          <Trash2 className="h-3.5 w-3.5" />
+        </button>
+      )}
       <div className="flex items-start justify-between gap-2">
         <h4 className="text-sm font-semibold text-text line-clamp-1 group-hover:text-text-accent transition-colors">
           {application.roleTitle}

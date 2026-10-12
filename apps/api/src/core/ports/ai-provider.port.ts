@@ -28,8 +28,19 @@ export interface GenerateJsonResult<T> {
   modelId: string;
 }
 
+export interface ModelProbe {
+  model: string;
+  role: 'extract' | 'fallback' | 'search';
+  ok: boolean;
+  status: number | null;
+  ms: number;
+  message: string | null;
+}
+
 export interface AiProvider {
   generateJson<T>(req: GenerateJsonRequest): Promise<GenerateJsonResult<T>>;
+  /** Optional diagnostics: a tiny call to each configured model (used by the admin "Test AI models" button). */
+  probe?(): Promise<ModelProbe[]>;
 }
 
 /** Thrown by an adapter when the requested search tool cannot be used (e.g. free tier). */

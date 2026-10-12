@@ -55,3 +55,18 @@ export interface AdminAiUsageDto {
   }>;
   topUsers: Array<{ userId: string; email: string | null; calls: number; failures: number }>;
 }
+
+export interface AiModelProbeDto {
+  model: string;
+  role: 'extract' | 'fallback' | 'search';
+  ok: boolean;
+  status: number | null;
+  ms: number;
+  message: string | null;
+}
+
+export interface AiHealthDto {
+  aiEnabled: boolean;
+  keyConfigured: boolean;
+  probes: AiModelProbeDto[];
+}

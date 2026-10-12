@@ -13,6 +13,8 @@ import {
   ApplicationDoc,
   ApplicationMilestones,
 } from '../models/application.model';
+import { CommentModel } from '../../comments/models/comment.model';
+import { ActivityModel } from '../../activities/models/activity.model';
 import { OptionRepository } from '../../options/repositories/option.repository';
 import { CompanyRepository } from '../../companies/repositories/company.repository';
 import { ActivityRepository } from '../../activities/repositories/activity.repository';
@@ -115,6 +117,8 @@ export class ApplicationCommandService {
             labelIds: (input.labelIds || []).map((id) => new Types.ObjectId(id)),
             location: input.location || undefined,
             coverLetter: input.coverLetter ?? false,
+            contactEmail: input.contactEmail || undefined,
+            resumeUrl: input.resumeUrl || undefined,
             jobUrl: input.jobUrl || undefined,
             jobDescription: cleanJobDescHtml
               ? {
@@ -134,17 +138,16 @@ export class ApplicationCommandService {
                   expected: input.salary.expected ?? undefined,
                 }
               : undefined,
-            dates: input.dates
-              ? {
-                  savedAt: input.dates.savedAt ? new Date(input.dates.savedAt) : undefined,
-                  appliedAt: input.dates.appliedAt ? new Date(input.dates.appliedAt) : undefined,
-                  deadlineAt: input.dates.deadlineAt ? new Date(input.dates.deadlineAt) : undefined,
-                  followUpAt: input.dates.followUpAt ? new Date(input.dates.followUpAt) : undefined,
-                  nextInterviewAt: input.dates.nextInterviewAt
-                    ? new Date(input.dates.nextInterviewAt)
-                    : undefined,
-                }
-              : undefined,
+            dates: {
+              savedAt: input.dates?.savedAt ? new Date(input.dates.savedAt) : undefined,
+              // Applied date defaults to today when the user did not pick one
+              appliedAt: input.dates?.appliedAt ? new Date(input.dates.appliedAt) : new Date(),
+              deadlineAt: input.dates?.deadlineAt ? new Date(input.dates.deadlineAt) : undefined,
+              followUpAt: input.dates?.followUpAt ? new Date(input.dates.followUpAt) : undefined,
+              nextInterviewAt: input.dates?.nextInterviewAt
+                ? new Date(input.dates.nextInterviewAt)
+                : undefined,
+            },
             milestones,
             contacts: (input.contacts || []).map((c) => ({
               name: c.name,
@@ -222,6 +225,8 @@ export class ApplicationCommandService {
     if (input.roleTitle !== undefined) changes.roleTitle = input.roleTitle;
     if (input.location !== undefined) changes.location = input.location;
     if (input.coverLetter !== undefined) changes.coverLetter = input.coverLetter;
+    if (input.contactEmail !== undefined) changes.contactEmail = input.contactEmail;
+    if (input.resumeUrl !== undefined) changes.resumeUrl = input.resumeUrl;
     if (input.jobUrl !== undefined) changes.jobUrl = input.jobUrl;
     if (input.companyId !== undefined) {
       changes.companyId = input.companyId ? new Types.ObjectId(input.companyId) : null;
@@ -530,5 +535,26 @@ export class ApplicationCommandService {
     const options = await this.optionRepository.findAllForUser(userId, true);
     const optionsMap = new Map(options.map((o) => [o._id.toString(), OptionMapper.toDto(o)]));
     return ApplicationMapper.toDto(restored, optionsMap);
+  }
+
+  /**
+   * Permanently removes an application with its comments and activity history, in one transaction.
+   * Works for active, archived and soft-deleted applications. Scoped by userId; it cannot be undone.
+   */
+  public async deletePermanently(userId: string, id: string): Promise<void> {
+    if (!Types.ObjectId.isValid(id)) throw new NotFoundError();
+    const ownerId = new Types.ObjectId(userId);
+    const appId = new Types.ObjectId(id);
+
+    const existing = await ApplicationModel.findOne({ _id: appId, userId: ownerId })
+      .setOptions({ withDeleted: true })
+      .exec();
+    if (!existing) throw new NotFoundError();
+
+    await withTransaction(async (session) => {
+      await CommentModel.deleteMany({ applicationId: appId, userId: ownerId }, { session });
+      await ActivityModel.deleteMany({ entityId: appId, userId: ownerId }, { session });
+      await ApplicationModel.deleteOne({ _id: appId, userId: ownerId }, { session });
+    });
   }
 }

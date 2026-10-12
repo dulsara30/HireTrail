@@ -59,6 +59,8 @@ export interface ApplicationDto {
   labelIds: string[];
   location?: string | null;
   coverLetter: boolean;
+  contactEmail?: string | null;
+  resumeUrl?: string | null;
   jobUrl?: string | null;
   jobDescription?: {
     html?: string;

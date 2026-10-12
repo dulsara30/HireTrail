@@ -32,6 +32,24 @@ export const contactSchema = yup.object({
   linkedinUrl: urlSchema.nullable().optional(),
 });
 
+const DRIVE_HOSTS = ['drive.google.com', 'docs.google.com', 'drive.usercontent.google.com'];
+
+/** A link to a resume stored in Google Drive or Google Docs (the user shares it; we only store the link). */
+export const resumeUrlSchema = urlSchema.test(
+  'google-drive-link',
+  'Use a Google Drive or Google Docs link',
+  (value) => {
+    if (!value) return true;
+    try {
+      return DRIVE_HOSTS.includes(new URL(value).hostname.toLowerCase());
+    } catch {
+      return false;
+    }
+  },
+);
+
+const contactEmailSchema = yup.string().trim().email('Enter a valid email').max(254);
+
 export const createApplicationSchema = yup.object({
   companyId: objectIdSchema.nullable().optional(),
   companyName: yup
@@ -61,6 +79,8 @@ export const createApplicationSchema = yup.object({
   location: yup.string().trim().max(TEXT_LIMITS.LOCATION_MAX).nullable().optional(),
   jobUrl: urlSchema.nullable().optional(),
   coverLetter: yup.boolean().default(false),
+  contactEmail: contactEmailSchema.nullable().optional(),
+  resumeUrl: resumeUrlSchema.nullable().optional(),
   jobDescriptionHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   notesHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   salary: salarySchema.nullable().optional(),
@@ -90,6 +110,8 @@ export const updateApplicationSchema = yup.object({
   location: yup.string().trim().max(TEXT_LIMITS.LOCATION_MAX).nullable().optional(),
   jobUrl: urlSchema.nullable().optional(),
   coverLetter: yup.boolean().optional(),
+  contactEmail: contactEmailSchema.nullable().optional(),
+  resumeUrl: resumeUrlSchema.nullable().optional(),
   jobDescriptionHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   notesHtml: yup.string().max(TEXT_LIMITS.DESCRIPTION_MAX).nullable().optional(),
   salary: salarySchema.nullable().optional(),
@@ -113,13 +135,30 @@ export const moveApplicationSchema = yup.object({
     .required('Version is required for optimistic concurrency check'),
 });
 
+/**
+ * A list of ids from a URL query: accepts a repeated key, a single id or a comma-separated list
+ * (the web app sends "a,b,c").
+ */
+const idListSchema = yup
+  .array()
+  .transform((value, original) => {
+    if (Array.isArray(original)) return original;
+    if (typeof original === 'string')
+      return original
+        .split(',')
+        .map((v) => v.trim())
+        .filter(Boolean);
+    return value;
+  })
+  .of(objectIdSchema);
+
 export const listApplicationsQuerySchema = cursorPaginationSchema.shape({
   q: yup.string().trim().optional(),
-  statusIds: yup.array().of(objectIdSchema).optional(),
-  priorityIds: yup.array().of(objectIdSchema).optional(),
-  labelIds: yup.array().of(objectIdSchema).optional(),
-  workModeIds: yup.array().of(objectIdSchema).optional(),
-  sourceIds: yup.array().of(objectIdSchema).optional(),
+  statusIds: idListSchema.optional(),
+  priorityIds: idListSchema.optional(),
+  labelIds: idListSchema.optional(),
+  workModeIds: idListSchema.optional(),
+  sourceIds: idListSchema.optional(),
   companyId: objectIdSchema.optional(),
   appliedFrom: yup.date().optional(),
   appliedTo: yup.date().optional(),
@@ -134,19 +173,19 @@ export const listApplicationsQuerySchema = cursorPaginationSchema.shape({
 
 export const boardQuerySchema = yup.object({
   q: yup.string().trim().optional(),
-  priorityIds: yup.array().of(objectIdSchema).optional(),
-  labelIds: yup.array().of(objectIdSchema).optional(),
-  workModeIds: yup.array().of(objectIdSchema).optional(),
-  sourceIds: yup.array().of(objectIdSchema).optional(),
+  priorityIds: idListSchema.optional(),
+  labelIds: idListSchema.optional(),
+  workModeIds: idListSchema.optional(),
+  sourceIds: idListSchema.optional(),
   archived: yup.boolean().default(false),
 });
 
 export const laneQuerySchema = cursorPaginationSchema.shape({
   q: yup.string().trim().optional(),
-  priorityIds: yup.array().of(objectIdSchema).optional(),
-  labelIds: yup.array().of(objectIdSchema).optional(),
-  workModeIds: yup.array().of(objectIdSchema).optional(),
-  sourceIds: yup.array().of(objectIdSchema).optional(),
+  priorityIds: idListSchema.optional(),
+  labelIds: idListSchema.optional(),
+  workModeIds: idListSchema.optional(),
+  sourceIds: idListSchema.optional(),
 });
 
 export type CreateApplicationInput = yup.InferType<typeof createApplicationSchema>;

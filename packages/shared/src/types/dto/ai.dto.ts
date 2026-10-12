@@ -8,6 +8,7 @@ export type AutofillFieldKey =
   | 'jobTypeId'
   | 'levelId'
   | 'jobUrl'
+  | 'contactEmail'
   | 'salary'
   | 'deadlineAt';
 
@@ -23,6 +24,7 @@ export interface AutofillDraftDto {
   roleTitle: string | null;
   location: string | null;
   jobUrl: string | null;
+  contactEmail: string | null;
   workModeId: string | null;
   jobTypeId: string | null;
   levelId: string | null;
@@ -47,7 +49,8 @@ export interface AiUsageDto {
   features: Record<AiFeature, { used: number; limit: number }>;
 }
 
-export type VerificationVerdict = 'MATCH' | 'DIFFERENT' | 'NOT_FOUND';
+/** NOT_CHECKED: the search check was unavailable, so this field was not looked at (it does not lower the score). */
+export type VerificationVerdict = 'MATCH' | 'DIFFERENT' | 'NOT_FOUND' | 'NOT_CHECKED';
 
 export interface VerificationFieldResultDto {
   field: VerifiableField;

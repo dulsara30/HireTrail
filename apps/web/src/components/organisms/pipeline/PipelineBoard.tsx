@@ -15,6 +15,7 @@ import { PipelineLane } from './PipelineLane';
 import { ApplicationCard } from '../applications/ApplicationCard';
 import { useBoardUiStore } from '../../../store/board-ui.store';
 import { Spinner } from '../../atoms/Spinner';
+import { DeleteApplicationDialog } from '../applications/DeleteApplicationDialog';
 
 interface PipelineBoardProps {
   board?: BoardDto;
@@ -32,6 +33,7 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
   onNewApplicationInLane,
 }) => {
   const { activeDragId, setActiveDragId } = useBoardUiStore();
+  const [deleteTarget, setDeleteTarget] = React.useState<ApplicationListItemDto | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -97,6 +99,7 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
               lane={lane}
               onSelectApplication={onSelectApplication}
               onNewApplicationInLane={onNewApplicationInLane}
+              onDeleteApplication={setDeleteTarget}
             />
           ))
         ) : (
@@ -111,6 +114,10 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
           </div>
         )}
       </div>
+
+      {deleteTarget && (
+        <DeleteApplicationDialog application={deleteTarget} onClose={() => setDeleteTarget(null)} />
+      )}
 
       <DragOverlay>
         {activeApplication ? (

@@ -34,7 +34,11 @@ const verificationSchema = new Schema<CompanyVerificationDoc>(
           field: { type: String, required: true },
           storedValue: { type: String, default: null },
           foundValue: { type: String, default: null },
-          verdict: { type: String, enum: ['MATCH', 'DIFFERENT', 'NOT_FOUND'], required: true },
+          verdict: {
+            type: String,
+            enum: ['MATCH', 'DIFFERENT', 'NOT_FOUND', 'NOT_CHECKED'],
+            required: true,
+          },
           sources: { type: [{ _id: false, url: String, title: String }], default: [] },
         },
       ],

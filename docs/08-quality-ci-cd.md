@@ -161,7 +161,8 @@ jobs:
 Notes:
 
 - Until phase 3, `pnpm test:e2e` is a placeholder script that prints "no e2e tests yet" and exits 0.
-- Deploys only happen after `quality` and `secrets-scan` pass. PRs get preview deployments; pushes to `main` go to production. The API deploys before the web app is fine either way because the web only proxies.
+- **Update:** the GitHub Actions `deploy` job below was removed. Vercel's own Git integration deploys previews for pull requests and production for `main`; this workflow only runs quality, e2e and secrets-scan.
+- (Original plan) Deploys only happen after `quality` and `secrets-scan` pass. PRs get preview deployments; pushes to `main` go to production. The API deploys before the web app is fine either way because the web only proxies.
 - Turn off Vercel's own Git auto-deploys so nothing deploys untested. In both `apps/web/vercel.json` and `apps/api/vercel.json` set `"git": { "deploymentEnabled": false }`.
 - In each Vercel project set **Root Directory** to `apps/web` or `apps/api`, and Node.js version to match `.nvmrc`.
 - Pin the `vercel` CLI version once things work (replace `@latest`), and pin third-party actions to a commit SHA for supply-chain safety.

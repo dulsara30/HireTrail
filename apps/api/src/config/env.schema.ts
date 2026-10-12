@@ -50,9 +50,15 @@ export const envSchema = yup.object({
   GOOGLE_REDIRECT_URI: yup.string().optional(),
 
   GEMINI_API_KEY: yup.string().optional(),
-  GEMINI_MODEL_EXTRACT: yup.string().default('gemini-3.6-flash'),
-  GEMINI_MODEL_GROUNDED: yup.string().default('gemini-2.5-flash'),
-  GEMINI_MODEL_FALLBACK: yup.string().default('gemini-2.5-flash'),
+  GEMINI_MODEL_EXTRACT: yup.string().default('gemini-3.1-flash-lite'),
+  GEMINI_MODEL_GROUNDED: yup.string().default('gemini-3.8-flash'),
+  // Comma-separated list, tried in order when the main model is overloaded or over quota.
+  // The Flash-Lite models have the largest free limits (500 requests per day), so they come first.
+  GEMINI_MODEL_FALLBACK: yup
+    .string()
+    .default(
+      'gemini-3.5-flash-lite,gemini-flash-lite-latest,gemini-3.8-flash,gemini-3-flash-preview,gemini-flash-latest',
+    ),
   GEMINI_TOOLS_WITH_SCHEMA: yup
     .boolean()
     .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))

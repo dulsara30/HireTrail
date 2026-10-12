@@ -39,26 +39,28 @@ Locked PRO features show a small "PRO" badge and an explanation, never a broken 
 
 ### 3.1 Fields
 
-| Field           | Type                                                               | Required | Notes                                                                              |
-| --------------- | ------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------- |
-| Company         | reference to a company, plus a name snapshot                       | Yes      | Pick from directory or type a new name (creates a private company)                 |
-| Role title      | text, 2 to 150 chars                                               | Yes      |                                                                                    |
-| Status          | option (type STATUS)                                               | Yes      | Defaults to the user's first status (Saved)                                        |
-| Priority        | option (PRIORITY)                                                  | No       | Defaults: High, Medium, Low                                                        |
-| Labels          | many options (LABEL)                                               | No       | Free tags like "Java", "Referral", "Remote"                                        |
-| Work mode       | option (WORK_MODE)                                                 | No       | Onsite, Hybrid, Remote                                                             |
-| Job type        | option (JOB_TYPE)                                                  | No       | Internship, Full-time, Contract, Part-time                                         |
-| Level           | option (LEVEL)                                                     | No       | Intern, Junior, Mid, Senior                                                        |
-| Source          | option (SOURCE)                                                    | No       | LinkedIn, Company website, TopJobs, ITPro, Referral, Email, Other                  |
-| CV version      | option (CV_VERSION)                                                | No       | Master, Java-Spring, Frontend-React, Full-Stack                                    |
-| Location        | text                                                               | No       |                                                                                    |
-| Cover Letter    | boolean (Yes / No)                                                 | No       | Default No. Shown as "Cover Letter" (Yes/No) in the panel, table column and export |
-| Job link        | URL (http/https only)                                              | No       |                                                                                    |
-| Job description | rich text, one field                                               | No       | Stored exactly as pasted (sanitised HTML + plain text copy). Never rewritten by AI |
-| Salary          | min, max, currency, period (MONTH/YEAR/HOUR), and "my expectation" | No       | Stored as integers in minor units (cents) to avoid float errors                    |
-| Dates           | saved, applied, deadline, follow-up, next interview                | No       | Stored in UTC, shown in the user's time zone                                       |
-| Contacts        | list of name, role, email, phone, LinkedIn                         | No       | Max 10                                                                             |
-| Notes           | rich text                                                          | No       |                                                                                    |
+| Field           | Type                                                               | Required | Notes                                                                                    |
+| --------------- | ------------------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------- |
+| Company         | reference to a company, plus a name snapshot                       | Yes      | Pick from directory or type a new name (creates a private company)                       |
+| Role title      | text, 2 to 150 chars                                               | Yes      |                                                                                          |
+| Status          | option (type STATUS)                                               | Yes      | Defaults to the user's first status (Saved)                                              |
+| Priority        | option (PRIORITY)                                                  | No       | Defaults: High, Medium, Low                                                              |
+| Labels          | many options (LABEL)                                               | No       | Free tags like "Java", "Referral", "Remote"                                              |
+| Work mode       | option (WORK_MODE)                                                 | No       | Onsite, Hybrid, Remote                                                                   |
+| Job type        | option (JOB_TYPE)                                                  | No       | Internship, Full-time, Contract, Part-time                                               |
+| Level           | option (LEVEL)                                                     | No       | Intern, Junior, Mid, Senior                                                              |
+| Source          | option (SOURCE)                                                    | No       | LinkedIn, Company website, TopJobs, ITPro, Referral, Email, Other                        |
+| CV version      | option (CV_VERSION)                                                | No       | Master, Java-Spring, Frontend-React, Full-Stack                                          |
+| Location        | text                                                               | No       |                                                                                          |
+| Cover Letter    | boolean (Yes / No)                                                 | No       | Default No. Shown as "Cover Letter" (Yes/No) in the panel, table column and export       |
+| Contact Email   | email                                                              | No       | Recruiter or HR email. AI autofill fills it from the job post when it is clearly stated  |
+| Resume link     | URL (Google Drive or Google Docs only)                             | No       | A link to the resume the user shared in Drive. HireTrail stores the link, never the file |
+| Job link        | URL (http/https only)                                              | No       |                                                                                          |
+| Job description | rich text, one field                                               | No       | Stored exactly as pasted (sanitised HTML + plain text copy). Never rewritten by AI       |
+| Salary          | min, max, currency, period (MONTH/YEAR/HOUR), and "my expectation" | No       | Stored as integers in minor units (cents) to avoid float errors                          |
+| Dates           | saved, applied, deadline, follow-up, next interview                | No       | Stored in UTC, shown in the user's time zone                                             |
+| Contacts        | list of name, role, email, phone, LinkedIn                         | No       | Max 10                                                                                   |
+| Notes           | rich text                                                          | No       |                                                                                          |
 
 ### 3.2 Behaviour
 

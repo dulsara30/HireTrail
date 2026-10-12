@@ -3,16 +3,28 @@ import {
   DEFAULT_PAGE_SIZE,
   type AdminAiUsageDto,
   type AdminAiUsageQuery,
+  type AiHealthDto,
   type AdminAuditLogsQuery,
   type AuditLogDto,
 } from '@hiretrail/shared';
+import { type AiProvider } from '../../../core/ports/ai-provider.port';
 import { UserModel } from '../../auth/models/user.model';
 import { AiUsageModel } from '../../ai/models/ai-usage.model';
 import { type AuditLogRepository } from '../repositories/audit-log.repository';
 
 /** Read-only admin reports: the audit log and AI usage totals (no user content). */
 export class AdminReportsService {
-  constructor(private readonly auditRepo: AuditLogRepository) {}
+  constructor(
+    private readonly auditRepo: AuditLogRepository,
+    private readonly aiProvider: AiProvider,
+    private readonly aiStatus: { enabled: boolean; keyConfigured: boolean },
+  ) {}
+
+  /** Calls every configured model with a tiny prompt and reports which ones work. Admin only. */
+  public async aiHealth(): Promise<AiHealthDto> {
+    const probes = this.aiProvider.probe ? await this.aiProvider.probe() : [];
+    return { aiEnabled: this.aiStatus.enabled, keyConfigured: this.aiStatus.keyConfigured, probes };
+  }
 
   public async auditLogs(
     query: AdminAuditLogsQuery,

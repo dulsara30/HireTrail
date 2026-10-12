@@ -3,6 +3,7 @@
 import React from 'react';
 import { useAdminAiUsage } from '../../../../api/hooks/queries/useAdminAiUsage';
 import { Spinner } from '../../../../components/atoms/Spinner';
+import { AiModelTest } from '../../../../components/organisms/admin/AiModelTest';
 import { EmptyState } from '../../../../components/molecules/EmptyState';
 
 export default function AdminAiUsagePage() {
@@ -11,6 +12,7 @@ export default function AdminAiUsagePage() {
 
   return (
     <div className="space-y-4">
+      <AiModelTest />
       <div className="flex items-center gap-3">
         <label htmlFor="ai-days" className="text-xs font-semibold uppercase text-text-secondary">
           Period

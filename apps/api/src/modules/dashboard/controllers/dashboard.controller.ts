@@ -37,7 +37,7 @@ export class DashboardController extends BaseController {
 
   public getSummary = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const query = req.query as unknown as DashboardSummaryQuery;
+      const query = (req.validated?.query ?? req.query) as unknown as DashboardSummaryQuery;
       const summary = await this.aggregationService.getSummary(req.user!.id, query.range || '30d');
       this.ok(res, summary);
     } catch (err) {
@@ -47,7 +47,7 @@ export class DashboardController extends BaseController {
 
   public getCharts = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const query = req.query as unknown as DashboardChartsQuery;
+      const query = (req.validated?.query ?? req.query) as unknown as DashboardChartsQuery;
       const charts = await this.aggregationService.getCharts(req.user!.id, query.range || '30d');
       this.ok(res, charts);
     } catch (err) {

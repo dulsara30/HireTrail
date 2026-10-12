@@ -3,6 +3,13 @@
 import React, { useState } from 'react';
 import { useBoard } from '../../../api/hooks/queries/useBoard';
 import { useMoveApplication } from '../../../api/hooks/mutations/useMoveApplication';
+import {
+  EMPTY_PIPELINE_FILTERS,
+  PipelineFilters,
+  hasActivePipelineFilters,
+  type PipelineFilterValues,
+} from '../../../components/organisms/pipeline/PipelineFilters';
+import { useDebouncedValue } from '../../../hooks/useDebouncedValue';
 import { PipelineBoard } from '../../../components/organisms/pipeline/PipelineBoard';
 import { ApplicationPanel } from '../../../components/organisms/applications/ApplicationPanel';
 import { Button } from '../../../components/atoms/Button';
@@ -16,7 +23,16 @@ export default function PipelinePage() {
   const [isAutofillOpen, setIsAutofillOpen] = useState(false);
   const [draft, setDraft] = useState<AutofillDraftDto | null>(null);
 
-  const { data: board, isLoading } = useBoard();
+  const [filters, setFilters] = useState<PipelineFilterValues>(EMPTY_PIPELINE_FILTERS);
+  const debouncedQ = useDebouncedValue(filters.q.trim(), 300);
+  const { data: board, isLoading } = useBoard({
+    q: debouncedQ || undefined,
+    priorityIds: filters.priorityId ? [filters.priorityId] : undefined,
+    workModeIds: filters.workModeId ? [filters.workModeId] : undefined,
+    sourceIds: filters.sourceId ? [filters.sourceId] : undefined,
+    archived: false,
+  });
+  const matches = board ? board.lanes.reduce((n, lane) => n + lane.total, 0) : 0;
   const moveMutation = useMoveApplication();
 
   const handleMove = (id: string, targetStatusId: string, version: number) => {
@@ -50,6 +66,15 @@ export default function PipelinePage() {
             New Application
           </Button>
         </div>
+      </div>
+
+      <div className="space-y-1">
+        <PipelineFilters values={filters} onChange={setFilters} />
+        {hasActivePipelineFilters(filters) && board && (
+          <p className="text-xs text-text-secondary" role="status">
+            {matches} matching application{matches === 1 ? '' : 's'}
+          </p>
+        )}
       </div>
 
       <div className="flex-1 overflow-hidden">

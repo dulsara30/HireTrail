@@ -2,6 +2,7 @@ import { httpClient } from '../client/http-client';
 import { ADMIN_ENDPOINTS } from '../endpoints/admin.endpoints';
 import {
   type AdminAiUsageDto,
+  type AiHealthDto,
   type AdminChangePlanInput,
   type AdminChangeStatusInput,
   type AdminCompanyDto,
@@ -70,6 +71,13 @@ export const adminService = {
   async listAuditLogs(params: { action?: string; cursor?: string }): Promise<Page<AuditLogDto>> {
     const res = await httpClient.get<ApiSuccess<Page<AuditLogDto>>>(ADMIN_ENDPOINTS.auditLogs, {
       params: { ...params, limit: 30 },
+    });
+    return res.data.data;
+  },
+
+  async testAiModels(): Promise<AiHealthDto> {
+    const res = await httpClient.get<ApiSuccess<AiHealthDto>>(ADMIN_ENDPOINTS.aiHealth, {
+      timeout: 60000,
     });
     return res.data.data;
   },

@@ -15,19 +15,30 @@ import {
   PageInfo,
 } from '@hiretrail/shared';
 
+/** The API reads id lists as comma-separated values (a,b,c). */
+function serializeParams<T extends object>(query?: T): Record<string, unknown> | undefined {
+  if (!query) return undefined;
+  return Object.fromEntries(
+    Object.entries(query)
+      .filter(([, value]) => value !== undefined && value !== null && value !== '')
+      .map(([key, value]) => [key, Array.isArray(value) ? value.join(',') : value])
+      .filter(([, value]) => value !== ''),
+  );
+}
+
 export const applicationsService = {
   async getList(
     query: Partial<ListApplicationsQuery>,
   ): Promise<{ items: ApplicationListItemDto[]; page: PageInfo }> {
     const res = await httpClient.get<
       ApiSuccess<{ items: ApplicationListItemDto[]; page: PageInfo }>
-    >(APPLICATION_ENDPOINTS.list, { params: query });
+    >(APPLICATION_ENDPOINTS.list, { params: serializeParams(query) });
     return res.data.data;
   },
 
   async getBoard(query?: BoardQuery): Promise<BoardDto> {
     const res = await httpClient.get<ApiSuccess<BoardDto>>(APPLICATION_ENDPOINTS.board, {
-      params: query,
+      params: serializeParams(query),
     });
     return res.data.data;
   },
@@ -38,7 +49,7 @@ export const applicationsService = {
   ): Promise<{ items: ApplicationListItemDto[]; page: PageInfo }> {
     const res = await httpClient.get<
       ApiSuccess<{ items: ApplicationListItemDto[]; page: PageInfo }>
-    >(APPLICATION_ENDPOINTS.lane(statusId), { params: query });
+    >(APPLICATION_ENDPOINTS.lane(statusId), { params: serializeParams(query) });
     return res.data.data;
   },
 
@@ -83,6 +94,10 @@ export const applicationsService = {
       APPLICATION_ENDPOINTS.restore(id),
     );
     return res.data.data;
+  },
+
+  async deletePermanently(id: string): Promise<void> {
+    await httpClient.delete(APPLICATION_ENDPOINTS.deletePermanently(id));
   },
 
   async delete(id: string): Promise<void> {

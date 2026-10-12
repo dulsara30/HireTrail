@@ -15,7 +15,7 @@ export class CompanyController extends BaseController {
 
   public listCompanies = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const query = req.query as unknown as ListCompaniesQuery;
+      const query = (req.validated?.query ?? req.query) as unknown as ListCompaniesQuery;
       const result = await this.companyService.list(req.user!.id, query);
       this.ok(res, result);
     } catch (err) {

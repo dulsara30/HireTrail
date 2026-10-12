@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (search and filters)
+
+- **Applications table**: search by role or company, plus filters for company, status and priority, with a "No applications match" empty state and Clear. **Pipeline**: one global search (role or company) and filters for priority, work mode and source, with a match count.
+- Delete an application permanently from the table row, the board card or the side panel.
+- API list/board filters now accept a single id, a comma-separated list or a repeated key (a single id used to return 400).
+
+### Fixed (AI)
+
+- Company accuracy check no longer reports "Not found" for fields it did not look at when search is unavailable: they show "Not checked" and do not change the score.
+- Longer Gemini fallback chain (Flash-Lite models first: 500 requests per day on the free tier): `gemini-3.5-flash-lite,gemini-flash-lite-latest,gemini-3.8-flash,gemini-3-flash-preview,gemini-flash-latest`.
+
+### Fixed / Added (options, delete, AI diagnostics)
+
+- Archived options no longer appear in the create/edit dropdowns: controllers now use the validated query (`includeArchived=false` was read as the text "false", which counts as true).
+- **Delete application permanently** (`DELETE /applications/:id/permanent`, with confirmation in the side panel): removes the application with its comments and history in one transaction.
+- **Admin → AI usage → Test AI models** (`GET /admin/ai-health`): a tiny call from the server to each configured Gemini model, to diagnose production-only AI problems.
+
+### Added (contact and resume)
+
+- **Contact Email** and **Resume link** (Google Drive or Google Docs link, validated by host) on applications: model, schemas, DTO, history, side panel (with "Open resume in Google Drive"), new-application form, CSV export and import, and AI autofill (the apply email becomes the contact email).
+- The **applied date now defaults to today** when it is not chosen: the new-application form pre-fills it and the API applies the same default.
+
+### Fixed (AI models)
+
+- Gemini defaults updated: `gemini-3.1-flash-lite` for extraction, `gemini-3.8-flash` for search calls, plus a comma-separated `GEMINI_MODEL_FALLBACK` list tried when a model returns 503, 429 or 404. `gemini-2.5-flash` was retired by Google (404). Search calls that hit the free-tier quota fall back to the direct website check.
+
 ### Changed (plan gating)
 
 - FREE users now see a clear locked "Upgrade to PRO to access AI features" banner instead of AI inputs (new-application AI box, Autofill dialog, company accuracy check, AI company lookup, weekly insights). The API already blocked these with `PLAN_REQUIRED`.

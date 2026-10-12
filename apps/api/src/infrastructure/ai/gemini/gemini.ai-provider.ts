@@ -2,6 +2,7 @@ import { GoogleGenAI, type GenerateContentResponse, type Tool } from '@google/ge
 import {
   AiToolUnavailableError,
   type AiProvider,
+  type ModelProbe,
   type AiTool,
   type GenerateJsonRequest,
   type GenerateJsonResult,
@@ -14,8 +15,8 @@ import { logger } from '../../../core/logger/logger';
 export interface GeminiModels {
   extract: string;
   grounded: string;
-  /** Used when the main model is overloaded (503/429) or missing (404). Not used for search calls. */
-  fallback?: string;
+  /** Tried in order when the main model is overloaded (503), over quota (429) or missing (404). Not used for search calls. */
+  fallbacks?: string[];
 }
 
 interface CallResult {
@@ -34,6 +35,53 @@ export class GeminiAiProvider implements AiProvider {
     private readonly toolsWithSchema: boolean,
   ) {
     this.client = new GoogleGenAI({ apiKey });
+  }
+
+  /** One tiny call per configured model, so a misconfigured or overloaded model is easy to spot. */
+  public async probe(): Promise<ModelProbe[]> {
+    const plan: Array<{ model: string; role: ModelProbe['role']; search: boolean }> = [];
+    const seen = new Set<string>();
+    const add = (model: string | undefined, role: ModelProbe['role'], search = false) => {
+      if (!model) return;
+      const key = `${model}|${search}`;
+      if (seen.has(key)) return;
+      seen.add(key);
+      plan.push({ model, role, search });
+    };
+    add(this.models.extract, 'extract');
+    for (const m of this.models.fallbacks ?? []) add(m, 'fallback');
+    add(this.models.grounded, 'search', true);
+
+    return Promise.all(
+      plan.map(async ({ model, role, search }): Promise<ModelProbe> => {
+        const started = Date.now();
+        try {
+          await this.client.models.generateContent({
+            model,
+            contents: 'Reply with the single word OK.',
+            config: {
+              temperature: 0,
+              abortSignal: AbortSignal.timeout(15000),
+              ...(search ? { tools: [{ googleSearch: {} }] } : {}),
+            },
+          });
+          return { model, role, ok: true, status: 200, ms: Date.now() - started, message: null };
+        } catch (err) {
+          const status = this.statusOf(err);
+          const raw = err instanceof Error ? err.message : 'unknown error';
+          // Google returns JSON text: keep only its human message
+          const match = /"message":s*"([^"]+)"/.exec(raw);
+          return {
+            model,
+            role,
+            ok: false,
+            status: status ?? null,
+            ms: Date.now() - started,
+            message: (match?.[1] ?? raw).slice(0, 220),
+          };
+        }
+      }),
+    );
   }
 
   public async generateJson<T>(req: GenerateJsonRequest): Promise<GenerateJsonResult<T>> {
@@ -86,18 +134,23 @@ export class GeminiAiProvider implements AiProvider {
     const sdkTools: Tool[] = tools.map((t) =>
       t === 'google_search' ? { googleSearch: {} } : { urlContext: {} },
     );
-    const fallback = this.models.fallback;
     const candidates =
-      tools.length === 0 && fallback && fallback !== model ? [model, fallback] : [model];
+      tools.length === 0
+        ? [model, ...(this.models.fallbacks ?? []).filter((m) => m !== model)]
+        : [model];
 
+    // One time budget for all attempts, so fallbacks never push the request past the platform limit
+    const deadline = Date.now() + req.timeoutMs;
     const run = (m: string): Promise<GenerateContentResponse> =>
       this.client.models.generateContent({
         model: m,
-        contents: `<source>\n${req.content}\n</source>`,
+        contents: `<source>
+${req.content}
+</source>`,
         config: {
           systemInstruction: req.system,
           temperature: 0,
-          abortSignal: AbortSignal.timeout(req.timeoutMs),
+          abortSignal: AbortSignal.timeout(Math.max(1000, deadline - Date.now())),
           ...(sdkTools.length > 0 ? { tools: sdkTools } : {}),
           ...(json
             ? { responseMimeType: 'application/json', responseJsonSchema: req.jsonSchema }
@@ -107,24 +160,24 @@ export class GeminiAiProvider implements AiProvider {
 
     let lastError: unknown;
     for (const candidate of candidates) {
+      if (Date.now() >= deadline) break;
       try {
         return { res: await run(candidate), model: candidate };
       } catch (first) {
         lastError = first;
         this.logFailure(candidate, first);
-        if (!this.isRetryable(first)) {
-          if (this.isModelMissing(first)) continue;
-          throw this.mapError(first, tools.length > 0);
-        }
-        await new Promise((r) => setTimeout(r, 800 + Math.random() * 700));
-        try {
-          return { res: await run(candidate), model: candidate };
-        } catch (second) {
-          lastError = second;
-          this.logFailure(candidate, second);
-          if (!this.isRetryable(second) && !this.isModelMissing(second)) {
-            throw this.mapError(second, tools.length > 0);
+        const status = this.statusOf(first);
+        // A network hiccup is retried once on the same model; overload, quota and 404 move to the next model
+        if (status === undefined && Date.now() < deadline) {
+          await new Promise((r) => setTimeout(r, 500));
+          try {
+            return { res: await run(candidate), model: candidate };
+          } catch (second) {
+            lastError = second;
+            this.logFailure(candidate, second);
           }
+        } else if (!this.isRetryable(first) && !this.isModelMissing(first)) {
+          throw this.mapError(first, tools.length > 0);
         }
       }
     }
@@ -195,6 +248,9 @@ export class GeminiAiProvider implements AiProvider {
     const status = this.statusOf(err);
     const message = err instanceof Error ? err.message : '';
     if (usedTools && status === 400 && /tool|search|ground/i.test(message)) {
+      return new AiToolUnavailableError();
+    }
+    if (usedTools && status === 429) {
       return new AiToolUnavailableError();
     }
     if (status === 404) {

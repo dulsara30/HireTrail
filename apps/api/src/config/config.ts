@@ -27,7 +27,7 @@ export interface AppConfig {
     geminiApiKey?: string;
     modelExtract: string;
     modelGrounded: string;
-    modelFallback: string;
+    modelFallbacks: string[];
     toolsWithSchema: boolean;
     globalDailyLimit: number;
     quotas: {
@@ -87,7 +87,9 @@ export function loadConfig(rawEnv: NodeJS.ProcessEnv = process.env): AppConfig {
         geminiApiKey: validated.GEMINI_API_KEY,
         modelExtract: validated.GEMINI_MODEL_EXTRACT,
         modelGrounded: validated.GEMINI_MODEL_GROUNDED,
-        modelFallback: validated.GEMINI_MODEL_FALLBACK,
+        modelFallbacks: validated.GEMINI_MODEL_FALLBACK.split(',')
+          .map((m) => m.trim())
+          .filter(Boolean),
         toolsWithSchema: validated.GEMINI_TOOLS_WITH_SCHEMA,
         globalDailyLimit: validated.AI_GLOBAL_DAILY_LIMIT,
         quotas: {

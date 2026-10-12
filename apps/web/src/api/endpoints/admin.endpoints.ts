@@ -7,6 +7,7 @@ export const ADMIN_ENDPOINTS = {
   mergeCompany: (id: string) => `/admin/companies/${id}/merge`,
   auditLogs: '/admin/audit-logs',
   aiUsage: '/admin/ai-usage',
+  aiHealth: '/admin/ai-health',
 } as const;
 
 export const DATA_ENDPOINTS = {

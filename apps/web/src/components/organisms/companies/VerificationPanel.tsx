@@ -16,8 +16,18 @@ interface VerificationPanelProps {
   company: CompanyDto;
 }
 
-const VERDICT_TONE = { MATCH: 'success', DIFFERENT: 'danger', NOT_FOUND: 'neutral' } as const;
-const VERDICT_TEXT = { MATCH: 'Match', DIFFERENT: 'Different', NOT_FOUND: 'Not found' } as const;
+const VERDICT_TONE = {
+  MATCH: 'success',
+  DIFFERENT: 'danger',
+  NOT_FOUND: 'neutral',
+  NOT_CHECKED: 'neutral',
+} as const;
+const VERDICT_TEXT = {
+  MATCH: 'Match',
+  DIFFERENT: 'Different',
+  NOT_FOUND: 'Not found',
+  NOT_CHECKED: 'Not checked',
+} as const;
 
 function errorMessage(err: unknown): string {
   const e = err as { code?: string; message?: string; details?: { resetsAt?: string } };
@@ -122,7 +132,8 @@ export const VerificationPanel: React.FC<VerificationPanelProps> = ({ company })
         <>
           {!latest.searchCheckAvailable && (
             <p className="text-xs text-text-accent bg-bg-accent-subtle border border-border-accent rounded-md px-3 py-2">
-              Search check unavailable. Only website and careers page were checked directly.
+              Search check unavailable right now, so only the website and careers page were checked.
+              The other details are shown as "Not checked" and do not affect the score.
             </p>
           )}
           {latest.companyExists === 'NO' && (

@@ -11,7 +11,7 @@ export const VERIFICATION_WEIGHTS: Record<VerifiableField | 'companyExists', num
   foundedYear: 5,
 };
 
-const VERDICT_FACTOR: Record<VerificationVerdict, number> = {
+const VERDICT_FACTOR: Record<Exclude<VerificationVerdict, 'NOT_CHECKED'>, number> = {
   MATCH: 1,
   NOT_FOUND: 0.5,
   DIFFERENT: 0,
@@ -32,6 +32,8 @@ export class VerificationScorer {
     let possible = VERIFICATION_WEIGHTS.companyExists;
 
     for (const f of input.fields) {
+      // Fields that could not be checked are left out, so they neither help nor hurt the score
+      if (f.verdict === 'NOT_CHECKED') continue;
       const weight = VERIFICATION_WEIGHTS[f.field];
       earned += weight * VERDICT_FACTOR[f.verdict];
       possible += weight;

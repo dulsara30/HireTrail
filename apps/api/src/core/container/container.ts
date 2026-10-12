@@ -151,7 +151,7 @@ export class Container {
             {
               extract: config.ai.modelExtract,
               grounded: config.ai.modelGrounded,
-              fallback: config.ai.modelFallback,
+              fallbacks: config.ai.modelFallbacks,
             },
             config.ai.toolsWithSchema,
           )
@@ -312,7 +312,10 @@ export class Container {
     this.adminController = new AdminController(
       new AdminUserService(this.sessionRepo, auditRepo),
       new AdminCompanyService(verificationService, auditRepo),
-      new AdminReportsService(auditRepo),
+      new AdminReportsService(auditRepo, this.aiProvider, {
+        enabled: config.ai.enabled,
+        keyConfigured: Boolean(config.ai.geminiApiKey),
+      }),
     );
   }
 

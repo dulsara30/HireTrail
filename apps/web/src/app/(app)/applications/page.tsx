@@ -2,6 +2,14 @@
 
 import React, { useState } from 'react';
 import { useApplicationsInfinite } from '../../../api/hooks/queries/useApplicationsInfinite';
+import {
+  ApplicationFilters,
+  EMPTY_APPLICATION_FILTERS,
+  hasActiveFilters,
+  type ApplicationFilterValues,
+} from '../../../components/organisms/applications/ApplicationFilters';
+import { DeleteApplicationDialog } from '../../../components/organisms/applications/DeleteApplicationDialog';
+import { useDebouncedValue } from '../../../hooks/useDebouncedValue';
 import { ApplicationsTable } from '../../../components/organisms/applications/ApplicationsTable';
 import { ApplicationPanel } from '../../../components/organisms/applications/ApplicationPanel';
 import { Button } from '../../../components/atoms/Button';
@@ -17,10 +25,22 @@ export default function ApplicationsPage() {
   const [isAutofillOpen, setIsAutofillOpen] = useState(false);
   const [isImportOpen, setIsImportOpen] = useState(false);
   const download = useDownload();
+  const [filters, setFilters] = useState<ApplicationFilterValues>(EMPTY_APPLICATION_FILTERS);
+  const [deleteTarget, setDeleteTarget] = useState<{
+    id: string;
+    roleTitle: string;
+    companyName: string;
+  } | null>(null);
+  const debouncedQ = useDebouncedValue(filters.q.trim(), 300);
   const [draft, setDraft] = useState<AutofillDraftDto | null>(null);
 
   const { data, isLoading, hasNextPage, isFetchingNextPage, fetchNextPage } =
-    useApplicationsInfinite();
+    useApplicationsInfinite({
+      q: debouncedQ || undefined,
+      statusIds: filters.statusId ? [filters.statusId] : undefined,
+      priorityIds: filters.priorityId ? [filters.priorityId] : undefined,
+      companyId: filters.company?.id,
+    });
 
   const allItems = React.useMemo(() => {
     return data?.pages.flatMap((page) => page.items) || [];
@@ -58,6 +78,8 @@ export default function ApplicationsPage() {
         </div>
       </div>
 
+      <ApplicationFilters values={filters} onChange={setFilters} />
+
       <ApplicationsTable
         items={allItems}
         isLoading={isLoading}
@@ -66,9 +88,22 @@ export default function ApplicationsPage() {
         onLoadMore={() => fetchNextPage()}
         onSelectApplication={(id: string) => setSelectedAppId(id)}
         onNewApplication={() => setIsCreateOpen(true)}
+        onDelete={(app) => setDeleteTarget(app)}
+        isFiltered={hasActiveFilters(filters)}
+        onClearFilters={() => setFilters(EMPTY_APPLICATION_FILTERS)}
       />
 
       {/* Side Panel for Create / Edit */}
+      {deleteTarget && (
+        <DeleteApplicationDialog
+          application={deleteTarget}
+          onClose={() => setDeleteTarget(null)}
+          onDeleted={() => {
+            if (selectedAppId === deleteTarget.id) setSelectedAppId(null);
+          }}
+        />
+      )}
+
       {isImportOpen && <ImportWizard onClose={() => setIsImportOpen(false)} />}
 
       {isAutofillOpen && (

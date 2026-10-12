@@ -30,6 +30,7 @@
   "devDependencies": {
     "@hiretrail/eslint-config": "workspace:*",
     "@hiretrail/tsconfig": "workspace:*",
+    "@vitest/coverage-v8": "3.2.7",
     "eslint": "^9.21.0",
     "tsup": "^8.4.0",
     "typescript": "^5.7.3",

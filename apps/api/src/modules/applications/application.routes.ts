@@ -55,6 +55,7 @@ export function createApplicationRoutes(
   router.post('/:id/archive', appController.archive);
   router.post('/:id/restore', appController.restore);
   router.delete('/:id', appController.delete);
+  router.delete('/:id/permanent', appController.deletePermanently);
   router.post('/:id/undo-delete', appController.undoDelete);
 
   // Comments & activity nested under application

@@ -11,11 +11,13 @@ import { Plus } from 'lucide-react';
 interface SortableApplicationCardProps {
   application: ApplicationListItemDto;
   onSelect: (id: string) => void;
+  onDelete?: (application: ApplicationListItemDto) => void;
 }
 
 const SortableApplicationCard: React.FC<SortableApplicationCardProps> = ({
   application,
   onSelect,
+  onDelete,
 }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: application.id,
@@ -33,6 +35,7 @@ const SortableApplicationCard: React.FC<SortableApplicationCardProps> = ({
         application={application}
         onClick={() => onSelect(application.id)}
         isDragging={isDragging}
+        onDelete={onDelete ? () => onDelete(application) : undefined}
       />
     </div>
   );
@@ -42,12 +45,14 @@ interface PipelineLaneProps {
   lane: BoardLaneDto;
   onSelectApplication: (id: string) => void;
   onNewApplicationInLane: (statusId: string) => void;
+  onDeleteApplication?: (application: ApplicationListItemDto) => void;
 }
 
 export const PipelineLane: React.FC<PipelineLaneProps> = ({
   lane,
   onSelectApplication,
   onNewApplicationInLane,
+  onDeleteApplication,
 }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: lane.status.id,
@@ -86,6 +91,7 @@ export const PipelineLane: React.FC<PipelineLaneProps> = ({
               key={app.id}
               application={app}
               onSelect={onSelectApplication}
+              onDelete={onDeleteApplication}
             />
           ))}
         </SortableContext>

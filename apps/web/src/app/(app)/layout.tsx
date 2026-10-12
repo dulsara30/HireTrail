@@ -70,7 +70,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <div className="min-h-screen bg-bg-canvas md:flex">
+    <div className="min-h-screen bg-bg-canvas md:flex md:h-screen md:overflow-hidden">
       <AppSidebar
         user={user}
         collapsed={collapsed}
@@ -81,7 +81,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         isSigningOut={logoutMutation.isPending}
       />
 
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex h-14 items-center gap-3 border-b border-border-default border-t-4 border-t-border-accent bg-bg-surface px-4 md:hidden">
           <button
             type="button"
@@ -94,7 +94,9 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <HireTrailLogo size="sm" />
         </header>
 
-        <main className="w-full min-w-0 flex-1 p-4 md:p-6 lg:p-8">{children}</main>
+        <main className="w-full min-w-0 flex-1 p-4 md:min-h-0 md:overflow-y-auto md:p-6 lg:p-8">
+          {children}
+        </main>
       </div>
     </div>
   );

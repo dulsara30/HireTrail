@@ -62,7 +62,7 @@ export const PipelineLane: React.FC<PipelineLaneProps> = ({
   return (
     <div
       ref={setNodeRef}
-      className={`flex flex-col w-80 flex-shrink-0 bg-bg-surface rounded-xl border shadow-sm p-3 transition-colors max-h-[calc(100vh-140px)] ${
+      className={`flex flex-col w-80 flex-shrink-0 bg-bg-surface rounded-xl border shadow-sm p-3 transition-colors max-h-full ${
         isOver ? 'border-border-accent bg-bg-accent-subtle' : 'border-border-default'
       }`}
     >
@@ -84,7 +84,7 @@ export const PipelineLane: React.FC<PipelineLaneProps> = ({
         </Button>
       </div>
 
-      <div className="flex-1 overflow-y-auto pr-0.5 space-y-2.5 min-h-[150px]">
+      <div className="min-h-[150px] flex-1 space-y-2.5 overflow-y-auto pr-0.5">
         <SortableContext items={lane.items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
           {lane.items.map((app) => (
             <SortableApplicationCard

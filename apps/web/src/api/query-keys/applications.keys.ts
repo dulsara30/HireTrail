@@ -4,6 +4,8 @@ export const applicationKeys = {
   all: ['applications'] as const,
   lists: () => [...applicationKeys.all, 'list'] as const,
   list: (params: Partial<ListApplicationsQuery>) => [...applicationKeys.lists(), params] as const,
+  /** Prefix of every cached board, whatever filters it was loaded with. */
+  boards: () => [...applicationKeys.all, 'board'] as const,
   board: (query?: BoardQuery) => [...applicationKeys.all, 'board', query] as const,
   lane: (statusId: string, query?: Record<string, unknown>) =>
     [...applicationKeys.all, 'lane', statusId, query] as const,

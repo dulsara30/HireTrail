@@ -8,6 +8,9 @@ import {
   KeyboardSensor,
   DragEndEvent,
   DragStartEvent,
+  pointerWithin,
+  rectIntersection,
+  type CollisionDetection,
 } from '@dnd-kit/core';
 import { sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { BoardDto, ApplicationListItemDto } from '@hiretrail/shared';
@@ -24,6 +27,17 @@ interface PipelineBoardProps {
   onSelectApplication: (id: string) => void;
   onNewApplicationInLane: (statusId: string) => void;
 }
+
+/**
+ * Only whole lanes are drop targets, and the lane under the pointer wins. Cards inside a full
+ * lane (or a neighbouring lane that overlaps the dragged card more) can no longer steal the drop.
+ */
+const laneCollision: CollisionDetection = (args) => {
+  const lanes = args.droppableContainers.filter((c) => Boolean(c.data.current?.lane));
+  const scoped = { ...args, droppableContainers: lanes };
+  const hits = pointerWithin(scoped);
+  return hits.length > 0 ? hits : rectIntersection(scoped);
+};
 
 export const PipelineBoard: React.FC<PipelineBoardProps> = ({
   board,
@@ -90,7 +104,14 @@ export const PipelineBoard: React.FC<PipelineBoardProps> = ({
   }
 
   return (
-    <DndContext sensors={sensors} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={laneCollision}
+      autoScroll={{ threshold: { x: 0.18, y: 0.12 }, acceleration: 18 }}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={() => setActiveDragId(null)}
+    >
       <div className="flex h-full gap-4 overflow-x-auto pb-4 pt-1 items-start">
         {board && board.lanes.length > 0 ? (
           board.lanes.map((lane) => (

@@ -148,7 +148,11 @@ export class Container {
       config.ai.enabled && config.ai.geminiApiKey
         ? new GeminiAiProvider(
             config.ai.geminiApiKey,
-            { extract: config.ai.modelExtract, grounded: config.ai.modelGrounded },
+            {
+              extract: config.ai.modelExtract,
+              grounded: config.ai.modelGrounded,
+              fallback: config.ai.modelFallback,
+            },
             config.ai.toolsWithSchema,
           )
         : new UnconfiguredAiProvider();

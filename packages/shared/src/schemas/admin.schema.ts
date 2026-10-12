@@ -17,7 +17,8 @@ export const adminListUsersQuerySchema = cursorPaginationSchema.shape({
 
 export const adminChangePlanSchema = yup.object({
   plan: yup.string().oneOf(['FREE', 'PRO']).required('Plan is required'),
-  reason: reasonSchema,
+  // Optional for plan changes: a default note is recorded when it is left out
+  reason: yup.string().trim().max(300).optional(),
 });
 
 export const adminChangeStatusSchema = yup.object({

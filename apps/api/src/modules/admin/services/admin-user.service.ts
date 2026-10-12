@@ -143,6 +143,11 @@ export class AdminUserService {
   ): Promise<AdminUserDto> {
     const user = await this.requireUser(id);
     const before = { plan: user.plan };
+    const reason =
+      input.reason?.trim() ||
+      (input.plan === 'PRO'
+        ? 'Upgraded to PRO by an admin (payment received)'
+        : 'Changed to FREE by an admin');
 
     const updated = await withTransaction(async (session) => {
       const doc = await UserModel.findOneAndUpdate(
@@ -154,7 +159,7 @@ export class AdminUserService {
               source: 'MANUAL',
               updatedAt: new Date(),
               updatedBy: actor.id,
-              reason: input.reason,
+              reason,
             },
           },
         },
@@ -168,7 +173,7 @@ export class AdminUserService {
           targetId: id,
           before,
           after: { plan: input.plan },
-          reason: input.reason,
+          reason,
           ipHash: actor.ipHash,
         },
         session,

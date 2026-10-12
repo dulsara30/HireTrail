@@ -66,5 +66,5 @@ export type OptionColor =
   | 'teal'
   | 'pink'
   | 'lime'
-  | 'sky'
+  | 'brown'
   | 'indigo';

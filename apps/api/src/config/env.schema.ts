@@ -52,6 +52,7 @@ export const envSchema = yup.object({
   GEMINI_API_KEY: yup.string().optional(),
   GEMINI_MODEL_EXTRACT: yup.string().default('gemini-3.6-flash'),
   GEMINI_MODEL_GROUNDED: yup.string().default('gemini-2.5-flash'),
+  GEMINI_MODEL_FALLBACK: yup.string().default('gemini-2.5-flash'),
   GEMINI_TOOLS_WITH_SCHEMA: yup
     .boolean()
     .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))

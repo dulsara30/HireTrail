@@ -113,7 +113,7 @@ export const UserDetailPanel: React.FC<UserDetailPanelProps> = ({
                 htmlFor="admin-reason"
                 className="text-xs font-semibold uppercase text-text-accent"
               >
-                Reason (required, goes to the audit log)
+                Note (optional for plan changes, required to suspend)
               </label>
               <textarea
                 id="admin-reason"
@@ -133,15 +133,15 @@ export const UserDetailPanel: React.FC<UserDetailPanelProps> = ({
                 <Button
                   size="sm"
                   variant="primary"
-                  disabled={!canSubmit || changePlan.isPending}
+                  disabled={changePlan.isPending}
                   onClick={() =>
                     changePlan.mutate(
-                      { plan: nextPlan, reason: reason.trim() },
+                      { plan: nextPlan, reason: reason.trim() || undefined },
                       { onSuccess: done },
                     )
                   }
                 >
-                  Change to {nextPlan}
+                  {nextPlan === 'PRO' ? 'Make PRO' : 'Change to FREE'}
                 </Button>
                 <Button
                   size="sm"

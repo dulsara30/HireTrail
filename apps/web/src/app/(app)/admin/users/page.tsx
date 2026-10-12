@@ -9,6 +9,7 @@ import { useInfiniteScroll } from '../../../../hooks/useInfiniteScroll';
 import { Badge } from '../../../../components/atoms/Badge';
 import { Spinner } from '../../../../components/atoms/Spinner';
 import { EmptyState } from '../../../../components/molecules/EmptyState';
+import { PlanQuickButton } from '../../../../components/organisms/admin/PlanQuickButton';
 import { UserDetailPanel } from '../../../../components/organisms/admin/UserDetailPanel';
 
 const selectClass =
@@ -87,7 +88,7 @@ export default function AdminUsersPage() {
         <EmptyState title="No users found" description="Try a different search or filter." />
       ) : (
         <div className="overflow-x-auto rounded-xl border border-border-default bg-bg-surface shadow-sm">
-          <table className="w-full min-w-[40rem] text-left text-sm">
+          <table className="w-full min-w-[46rem] text-left text-sm">
             <thead className="border-b border-border-default bg-bg-accent-subtle text-xs font-semibold uppercase text-text-accent">
               <tr>
                 <th className="px-4 py-3">User</th>
@@ -96,6 +97,7 @@ export default function AdminUsersPage() {
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3">Joined</th>
                 <th className="px-4 py-3">Last login</th>
+                <th className="px-4 py-3">Upgrade</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border-default">
@@ -125,6 +127,9 @@ export default function AdminUsersPage() {
                   </td>
                   <td className="px-4 py-3 text-text-secondary">
                     {u.lastLoginAt ? new Date(u.lastLoginAt).toLocaleDateString() : 'Never'}
+                  </td>
+                  <td className="px-4 py-3">
+                    <PlanQuickButton user={u} />
                   </td>
                 </tr>
               ))}

@@ -51,9 +51,9 @@
   --color-tag-lime-bg: #f7fee7;
   --color-tag-lime-text: #4d7c0f;
   --color-tag-lime-border: #d9f99d;
-  --color-tag-sky-bg: #f0f9ff;
-  --color-tag-sky-text: #0369a1;
-  --color-tag-sky-border: #bae6fd;
+  --color-tag-brown-bg: #f6ede4;
+  --color-tag-brown-text: #7c4a21;
+  --color-tag-brown-border: #e4cdb5;
   --color-tag-indigo-bg: #eef2ff;
   --color-tag-indigo-text: #4338ca;
   --color-tag-indigo-border: #c7d2fe;
@@ -137,9 +137,9 @@
   --color-tag-lime-bg: var(--color-tag-lime-bg);
   --color-tag-lime-text: var(--color-tag-lime-text);
   --color-tag-lime-border: var(--color-tag-lime-border);
-  --color-tag-sky-bg: var(--color-tag-sky-bg);
-  --color-tag-sky-text: var(--color-tag-sky-text);
-  --color-tag-sky-border: var(--color-tag-sky-border);
+  --color-tag-brown-bg: var(--color-tag-brown-bg);
+  --color-tag-brown-text: var(--color-tag-brown-text);
+  --color-tag-brown-border: var(--color-tag-brown-border);
   --color-tag-indigo-bg: var(--color-tag-indigo-bg);
   --color-tag-indigo-text: var(--color-tag-indigo-text);
   --color-tag-indigo-border: var(--color-tag-indigo-border);

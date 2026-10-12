@@ -15,7 +15,7 @@ export const OPTION_COLORS: OptionColor[] = [
   'teal',
   'pink',
   'lime',
-  'sky',
+  'brown',
   'indigo',
 ];
 

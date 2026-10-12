@@ -38,16 +38,16 @@ import { OPTION_COLOR_STYLES } from '../../../constants/option-colors';
 const COLORS: OptionColor[] = [
   'neutral',
   'accent',
-  'info',
-  'purple',
-  'success',
-  'danger',
   'orange',
-  'teal',
+  'danger',
   'pink',
-  'lime',
-  'sky',
+  'purple',
   'indigo',
+  'info',
+  'teal',
+  'success',
+  'lime',
+  'brown',
 ];
 
 const CATEGORY_LABELS: Record<StatusCategory, string> = {
@@ -141,7 +141,7 @@ const SortableRow: React.FC<RowProps> = ({
           onClick={() => setColorOpen((o) => !o)}
           aria-label={`Change colour of ${option.label}`}
           aria-expanded={colorOpen}
-          className={`h-6 w-6 rounded-full border-2 ${OPTION_COLOR_STYLES[option.color].bg} ${OPTION_COLOR_STYLES[option.color].border}`}
+          className={`h-6 w-6 rounded-full border-2 ${OPTION_COLOR_STYLES[option.color].swatch} border-bg-surface shadow-sm`}
         />
         {colorOpen && (
           <div className="absolute left-0 top-8 z-40 flex gap-1.5 rounded-lg border border-border-default bg-bg-surface p-2 shadow-lg">
@@ -154,7 +154,7 @@ const SortableRow: React.FC<RowProps> = ({
                   onRecolor(option, c);
                   setColorOpen(false);
                 }}
-                className={`h-6 w-6 rounded-full border-2 ${OPTION_COLOR_STYLES[c].bg} ${OPTION_COLOR_STYLES[c].border} ${
+                className={`h-6 w-6 rounded-full border-2 ${OPTION_COLOR_STYLES[c].swatch} border-bg-surface shadow-sm ${
                   c === option.color ? 'ring-2 ring-border-inverse ring-offset-1' : ''
                 }`}
               />
@@ -384,7 +384,7 @@ export const OptionManager: React.FC<OptionManagerProps> = ({ type, title }) => 
               aria-label={c}
               aria-pressed={newColor === c}
               onClick={() => setNewColor(c)}
-              className={`h-6 w-6 rounded-full border-2 ${OPTION_COLOR_STYLES[c].bg} ${OPTION_COLOR_STYLES[c].border} ${
+              className={`h-6 w-6 rounded-full border-2 ${OPTION_COLOR_STYLES[c].swatch} border-bg-surface shadow-sm ${
                 newColor === c ? 'ring-2 ring-border-inverse ring-offset-1' : ''
               }`}
             />

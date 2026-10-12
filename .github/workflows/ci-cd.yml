@@ -66,36 +66,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy:
-    name: Deploy ${{ matrix.app }} (${{ github.event_name == 'push' && 'production' || 'preview' }})
-    needs: [quality, e2e, secrets-scan]
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - app: api
-            project_secret: VERCEL_PROJECT_ID_API
-          - app: web
-            project_secret: VERCEL_PROJECT_ID_WEB
-    env:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets[matrix.project_secret] }}
-      VERCEL_ENV: ${{ github.event_name == 'push' && 'production' || 'preview' }}
-      PROD_FLAG: ${{ github.event_name == 'push' && '--prod' || '' }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-      - run: pnpm add -g vercel@latest
-      - run: vercel pull --yes --environment=$VERCEL_ENV --token=${{ secrets.VERCEL_TOKEN }}
-      - run: vercel build $PROD_FLAG --token=${{ secrets.VERCEL_TOKEN }}
-      - id: deploy
-        run: echo "url=$(vercel deploy --prebuilt $PROD_FLAG --token=${{ secrets.VERCEL_TOKEN }})" >> "$GITHUB_OUTPUT"
-      - name: Point the stable preview alias at this PR's deployment
-        if: github.event_name == 'pull_request'
-        run: vercel alias set ${{ steps.deploy.outputs.url }} ${{ matrix.app == 'api' && vars.PREVIEW_ALIAS_API || vars.PREVIEW_ALIAS_WEB }} --token=${{ secrets.VERCEL_TOKEN }}
-      - run: echo "Deployed ${{ matrix.app }} to ${{ steps.deploy.outputs.url }}"
+  # Deployments are done by Vercel's own Git integration (previews for pull requests,
+  # production for main), so this workflow only runs quality, e2e and secret scanning.

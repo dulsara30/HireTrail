@@ -85,6 +85,11 @@ export interface CompanyLookupDto {
     industry: string | null;
     size: string | null;
     description: string | null;
+    /** Fields below were added later, so older cached lookups do not have them. */
+    linkedinUrl?: string | null;
+    contactEmail?: string | null;
+    foundedYear?: string | null;
+    techStack?: string[];
   } | null;
   sources: Array<{ url: string; title?: string }>;
 }

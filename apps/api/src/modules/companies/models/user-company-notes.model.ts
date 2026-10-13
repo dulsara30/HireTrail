@@ -6,6 +6,7 @@ export interface UserCompanyNotesDoc extends Document {
   userId: Types.ObjectId;
   companyId: Types.ObjectId;
   myRating: number | null;
+  /** Legacy single note. Moved into company notes the first time the user opens the list. */
   notesHtml: string | null;
   createdAt: Date;
   updatedAt: Date;

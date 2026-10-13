@@ -60,7 +60,28 @@ export const AiModelTest: React.FC = () => {
             <Badge color={data.keyConfigured ? 'success' : 'danger'}>
               API key: {data.keyConfigured ? 'set' : 'missing'}
             </Badge>
+            <Badge color={data.search.configured ? 'success' : 'orange'}>
+              Web search ({data.search.provider}): {data.search.configured ? 'key set' : 'no key'}
+            </Badge>
+            {data.search.configured && (
+              <Badge color={data.search.creditsUsed >= data.search.budget ? 'danger' : 'info'}>
+                Search credits {data.search.month}: {data.search.creditsUsed} / {data.search.budget}
+              </Badge>
+            )}
           </div>
+          {data.cooldowns.length > 0 && (
+            <div className="space-y-1 rounded-lg border border-border-default bg-bg-surface p-3">
+              <p className="text-xs font-semibold text-text-primary">Skipped for now</p>
+              <ul className="space-y-0.5 text-xs text-text-secondary">
+                {data.cooldowns.map((c) => (
+                  <li key={c.key}>
+                    <span className="font-medium text-text-primary">{c.key}</span> ({c.reason}),
+                    back at {new Date(c.until).toLocaleString()}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
           {data.probes.length === 0 ? (
             <p className="text-xs text-text-danger">
               No model could be tested. Add a valid GEMINI_API_KEY to the API project and redeploy.

@@ -11,6 +11,9 @@ import {
   type AdminListCompaniesQuery,
   type AdminListUsersQuery,
   type AdminMergeCompanyInput,
+  type AdminCreateCompanyInput,
+  type AdminUpdateCompanyInput,
+  type CompanyLookupRequestInput,
 } from '@hiretrail/shared';
 import { type AdminUserService, type AdminActor } from '../services/admin-user.service';
 import { type AdminCompanyService } from '../services/admin-company.service';
@@ -82,6 +85,35 @@ export class AdminController extends BaseController {
 
   public listCompanies = this.wrap(async (req, res) => {
     this.ok(res, await this.companies.list(this.query<AdminListCompaniesQuery>(req)));
+  });
+
+  public lookupCompany = this.wrap(async (req, res) => {
+    this.ok(
+      res,
+      await this.companies.lookup(this.actor(req), this.body<CompanyLookupRequestInput>(req)),
+    );
+  });
+
+  public createCompany = this.wrap(async (req, res) => {
+    this.created(
+      res,
+      await this.companies.create(this.actor(req), this.body<AdminCreateCompanyInput>(req)),
+    );
+  });
+
+  public companyDetail = this.wrap(async (req, res) => {
+    this.ok(res, await this.companies.detail(String(req.params.id)));
+  });
+
+  public updateCompany = this.wrap(async (req, res) => {
+    this.ok(
+      res,
+      await this.companies.update(
+        this.actor(req),
+        String(req.params.id),
+        this.body<AdminUpdateCompanyInput>(req),
+      ),
+    );
   });
 
   public mergeCompany = this.wrap(async (req, res) => {

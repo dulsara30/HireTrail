@@ -11,6 +11,8 @@ import { Badge } from '../../../../components/atoms/Badge';
 import { Button } from '../../../../components/atoms/Button';
 import { Spinner } from '../../../../components/atoms/Spinner';
 import { EmptyState } from '../../../../components/molecules/EmptyState';
+import { AdminAddCompany } from '../../../../components/organisms/admin/AdminAddCompany';
+import { CompanyDetailPanel } from '../../../../components/organisms/admin/CompanyDetailPanel';
 
 export default function AdminCompaniesPage() {
   const [search, setSearch] = React.useState('');
@@ -19,6 +21,7 @@ export default function AdminCompaniesPage() {
   const [into, setInto] = React.useState<AdminCompanyDto | null>(null);
   const [reason, setReason] = React.useState('');
   const [result, setResult] = React.useState<string | null>(null);
+  const [detailId, setDetailId] = React.useState<string | null>(null);
 
   const { data, isLoading, isError, hasNextPage, isFetchingNextPage, fetchNextPage } =
     useAdminCompaniesInfinite(q);
@@ -57,6 +60,8 @@ export default function AdminCompaniesPage() {
 
   return (
     <div className="space-y-4">
+      <AdminAddCompany onCreated={(id) => setDetailId(id)} />
+
       <section
         aria-label="Merge duplicates"
         className="space-y-3 rounded-xl border border-border-accent bg-bg-accent-subtle p-4"
@@ -161,16 +166,30 @@ export default function AdminCompaniesPage() {
                 key={c.id}
                 className={`flex flex-wrap items-center gap-3 px-4 py-3 ${selected ? 'bg-bg-accent-subtle' : ''}`}
               >
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-text-primary">{c.name}</p>
+                <button
+                  type="button"
+                  onClick={() => setDetailId(c.id)}
+                  className="min-w-0 flex-1 text-left"
+                >
+                  <p className="truncate text-sm font-medium text-text-primary hover:underline">
+                    {c.name}
+                  </p>
                   <p className="truncate text-xs text-text-secondary">
                     {c.website ?? c.country ?? ''}
                   </p>
-                </div>
+                </button>
                 {c.hasConflicts && <Badge color="orange">Conflicts</Badge>}
                 {c.verificationScore !== null && (
                   <Badge color="info">Score {c.verificationScore}</Badge>
                 )}
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => setDetailId(c.id)}
+                  aria-label={`Open details for ${c.name}`}
+                >
+                  Details
+                </Button>
                 <Button
                   size="sm"
                   variant="secondary"
@@ -187,6 +206,7 @@ export default function AdminCompaniesPage() {
       <div ref={sentinelRef} className="flex justify-center py-2">
         {isFetchingNextPage && <Spinner size="sm" />}
       </div>
+      {detailId && <CompanyDetailPanel companyId={detailId} onClose={() => setDetailId(null)} />}
     </div>
   );
 }

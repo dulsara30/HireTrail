@@ -69,13 +69,30 @@ export const searchCompaniesQuerySchema = cursorPaginationSchema.shape({
   q: yup.string().trim().optional(),
 });
 
-export const upsertCompanyNotesSchema = yup.object({
-  myRating: yup.number().min(1).max(5).nullable().optional(),
-  notesHtml: yup.string().trim().max(10000).nullable().optional(),
+/** One star rating per user and company; null clears it. */
+export const setCompanyRatingSchema = yup.object({
+  myRating: yup.number().integer().min(1).max(5).nullable().defined(),
+});
+
+const companyNoteBodySchema = yup
+  .string()
+  .trim()
+  .min(1, 'A note cannot be empty')
+  .max(10000, 'A note cannot exceed 10000 characters');
+
+export const createCompanyNoteSchema = yup.object({
+  bodyHtml: companyNoteBodySchema.required('A note cannot be empty'),
+});
+
+export const updateCompanyNoteSchema = yup.object({
+  bodyHtml: companyNoteBodySchema.required('A note cannot be empty'),
+  version: yup.number().integer().min(0).required(),
 });
 
 export type CreateCompanyInput = yup.InferType<typeof createCompanySchema>;
 export type UpdateCompanyInput = yup.InferType<typeof updateCompanySchema>;
 export type ListCompaniesQuery = yup.InferType<typeof listCompaniesQuerySchema>;
 export type SearchCompaniesQuery = yup.InferType<typeof searchCompaniesQuerySchema>;
-export type UpsertCompanyNotesInput = yup.InferType<typeof upsertCompanyNotesSchema>;
+export type SetCompanyRatingInput = yup.InferType<typeof setCompanyRatingSchema>;
+export type CreateCompanyNoteInput = yup.InferType<typeof createCompanyNoteSchema>;
+export type UpdateCompanyNoteInput = yup.InferType<typeof updateCompanyNoteSchema>;

@@ -69,7 +69,11 @@ export function createApp(): Express {
   app.use(
     '/api/v1/companies',
     container.authenticate,
-    createCompanyRoutes(container.companyController, container.companyAiController),
+    createCompanyRoutes(
+      container.companyController,
+      container.companyAiController,
+      container.companyNoteController,
+    ),
   );
   app.use(
     '/api/v1/comments',

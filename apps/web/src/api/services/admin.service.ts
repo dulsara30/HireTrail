@@ -6,6 +6,11 @@ import {
   type AdminChangePlanInput,
   type AdminChangeStatusInput,
   type AdminCompanyDto,
+  type AdminCompanyDetailDto,
+  type AdminUpdateCompanyInput,
+  type AdminCreateCompanyInput,
+  type CompanyLookupDto,
+  type CompanyLookupRequestInput,
   type AdminMergeCompanyInput,
   type AdminUserDetailDto,
   type AdminUserDto,
@@ -57,6 +62,38 @@ export const adminService = {
     const res = await httpClient.get<ApiSuccess<Page<AdminCompanyDto>>>(ADMIN_ENDPOINTS.companies, {
       params: { ...params, limit: 20 },
     });
+    return res.data.data;
+  },
+
+  async lookupCompany(input: CompanyLookupRequestInput): Promise<CompanyLookupDto> {
+    const res = await httpClient.post<ApiSuccess<CompanyLookupDto>>(
+      ADMIN_ENDPOINTS.lookupCompany,
+      input,
+      { timeout: 90_000 },
+    );
+    return res.data.data;
+  },
+
+  async createCompany(input: AdminCreateCompanyInput): Promise<AdminCompanyDetailDto> {
+    const res = await httpClient.post<ApiSuccess<AdminCompanyDetailDto>>(
+      ADMIN_ENDPOINTS.companies,
+      input,
+    );
+    return res.data.data;
+  },
+
+  async getCompany(id: string): Promise<AdminCompanyDetailDto> {
+    const res = await httpClient.get<ApiSuccess<AdminCompanyDetailDto>>(
+      ADMIN_ENDPOINTS.company(id),
+    );
+    return res.data.data;
+  },
+
+  async updateCompany(id: string, input: AdminUpdateCompanyInput): Promise<AdminCompanyDetailDto> {
+    const res = await httpClient.patch<ApiSuccess<AdminCompanyDetailDto>>(
+      ADMIN_ENDPOINTS.company(id),
+      input,
+    );
     return res.data.data;
   },
 

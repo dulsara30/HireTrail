@@ -35,6 +35,69 @@ export const adminMergeCompanySchema = yup.object({
   reason: reasonSchema,
 });
 
+const optionalText = (max: number) => yup.string().trim().max(max).nullable().optional();
+const ratingValue = yup.number().min(0).max(10).nullable().optional();
+
+/** Admins can edit every field of a global company. Optimistic concurrency via `version`. */
+export const adminUpdateCompanySchema = yup.object({
+  name: yup.string().trim().min(1, 'Company name is required').max(120).optional(),
+  aliases: yup.array().of(yup.string().trim().min(1).max(120).required()).max(30).optional(),
+  region: yup.string().oneOf(['LOCAL', 'FOREIGN']).nullable().optional(),
+  country: optionalText(80),
+  city: optionalText(80),
+  website: optionalText(300),
+  careersUrl: optionalText(300),
+  linkedinUrl: optionalText(300),
+  contactEmail: optionalText(254),
+  foundedYear: optionalText(10),
+  size: optionalText(60),
+  industry: optionalText(120),
+  techStack: yup.array().of(yup.string().trim().min(1).max(60).required()).max(60).optional(),
+  description: optionalText(2000),
+  hiringModel: optionalText(120),
+  tier: yup.string().oneOf(['A', 'B']).nullable().optional(),
+  reportRatings: yup
+    .object({
+      culture: ratingValue,
+      workExperience: ratingValue,
+      salary: ratingValue,
+      learning: ratingValue,
+      overall: ratingValue,
+      scale: ratingValue,
+      appeal: ratingValue,
+    })
+    .nullable()
+    .optional(),
+  version: yup.number().integer().min(0).required(),
+  reason: reasonSchema,
+});
+
+/** Creates a global company. `sourceUrls` are the public pages a lookup used (kept for the audit trail). */
+export const adminCreateCompanySchema = yup.object({
+  name: yup
+    .string()
+    .trim()
+    .min(1, 'Company name is required')
+    .max(120)
+    .required('Company name is required'),
+  website: optionalText(300),
+  careersUrl: optionalText(300),
+  country: optionalText(80),
+  city: optionalText(80),
+  industry: optionalText(120),
+  size: optionalText(60),
+  description: optionalText(2000),
+  linkedinUrl: optionalText(300),
+  contactEmail: optionalText(254),
+  foundedYear: optionalText(10),
+  techStack: yup.array().of(yup.string().trim().min(1).max(60).required()).max(30).default([]),
+  region: yup.string().oneOf(['LOCAL', 'FOREIGN']).nullable().optional(),
+  tier: yup.string().oneOf(['A', 'B']).nullable().optional(),
+  fromAiLookup: yup.boolean().default(false),
+  sourceUrls: yup.array().of(yup.string().trim().max(500).required()).max(10).default([]),
+  reason: reasonSchema,
+});
+
 export const adminApplySuggestionsSchema = yup.object({
   fields: yup.array().of(yup.string().required()).min(1).required(),
   reason: reasonSchema,
@@ -54,6 +117,8 @@ export type AdminChangePlanInput = yup.InferType<typeof adminChangePlanSchema>;
 export type AdminChangeStatusInput = yup.InferType<typeof adminChangeStatusSchema>;
 export type AdminListCompaniesQuery = yup.InferType<typeof adminListCompaniesQuerySchema>;
 export type AdminMergeCompanyInput = yup.InferType<typeof adminMergeCompanySchema>;
+export type AdminCreateCompanyInput = yup.InferType<typeof adminCreateCompanySchema>;
+export type AdminUpdateCompanyInput = yup.InferType<typeof adminUpdateCompanySchema>;
 export type AdminApplySuggestionsInput = yup.InferType<typeof adminApplySuggestionsSchema>;
 export type AdminAuditLogsQuery = yup.InferType<typeof adminAuditLogsQuerySchema>;
 export type AdminAiUsageQuery = yup.InferType<typeof adminAiUsageQuerySchema>;

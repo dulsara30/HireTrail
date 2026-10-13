@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { CompanyController } from './controllers/company.controller';
 import { type CompanyAiController } from './controllers/company-ai.controller';
+import { type CompanyNoteController } from './controllers/company-note.controller';
 import { validate } from '../../core/middleware/validate.middleware';
 import { requirePlan, requireVerifiedEmail } from '../../core/middleware/guards.middleware';
 import {
@@ -8,7 +9,9 @@ import {
   updateCompanySchema,
   listCompaniesQuerySchema,
   searchCompaniesQuerySchema,
-  upsertCompanyNotesSchema,
+  setCompanyRatingSchema,
+  createCompanyNoteSchema,
+  updateCompanyNoteSchema,
   verifyCompanyRequestSchema,
   applySuggestionsSchema,
   companyLookupRequestSchema,
@@ -17,6 +20,7 @@ import {
 export function createCompanyRoutes(
   controller: CompanyController,
   aiController: CompanyAiController,
+  noteController: CompanyNoteController,
 ): Router {
   const router = Router();
 
@@ -33,7 +37,15 @@ export function createCompanyRoutes(
   router.get('/:idOrSlug', controller.getByIdOrSlug);
   router.patch('/:id', validate({ body: updateCompanySchema }), controller.update);
   router.delete('/:id', controller.delete);
-  router.put('/:id/my-notes', validate({ body: upsertCompanyNotesSchema }), controller.upsertNotes);
+  router.put('/:id/my-rating', validate({ body: setCompanyRatingSchema }), controller.setRating);
+  router.get('/:id/my-notes', noteController.listNotes);
+  router.post('/:id/my-notes', validate({ body: createCompanyNoteSchema }), noteController.create);
+  router.patch(
+    '/:id/my-notes/:noteId',
+    validate({ body: updateCompanyNoteSchema }),
+    noteController.update,
+  );
+  router.delete('/:id/my-notes/:noteId', noteController.delete);
   router.post(
     '/:id/verify',
     requirePlan('PRO'),

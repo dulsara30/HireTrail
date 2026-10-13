@@ -5,7 +5,7 @@ import {
   CreateCompanyInput,
   UpdateCompanyInput,
   ListCompaniesQuery,
-  UpsertCompanyNotesInput,
+  SetCompanyRatingInput,
 } from '@hiretrail/shared';
 
 export class CompanyController extends BaseController {
@@ -79,15 +79,15 @@ export class CompanyController extends BaseController {
     }
   };
 
-  public upsertNotes = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  public setRating = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const input = req.body as UpsertCompanyNotesInput;
-      const notes = await this.companyService.upsertNotes(
+      const input = req.body as SetCompanyRatingInput;
+      const result = await this.companyService.setRating(
         req.user!.id,
         req.params.id as string,
         input,
       );
-      this.ok(res, notes);
+      this.ok(res, result);
     } catch (err) {
       next(err);
     }

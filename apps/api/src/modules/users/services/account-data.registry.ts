@@ -9,6 +9,7 @@ import { UserModel } from '../../auth/models/user.model';
 import { CommentModel } from '../../comments/models/comment.model';
 import { CompanyModel } from '../../companies/models/company.model';
 import { CompanyVerificationModel } from '../../companies/models/company-verification.model';
+import { CompanyNoteModel } from '../../companies/models/company-note.model';
 import { UserCompanyNotesModel } from '../../companies/models/user-company-notes.model';
 import { AiInsightsModel } from '../../dashboard/models/ai-insights.model';
 import { OptionModel } from '../../options/models/option.model';
@@ -69,6 +70,12 @@ export const ACCOUNT_COLLECTIONS: AccountCollection[] = [
   {
     name: 'company-notes',
     model: asModel(UserCompanyNotesModel),
+    filter: (userId) => ({ userId }) as FilterQuery<never>,
+    exportable: true,
+  },
+  {
+    name: 'company-note-entries',
+    model: asModel(CompanyNoteModel),
     filter: (userId) => ({ userId }) as FilterQuery<never>,
     exportable: true,
   },

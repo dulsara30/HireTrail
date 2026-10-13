@@ -28,7 +28,11 @@ export interface AppConfig {
     modelExtract: string;
     modelGrounded: string;
     modelFallbacks: string[];
+    modelGroundedFallbacks: string[];
     toolsWithSchema: boolean;
+    tavilyApiKey?: string;
+    tavilyMonthlyBudget: number;
+    websiteGuess: boolean;
     globalDailyLimit: number;
     quotas: {
       autofill: number;
@@ -90,7 +94,13 @@ export function loadConfig(rawEnv: NodeJS.ProcessEnv = process.env): AppConfig {
         modelFallbacks: validated.GEMINI_MODEL_FALLBACK.split(',')
           .map((m) => m.trim())
           .filter(Boolean),
+        modelGroundedFallbacks: validated.GEMINI_MODEL_GROUNDED_FALLBACK.split(',')
+          .map((m) => m.trim())
+          .filter(Boolean),
         toolsWithSchema: validated.GEMINI_TOOLS_WITH_SCHEMA,
+        tavilyApiKey: validated.TAVILY_API_KEY,
+        tavilyMonthlyBudget: validated.TAVILY_MONTHLY_BUDGET,
+        websiteGuess: validated.LOOKUP_WEBSITE_GUESS,
         globalDailyLimit: validated.AI_GLOBAL_DAILY_LIMIT,
         quotas: {
           autofill: validated.AI_QUOTA_AUTOFILL,

@@ -4,23 +4,13 @@ import React from 'react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useCompany } from '../../../../api/hooks/queries/useCompany';
-import { useUpsertCompanyNotes } from '../../../../api/hooks/mutations/useUpsertCompanyNotes';
+import { CompanyNotes } from '../../../../components/organisms/companies/CompanyNotes';
 import { VerificationPanel } from '../../../../components/organisms/companies/VerificationPanel';
 import { Badge } from '../../../../components/atoms/Badge';
 import { Button } from '../../../../components/atoms/Button';
 import { Spinner } from '../../../../components/atoms/Spinner';
 import { ROUTES } from '../../../../constants/routes';
-import {
-  Building2,
-  Globe,
-  MapPin,
-  Mail,
-  ExternalLink,
-  Star,
-  ChevronLeft,
-  Briefcase,
-  Save,
-} from 'lucide-react';
+import { Building2, Globe, MapPin, Mail, ExternalLink, ChevronLeft, Briefcase } from 'lucide-react';
 
 export default function CompanyDetailPage() {
   const params = useParams();
@@ -28,35 +18,6 @@ export default function CompanyDetailPage() {
   const slug = params?.slug as string;
 
   const { data: company, isLoading, isError } = useCompany(slug);
-
-  const [rating, setRating] = React.useState<number | null>(null);
-  const [notes, setNotes] = React.useState('');
-  const [notesSaved, setNotesSaved] = React.useState(false);
-
-  React.useEffect(() => {
-    if (company?.myNotes) {
-      setRating(company.myNotes.myRating ?? null);
-      setNotes(company.myNotes.notesHtml ?? '');
-    }
-  }, [company]);
-
-  const upsertNotesMutation = useUpsertCompanyNotes(company?.id || '', company?.slug);
-
-  const handleSaveNotes = () => {
-    if (!company) return;
-    upsertNotesMutation.mutate(
-      {
-        myRating: rating,
-        notesHtml: notes,
-      },
-      {
-        onSuccess: () => {
-          setNotesSaved(true);
-          setTimeout(() => setNotesSaved(false), 2500);
-        },
-      },
-    );
-  };
 
   if (isLoading) {
     return (
@@ -259,72 +220,7 @@ export default function CompanyDetailPage() {
 
         {/* Right Column: Private Notes & Personal Rating */}
         <div className="space-y-6">
-          <div className="p-6 bg-bg-surface border border-border-default rounded-xl space-y-5">
-            <div>
-              <h2 className="text-sm font-semibold text-text-primary">My Private Notes</h2>
-              <p className="text-xs text-text-tertiary">Only you can see this rating and notes.</p>
-            </div>
-
-            {/* My Rating */}
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-text-secondary block">
-                My Impression Rating (1–5)
-              </label>
-              <div className="flex items-center gap-1">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    type="button"
-                    onClick={() => setRating(star)}
-                    className="p-1 text-text-tertiary hover:text-amber-400 focus:outline-none"
-                  >
-                    <Star
-                      className={`w-6 h-6 ${
-                        (rating ?? 0) >= star
-                          ? 'fill-amber-400 text-amber-400'
-                          : 'text-border-default'
-                      }`}
-                    />
-                  </button>
-                ))}
-                {rating && (
-                  <button
-                    type="button"
-                    onClick={() => setRating(null)}
-                    className="text-xs text-text-tertiary hover:text-text-primary ml-2"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Notes textarea */}
-            <div className="space-y-1.5">
-              <label className="text-xs font-medium text-text-secondary block">
-                Personal Notes
-              </label>
-              <textarea
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Interview contacts, glassdoor feedback, salary impressions..."
-                rows={6}
-                className="w-full text-sm p-3 rounded-lg border border-border-default bg-bg-surface focus:outline-none focus:border-border-focus"
-              />
-            </div>
-
-            <Button
-              onClick={handleSaveNotes}
-              disabled={upsertNotesMutation.isPending}
-              size="sm"
-              className="w-full gap-2"
-            >
-              <Save className="w-4 h-4" />
-              <span>
-                {upsertNotesMutation.isPending ? 'Saving...' : notesSaved ? 'Saved!' : 'Save Notes'}
-              </span>
-            </Button>
-          </div>
+          <CompanyNotes companyId={company.id} initialRating={company.myNotes?.myRating ?? null} />
         </div>
       </div>
     </div>

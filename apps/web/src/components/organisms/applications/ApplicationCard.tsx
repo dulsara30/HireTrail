@@ -1,4 +1,5 @@
 import React from 'react';
+import { daysSince, formatDaysShort } from '../../../utils/helpers/days-since';
 import { Trash2 } from 'lucide-react';
 import { ApplicationListItemDto } from '@hiretrail/shared';
 import { StatusPill } from '../../molecules/StatusPill/StatusPill';
@@ -19,6 +20,7 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
   isDragging = false,
   onDelete,
 }) => {
+  const appliedDays = daysSince(application.dates?.appliedAt);
   const tone = OPTION_COLOR_STYLES[application.resolvedStatus?.color ?? 'neutral'];
   return (
     <div
@@ -62,7 +64,7 @@ export const ApplicationCard: React.FC<ApplicationCardProps> = ({
       <div className="flex items-center justify-between pt-1 border-t border-border-default text-[11px] text-text-muted">
         <span>
           {application.dates?.appliedAt
-            ? `Applied ${new Date(application.dates.appliedAt).toLocaleDateString()}`
+            ? `Applied ${new Date(application.dates.appliedAt).toLocaleDateString()}${appliedDays !== null ? ` · ${formatDaysShort(appliedDays)}` : ''}`
             : 'Saved'}
         </span>
         {application.resolvedStatus && (

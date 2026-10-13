@@ -11,12 +11,15 @@ import {
 } from '../../../core/ports/ai-provider.port';
 import { UpstreamError } from '../../../core/errors/domain-errors';
 import { logger } from '../../../core/logger/logger';
+import { NoopProviderHealth, type ProviderHealth } from '../../../core/ports/provider-health.port';
 
 export interface GeminiModels {
   extract: string;
   grounded: string;
   /** Tried in order when the main model is overloaded (503), over quota (429) or missing (404). Not used for search calls. */
   fallbacks?: string[];
+  /** Tried in order for search (grounded) calls when the main grounded model fails. */
+  groundedFallbacks?: string[];
 }
 
 interface CallResult {
@@ -29,6 +32,9 @@ const BUSY_MESSAGE = 'AI is busy right now, try again in a minute';
 /** A model that has not answered within this time is skipped, so one slow model cannot use the whole budget. */
 const PER_ATTEMPT_MS = 12000;
 
+/** Search calls are slower, but still capped so the next model gets a turn inside the overall budget. */
+const PER_SEARCH_ATTEMPT_MS = 20000;
+
 export class GeminiAiProvider implements AiProvider {
   private readonly client: GoogleGenAI;
 
@@ -36,6 +42,7 @@ export class GeminiAiProvider implements AiProvider {
     apiKey: string,
     private readonly models: GeminiModels,
     private readonly toolsWithSchema: boolean,
+    private readonly health: ProviderHealth = new NoopProviderHealth(),
   ) {
     this.client = new GoogleGenAI({ apiKey });
   }
@@ -54,6 +61,7 @@ export class GeminiAiProvider implements AiProvider {
     add(this.models.extract, 'extract');
     for (const m of this.models.fallbacks ?? []) add(m, 'fallback');
     add(this.models.grounded, 'search', true);
+    for (const m of this.models.groundedFallbacks ?? []) add(m, 'search', true);
 
     return Promise.all(
       plan.map(async ({ model, role, search }): Promise<ModelProbe> => {
@@ -137,10 +145,8 @@ export class GeminiAiProvider implements AiProvider {
     const sdkTools: Tool[] = tools.map((t) =>
       t === 'google_search' ? { googleSearch: {} } : { urlContext: {} },
     );
-    const candidates =
-      tools.length === 0
-        ? [model, ...(this.models.fallbacks ?? []).filter((m) => m !== model)]
-        : [model];
+    const chain = tools.length === 0 ? this.models.fallbacks : this.models.groundedFallbacks;
+    const candidates = [model, ...(chain ?? []).filter((m) => m !== model)];
 
     // One time budget for all attempts, so fallbacks never push the request past the platform limit
     const deadline = Date.now() + req.timeoutMs;
@@ -156,7 +162,10 @@ ${req.content}
           abortSignal: AbortSignal.timeout(
             Math.max(
               1000,
-              Math.min(deadline - Date.now(), tools.length === 0 ? PER_ATTEMPT_MS : Infinity),
+              Math.min(
+                deadline - Date.now(),
+                tools.length === 0 ? PER_ATTEMPT_MS : PER_SEARCH_ATTEMPT_MS,
+              ),
             ),
           ),
           ...(sdkTools.length > 0 ? { tools: sdkTools } : {}),
@@ -167,8 +176,14 @@ ${req.content}
       });
 
     let lastError: unknown;
+    let attempted = 0;
+    const kind = tools.length > 0 ? 'search' : 'text';
     for (const candidate of candidates) {
       if (Date.now() >= deadline) break;
+      // A model that just failed is skipped until its cooldown ends
+      const healthKey = `gemini:${candidate}:${kind}`;
+      if (await this.health.isOpen(healthKey)) continue;
+      attempted++;
       try {
         return { res: await run(candidate), model: candidate };
       } catch (first) {
@@ -178,6 +193,7 @@ ${req.content}
         const timedOut =
           first instanceof Error &&
           /abort|timeout|timed out/i.test(`${first.name} ${first.message}`);
+        await this.rememberFailure(healthKey, first, kind, timedOut);
         // A short network hiccup is retried once on the same model. A timeout, overload, quota error
         // or missing model moves straight to the next model (a slow model must not use the whole budget).
         if (status === undefined && !timedOut && Date.now() < deadline) {
@@ -188,12 +204,56 @@ ${req.content}
             lastError = second;
             this.logFailure(candidate, second);
           }
-        } else if (!timedOut && !this.isRetryable(first) && !this.isModelMissing(first)) {
+        } else if (
+          !timedOut &&
+          !this.isRetryable(first) &&
+          !this.isModelMissing(first) &&
+          !this.isSearchUnsupported(first, tools.length > 0)
+        ) {
           throw this.mapError(first, tools.length > 0);
         }
       }
     }
+    if (attempted === 0 && !lastError) {
+      // Every model for this kind of call is cooling down
+      if (tools.length > 0) throw new AiToolUnavailableError();
+      throw new UpstreamError(BUSY_MESSAGE);
+    }
     throw this.mapError(lastError, tools.length > 0);
+  }
+
+  /** How long to skip a model after a failure: short for rate limits, long for missing models. */
+  private async rememberFailure(
+    key: string,
+    err: unknown,
+    kind: 'search' | 'text',
+    timedOut: boolean,
+  ): Promise<void> {
+    const status = this.statusOf(err);
+    const message = err instanceof Error ? err.message : '';
+    let cooldownMs: number | null = null;
+    let reason = '';
+
+    if (status === 429) {
+      reason = 'rate limit or quota';
+      if (/per ?day/i.test(message)) cooldownMs = 6 * 60 * 60 * 1000;
+      else if (kind === 'search') cooldownMs = 30 * 60 * 1000;
+      else {
+        const retry = /retryDelay"?:\s*"?(\d+)/i.exec(message)?.[1];
+        cooldownMs = Math.max(30_000, (retry ? Number(retry) + 5 : 120) * 1000);
+      }
+    } else if (status === 404) {
+      reason = 'model not found';
+      cooldownMs = 24 * 60 * 60 * 1000;
+    } else if (status !== undefined && status >= 500) {
+      reason = 'server error';
+      cooldownMs = 60_000;
+    } else if (timedOut) {
+      reason = 'timeout';
+      cooldownMs = 3 * 60_000;
+    }
+
+    if (cooldownMs !== null) await this.health.trip(key, cooldownMs, reason);
   }
 
   private toResult<T>(
@@ -238,6 +298,12 @@ ${req.content}
   private isRetryable(err: unknown): boolean {
     const status = this.statusOf(err);
     return status === 429 || (status !== undefined && status >= 500);
+  }
+
+  /** A model that rejects the search tool: the next model in the chain may accept it. */
+  private isSearchUnsupported(err: unknown, usedTools: boolean): boolean {
+    const message = err instanceof Error ? err.message : '';
+    return usedTools && this.statusOf(err) === 400 && /tool|search|ground/i.test(message);
   }
 
   private isModelMissing(err: unknown): boolean {

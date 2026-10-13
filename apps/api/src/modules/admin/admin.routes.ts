@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import {
   adminAiUsageQuerySchema,
+  adminCreateCompanySchema,
+  companyLookupRequestSchema,
   adminApplySuggestionsSchema,
   adminAuditLogsQuerySchema,
   adminChangePlanSchema,
@@ -8,6 +10,7 @@ import {
   adminListCompaniesQuerySchema,
   adminListUsersQuerySchema,
   adminMergeCompanySchema,
+  adminUpdateCompanySchema,
 } from '@hiretrail/shared';
 import { type AdminController } from './controllers/admin.controller';
 import { validate } from '../../core/middleware/validate.middleware';
@@ -31,6 +34,18 @@ export function createAdminRoutes(controller: AdminController): Router {
     '/companies',
     validate({ query: adminListCompaniesQuerySchema }),
     controller.listCompanies,
+  );
+  router.post(
+    '/companies/lookup',
+    validate({ body: companyLookupRequestSchema }),
+    controller.lookupCompany,
+  );
+  router.post('/companies', validate({ body: adminCreateCompanySchema }), controller.createCompany);
+  router.get('/companies/:id', controller.companyDetail);
+  router.patch(
+    '/companies/:id',
+    validate({ body: adminUpdateCompanySchema }),
+    controller.updateCompany,
   );
   router.post(
     '/companies/:id/merge',

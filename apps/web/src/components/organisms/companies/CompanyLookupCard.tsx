@@ -133,6 +133,10 @@ export const CompanyLookupCard: React.FC<CompanyLookupCardProps> = ({ name }) =>
                     ['City', result.profile.city],
                     ['Industry', result.profile.industry],
                     ['Size', result.profile.size],
+                    ['Founded', result.profile.foundedYear ?? null],
+                    ['LinkedIn', result.profile.linkedinUrl ?? null],
+                    ['Contact email', result.profile.contactEmail ?? null],
+                    ['Tech stack', result.profile.techStack?.join(', ') || null],
                   ] as Array<[string, string | null]>
                 )
                   .filter(([, v]) => v)

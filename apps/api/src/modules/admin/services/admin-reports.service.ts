@@ -8,6 +8,8 @@ import {
   type AuditLogDto,
 } from '@hiretrail/shared';
 import { type AiProvider } from '../../../core/ports/ai-provider.port';
+import { type ProviderHealth } from '../../../core/ports/provider-health.port';
+import { type ExternalUsageRepository } from '../../ai/repositories/external-usage.repository';
 import { UserModel } from '../../auth/models/user.model';
 import { AiUsageModel } from '../../ai/models/ai-usage.model';
 import { type AuditLogRepository } from '../repositories/audit-log.repository';
@@ -18,12 +20,29 @@ export class AdminReportsService {
     private readonly auditRepo: AuditLogRepository,
     private readonly aiProvider: AiProvider,
     private readonly aiStatus: { enabled: boolean; keyConfigured: boolean },
+    private readonly searchStatus: {
+      health: ProviderHealth;
+      usage: ExternalUsageRepository;
+      search: { provider: string; configured: boolean; budget: number };
+    },
   ) {}
 
   /** Calls every configured model with a tiny prompt and reports which ones work. Admin only. */
   public async aiHealth(): Promise<AiHealthDto> {
     const probes = this.aiProvider.probe ? await this.aiProvider.probe() : [];
-    return { aiEnabled: this.aiStatus.enabled, keyConfigured: this.aiStatus.keyConfigured, probes };
+    const { health, usage, search } = this.searchStatus;
+    const month = new Date().toISOString().slice(0, 7);
+    const [cooldowns, creditsUsed] = await Promise.all([
+      health.snapshot(),
+      usage.creditsUsed(search.provider, month),
+    ]);
+    return {
+      aiEnabled: this.aiStatus.enabled,
+      keyConfigured: this.aiStatus.keyConfigured,
+      probes,
+      search: { ...search, month, creditsUsed },
+      cooldowns,
+    };
   }
 
   public async auditLogs(

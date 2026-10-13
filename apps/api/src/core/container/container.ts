@@ -59,6 +59,13 @@ import { CompanyVerificationRepository } from '../../modules/companies/repositor
 import { AiLookupCacheRepository } from '../../modules/companies/repositories/ai-lookup-cache.repository';
 import { CompanyVerificationService } from '../../modules/companies/services/company-verification.service';
 import { CompanyLookupService } from '../../modules/companies/services/company-lookup.service';
+import { ProviderHealthRepository } from '../../modules/ai/repositories/provider-health.repository';
+import { ExternalUsageRepository } from '../../modules/ai/repositories/external-usage.repository';
+import { TavilyWebSearch } from '../../infrastructure/search/tavily.web-search';
+import { CompanyEvidenceService } from '../../modules/companies/services/company-evidence.service';
+import { CompanyNoteRepository } from '../../modules/companies/repositories/company-note.repository';
+import { CompanyNoteService } from '../../modules/companies/services/company-note.service';
+import { CompanyNoteController } from '../../modules/companies/controllers/company-note.controller';
 import { CompanyAiController } from '../../modules/companies/controllers/company-ai.controller';
 
 import { AuditLogRepository } from '../../modules/admin/repositories/audit-log.repository';
@@ -123,6 +130,8 @@ export class Container {
   public readonly dashboardController: DashboardController;
   public readonly aiController: AiController;
   public readonly companyAiController: CompanyAiController;
+  public readonly companyNoteController: CompanyNoteController;
+  public readonly providerHealth: ProviderHealthRepository;
   public readonly adminController: AdminController;
   public readonly applicationDataController: ApplicationDataController;
 
@@ -144,6 +153,7 @@ export class Container {
       this.mailer = new ResendMailer(config.email.apiKey, config.email.from);
     }
 
+    this.providerHealth = new ProviderHealthRepository();
     this.aiProvider =
       config.ai.enabled && config.ai.geminiApiKey
         ? new GeminiAiProvider(
@@ -152,8 +162,10 @@ export class Container {
               extract: config.ai.modelExtract,
               grounded: config.ai.modelGrounded,
               fallbacks: config.ai.modelFallbacks,
+              groundedFallbacks: config.ai.modelGroundedFallbacks,
             },
             config.ai.toolsWithSchema,
+            this.providerHealth,
           )
         : new UnconfiguredAiProvider();
     this.webPageFetcher = new SafeWebPageFetcher();
@@ -245,6 +257,9 @@ export class Container {
       this.optionQueryService,
     );
     this.companyController = new CompanyController(this.companyService);
+    this.companyNoteController = new CompanyNoteController(
+      new CompanyNoteService(this.companyRepo, new CompanyNoteRepository(), this.companyNotesRepo),
+    );
     this.activityController = new ActivityController(this.activityRepo);
     this.commentController = new CommentController(this.commentService);
     this.applicationController = new ApplicationController(
@@ -294,28 +309,52 @@ export class Container {
       ),
     );
 
+    const webSearch = new TavilyWebSearch(config.ai.tavilyApiKey);
+    const externalUsage = new ExternalUsageRepository();
+    const evidenceService = new CompanyEvidenceService(
+      webSearch,
+      this.webPageFetcher,
+      this.providerHealth,
+      externalUsage,
+      { monthlyBudget: config.ai.tavilyMonthlyBudget, websiteGuess: config.ai.websiteGuess },
+    );
     const verificationService = new CompanyVerificationService(
       this.aiProvider,
       this.webPageFetcher,
       aiQuotaService,
       this.companyRepo,
       new CompanyVerificationRepository(),
+      evidenceService,
     );
     const lookupService = new CompanyLookupService(
       this.aiProvider,
       aiQuotaService,
       new AiLookupCacheRepository(),
+      evidenceService,
     );
     this.companyAiController = new CompanyAiController(verificationService, lookupService);
 
     const auditRepo = new AuditLogRepository();
     this.adminController = new AdminController(
       new AdminUserService(this.sessionRepo, auditRepo),
-      new AdminCompanyService(verificationService, auditRepo),
-      new AdminReportsService(auditRepo, this.aiProvider, {
-        enabled: config.ai.enabled,
-        keyConfigured: Boolean(config.ai.geminiApiKey),
-      }),
+      new AdminCompanyService(verificationService, auditRepo, this.companyNotesRepo, lookupService),
+      new AdminReportsService(
+        auditRepo,
+        this.aiProvider,
+        {
+          enabled: config.ai.enabled,
+          keyConfigured: Boolean(config.ai.geminiApiKey),
+        },
+        {
+          health: this.providerHealth,
+          usage: externalUsage,
+          search: {
+            provider: webSearch.id,
+            configured: webSearch.isConfigured(),
+            budget: config.ai.tavilyMonthlyBudget,
+          },
+        },
+      ),
     );
   }
 

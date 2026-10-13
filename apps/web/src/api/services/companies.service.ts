@@ -6,7 +6,10 @@ import {
   CreateCompanyInput,
   UpdateCompanyInput,
   ListCompaniesQuery,
-  UpsertCompanyNotesInput,
+  SetCompanyRatingInput,
+  CompanyNoteDto,
+  CreateCompanyNoteInput,
+  UpdateCompanyNoteInput,
   UserCompanyNotesDto,
   ApiSuccess,
   CompanyVerificationDto,
@@ -55,12 +58,41 @@ export const companiesService = {
     await httpClient.delete(COMPANY_ENDPOINTS.delete(id));
   },
 
-  async upsertNotes(id: string, input: UpsertCompanyNotesInput): Promise<UserCompanyNotesDto> {
+  async setRating(id: string, input: SetCompanyRatingInput): Promise<UserCompanyNotesDto> {
     const res = await httpClient.put<ApiSuccess<UserCompanyNotesDto>>(
+      COMPANY_ENDPOINTS.rating(id),
+      input,
+    );
+    return res.data.data;
+  },
+
+  async listNotes(id: string): Promise<CompanyNoteDto[]> {
+    const res = await httpClient.get<ApiSuccess<CompanyNoteDto[]>>(COMPANY_ENDPOINTS.notes(id));
+    return res.data.data;
+  },
+
+  async createNote(id: string, input: CreateCompanyNoteInput): Promise<CompanyNoteDto> {
+    const res = await httpClient.post<ApiSuccess<CompanyNoteDto>>(
       COMPANY_ENDPOINTS.notes(id),
       input,
     );
     return res.data.data;
+  },
+
+  async updateNote(
+    id: string,
+    noteId: string,
+    input: UpdateCompanyNoteInput,
+  ): Promise<CompanyNoteDto> {
+    const res = await httpClient.patch<ApiSuccess<CompanyNoteDto>>(
+      COMPANY_ENDPOINTS.note(id, noteId),
+      input,
+    );
+    return res.data.data;
+  },
+
+  async deleteNote(id: string, noteId: string): Promise<void> {
+    await httpClient.delete(COMPANY_ENDPOINTS.note(id, noteId));
   },
 
   async verify(id: string, force = false): Promise<CompanyVerificationDto> {

@@ -4,7 +4,7 @@ import {
   CompanyDto,
   CompanySummaryDto,
   ListCompaniesQuery,
-  UpsertCompanyNotesInput,
+  SetCompanyRatingInput,
   UserCompanyNotesDto,
 } from '@hiretrail/shared';
 import { CompanyRepository } from '../repositories/company.repository';
@@ -188,25 +188,18 @@ export class CompanyService {
     return CompanyMapper.toDto(doc, notes, myApplicationsSummary);
   }
 
-  public async upsertNotes(
+  public async setRating(
     userId: string,
     companyId: string,
-    input: UpsertCompanyNotesInput,
+    input: SetCompanyRatingInput,
   ): Promise<UserCompanyNotesDto> {
     const company = await this.companyRepository.findVisibleById(userId, companyId);
     if (!company) {
       throw new NotFoundError(undefined, 'Company not found');
     }
 
-    const updated = await this.notesRepository.upsertNotes(userId, companyId, {
-      myRating: input.myRating,
-      notesHtml: input.notesHtml,
-    });
+    const updated = await this.notesRepository.setRating(userId, companyId, input.myRating ?? null);
 
-    return {
-      myRating: updated.myRating,
-      notesHtml: updated.notesHtml,
-      updatedAt: updated.updatedAt.toISOString(),
-    };
+    return { myRating: updated.myRating, updatedAt: updated.updatedAt.toISOString() };
   }
 }

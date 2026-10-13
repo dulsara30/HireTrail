@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (days since applied)
+
+- Applications table: a "Days Since Applied" column (in the column picker, next to the applied date; people who saved their columns get it automatically once). Pipeline cards show the count next to the applied date, for example "Applied 08/10/2026 · 5d". The side panel shows "5 days since you applied" under the applied date. It counts whole calendar days and ignores the time of day and time zone.
+
+### Added (richer company lookup)
+
+- Lookup and the admin "Add company" form now also fill LinkedIn, contact email, founded year and tech stack, and the careers page when a real one exists. LinkedIn and careers come from real search or site addresses, the contact email is read from page text by code and must be on the company's own domain, and the founded year and each tech name are kept only when a cited page contains them. City is now only a city name (street addresses are rejected).
+- The company website fallback also reads the site's own about, contact and careers pages.
+
+### Added (free web search for company lookup and the accuracy check)
+
+- **Tavily web search** (free plan) finds real public pages about a company; the Gemini extract model structures them. This works without Google Search quota, which a free Gemini key does not have. A value is kept only when a cited page contains it.
+- **Company website fallback:** when search gives nothing, the company's own website is tried (guessed from the name, or taken from the hint) through the SSRF-guarded fetcher.
+- **Provider health:** failing models and the search service are skipped for a cooldown (shared through Mongo), so requests no longer wait on calls that will fail. Lookups for the same company share one search. A monthly credit budget stops search before the free plan runs out.
+- **Admin "Test AI models"** shows the search key status, credits used this month and what is cooling down.
+- New env vars: `TAVILY_API_KEY`, `TAVILY_MONTHLY_BUDGET`, `LOOKUP_WEBSITE_GUESS`.
+
+### Added (company lookup fallback and admin add-company)
+
+- **Search model fallback:** company lookup and the accuracy check now try an ordered list of models (`GEMINI_MODEL_GROUNDED_FALLBACK`) when the main grounded model is over quota, overloaded, slow (20 s per model) or rejects the search tool. "Test AI models" probes them too.
+- **Admin add company:** Admin → Companies → "Add company" looks a company up on public sources (no PRO plan needed), shows the sources, lets the admin review and edit the values, and saves it to the shared directory with a reason (audit log). Manual entry is available too. Routes: `POST /admin/companies/lookup`, `POST /admin/companies`.
+
+### Added (company notes, ratings and admin company panel)
+
+- **Many private notes per company:** each user keeps one star rating and any number of dated notes per company, with add, edit and delete. A legacy single note is moved into the list automatically. Routes: `PUT /companies/:id/my-rating`, `GET/POST /companies/:id/my-notes`, `PATCH/DELETE /companies/:id/my-notes/:noteId`. `PUT /companies/:id/my-notes` is removed.
+- **Admin company side panel:** click a company in Admin → Companies to see the average user rating (the mean and the count only, never who rated) and edit any field of the company, with a required reason (audit log) and a version check. Routes: `GET/PATCH /admin/companies/:id`.
+
 ### Added (Google Drive resume picker)
 
 - "Choose from Google Drive" on the application form and side panel. Uses Google's Picker with the `drive.file` scope in the browser; the server stores only the link and the file name (`resumeName`), never a Google token. Pasting a link still works. Needs `NEXT_PUBLIC_GOOGLE_CLIENT_ID`, `NEXT_PUBLIC_GOOGLE_API_KEY` and `NEXT_PUBLIC_GOOGLE_APP_ID`; the button is hidden when they are missing.

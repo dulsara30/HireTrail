@@ -4,6 +4,8 @@ export const ADMIN_ENDPOINTS = {
   userPlan: (id: string) => `/admin/users/${id}/plan`,
   userStatus: (id: string) => `/admin/users/${id}/status`,
   companies: '/admin/companies',
+  lookupCompany: '/admin/companies/lookup',
+  company: (id: string) => `/admin/companies/${id}`,
   mergeCompany: (id: string) => `/admin/companies/${id}/merge`,
   auditLogs: '/admin/audit-logs',
   aiUsage: '/admin/ai-usage',

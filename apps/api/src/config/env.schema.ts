@@ -59,10 +59,24 @@ export const envSchema = yup.object({
     .default(
       'gemini-3.5-flash-lite,gemini-flash-lite-latest,gemini-3.8-flash,gemini-3-flash-preview,gemini-flash-latest',
     ),
+  // Comma-separated models tried in order for Google Search calls (company lookup and accuracy check)
+  // when the main grounded model is over quota, overloaded, slow or does not support search.
+  GEMINI_MODEL_GROUNDED_FALLBACK: yup
+    .string()
+    .default('gemini-flash-lite-latest,gemini-3.1-flash-lite,gemini-3-flash-preview'),
   GEMINI_TOOLS_WITH_SCHEMA: yup
     .boolean()
     .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))
     .default(false),
+  // Web search used to find real public pages about a company (https://tavily.com, free plan)
+  TAVILY_API_KEY: yup.string().optional(),
+  // Stop using search after this many credits in a month (the free plan has about 1,000)
+  TAVILY_MONTHLY_BUDGET: yup.number().integer().positive().default(900),
+  // When search gives nothing, try the company's own website (guessed from its name)
+  LOOKUP_WEBSITE_GUESS: yup
+    .boolean()
+    .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))
+    .default(true),
   AI_ENABLED: yup
     .boolean()
     .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))

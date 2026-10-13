@@ -104,7 +104,11 @@ Visibility rule (in the repository): a user sees `ownerId: null` OR `ownerId: us
 
 ### userCompanyNotes (a user's own view of any company)
 
-`{ userId, companyId, myRating (1..5), notesHtml, updatedAt }`, unique on `{ userId, companyId }`. This keeps personal opinions out of shared global company documents.
+`{ userId, companyId, myRating (1..5), notesHtml (legacy), updatedAt }`, unique on `{ userId, companyId }`. This keeps personal opinions out of shared global company documents. It holds the user's single star rating. The admin panel shows the average of `myRating` per company through an aggregation that returns only the mean and the count, never user ids. `notesHtml` is the old single note: the first time the user lists their notes it is copied into `companyNotes` and cleared (an atomic find-and-update, so it happens once).
+
+### companyNotes (many private notes per user and company)
+
+`{ userId, companyId, bodyHtml (sanitised), editedAt, deletedAt, version, createdAt, updatedAt }`. Index `{ userId, companyId, createdAt: -1 }`. Every query is scoped by `userId`, so another user's note id gives 404. Soft deleted. Included in the account data export and deleted with the account. When two companies are merged, notes move to the company that is kept.
 
 ### companyVerifications (history of AI checks)
 

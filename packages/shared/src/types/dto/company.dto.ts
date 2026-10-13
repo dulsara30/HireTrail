@@ -30,8 +30,16 @@ export interface CompanyReportRatingsDto {
 
 export interface UserCompanyNotesDto {
   myRating?: number | null;
-  notesHtml?: string | null;
   updatedAt?: string;
+}
+
+/** One of the user's own private notes about a company (rich text, sanitised on the server). */
+export interface CompanyNoteDto {
+  id: string;
+  bodyHtml: string;
+  createdAt: string;
+  editedAt: string | null;
+  version: number;
 }
 
 export interface CompanyApplicationSummaryDto {

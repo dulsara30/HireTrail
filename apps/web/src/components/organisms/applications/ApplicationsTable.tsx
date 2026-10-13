@@ -1,4 +1,5 @@
 import React from 'react';
+import { daysSince, formatDaysSince } from '../../../utils/helpers/days-since';
 import { Columns3, Trash2 } from 'lucide-react';
 import { useInfiniteScroll } from '../../../hooks/useInfiniteScroll';
 import { ApplicationListItemDto } from '@hiretrail/shared';
@@ -25,7 +26,14 @@ interface ApplicationsTableProps {
 }
 
 type ColumnKey =
-  'role' | 'company' | 'status' | 'priority' | 'location' | 'appliedDate' | 'coverLetter';
+  | 'role'
+  | 'company'
+  | 'status'
+  | 'priority'
+  | 'location'
+  | 'appliedDate'
+  | 'daysSince'
+  | 'coverLetter';
 
 const COLUMNS: Array<{ key: ColumnKey; label: string }> = [
   { key: 'role', label: 'Role' },
@@ -34,10 +42,17 @@ const COLUMNS: Array<{ key: ColumnKey; label: string }> = [
   { key: 'priority', label: 'Priority' },
   { key: 'location', label: 'Location' },
   { key: 'appliedDate', label: 'Applied Date' },
+  { key: 'daysSince', label: 'Days Since Applied' },
   { key: 'coverLetter', label: 'Cover Letter' },
 ];
 
+function formatDays(appliedAt: string | null | undefined): string {
+  const days = daysSince(appliedAt);
+  return days === null ? '—' : formatDaysSince(days);
+}
+
 const STORAGE_KEY = 'ht_app_columns';
+const ADDED_KEY = 'ht_app_columns_days_since';
 const DEFAULT_VISIBLE: ColumnKey[] = COLUMNS.map((c) => c.key);
 
 function loadVisible(): ColumnKey[] {
@@ -46,6 +61,17 @@ function loadVisible(): ColumnKey[] {
     const parsed = raw ? (JSON.parse(raw) as unknown) : null;
     if (Array.isArray(parsed)) {
       const valid = parsed.filter((k): k is ColumnKey => COLUMNS.some((c) => c.key === k));
+      // People who saved their columns before this one existed get it next to the applied date, once
+      const added = window.localStorage.getItem(ADDED_KEY);
+      if (
+        valid.length > 0 &&
+        !added &&
+        valid.includes('appliedDate') &&
+        !valid.includes('daysSince')
+      ) {
+        valid.splice(valid.indexOf('appliedDate') + 1, 0, 'daysSince');
+        window.localStorage.setItem(ADDED_KEY, '1');
+      }
       if (valid.length > 0) return valid;
     }
   } catch {
@@ -175,6 +201,7 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
               {show('priority') && <th className="px-4 py-3">Priority</th>}
               {show('location') && <th className="px-4 py-3">Location</th>}
               {show('appliedDate') && <th className="px-4 py-3">Applied Date</th>}
+              {show('daysSince') && <th className="px-4 py-3">Days Since Applied</th>}
               {show('coverLetter') && <th className="px-4 py-3">Cover Letter</th>}
               {onDelete && (
                 <th className="px-4 py-3">
@@ -214,6 +241,11 @@ export const ApplicationsTable: React.FC<ApplicationsTableProps> = ({
                     {app.dates?.appliedAt
                       ? new Date(app.dates.appliedAt).toLocaleDateString()
                       : '—'}
+                  </td>
+                )}
+                {show('daysSince') && (
+                  <td className="px-4 py-3 text-text-secondary">
+                    {formatDays(app.dates?.appliedAt)}
                   </td>
                 )}
                 {show('coverLetter') && (

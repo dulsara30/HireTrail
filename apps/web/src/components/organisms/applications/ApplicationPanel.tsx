@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { daysSince } from '../../../utils/helpers/days-since';
 import { OptionDto, type AutofillDraftDto } from '@hiretrail/shared';
 import { ApplicationCreateForm } from './ApplicationCreateForm';
 import { VerificationBadge } from '../../molecules/VerificationBadge/VerificationBadge';
@@ -50,6 +51,7 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
     isLoading: isAppLoading,
     refetch: refetchApp,
   } = useApplication(isCreate ? null : applicationId);
+  const appliedDays = daysSince(application?.dates?.appliedAt);
   const { data: optionsData } = useOptions();
   const { data: comments = [], refetch: refetchComments } = useComments(
     isCreate ? null : applicationId,
@@ -593,6 +595,13 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
                             }
                             className="w-full text-xs font-medium bg-bg border border-border rounded px-2.5 py-1.5 focus:outline-none focus:border-accent"
                           />
+                          {key === 'appliedAt' && appliedDays !== null && (
+                            <p className="mt-0.5 text-[11px] font-medium text-text-secondary">
+                              {appliedDays === 0
+                                ? 'Applied today'
+                                : `${appliedDays} ${appliedDays === 1 ? 'day' : 'days'} since you applied`}
+                            </p>
+                          )}
                         </div>
                       ))}
                     </div>

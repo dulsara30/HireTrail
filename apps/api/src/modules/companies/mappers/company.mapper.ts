@@ -61,7 +61,6 @@ export class CompanyMapper {
       myNotes: notesDoc
         ? {
             myRating: notesDoc.myRating,
-            notesHtml: notesDoc.notesHtml,
             updatedAt: notesDoc.updatedAt.toISOString(),
           }
         : null,

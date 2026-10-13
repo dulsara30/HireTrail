@@ -22,6 +22,7 @@ import {
 } from '../../../core/errors/domain-errors';
 import { logger } from '../../../core/logger/logger';
 import {
+  VERIFICATION_EVIDENCE_SYSTEM_PROMPT,
   VERIFICATION_STRUCTURE_SCHEMA,
   VERIFICATION_SYSTEM_PROMPT,
   type VerificationAiOutput,
@@ -33,44 +34,18 @@ import { type CompanyVerificationDoc } from '../models/company-verification.mode
 import { type CompanyDoc } from '../models/company.model';
 import { CompanyMapper } from '../mappers/company.mapper';
 import { VerificationScorer } from './verification-scorer';
+import { matchesGroundingSource, registrableDomain } from './company-domain';
+import { type CompanyEvidenceService } from './company-evidence.service';
+import { type EvidencePage, valueBackedByPages } from './company-evidence';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const SECOND_LEVEL = new Set(['co', 'com', 'org', 'net', 'gov', 'edu', 'ac']);
-
 interface Actor {
   id: string;
   role: 'USER' | 'ADMIN';
   plan: 'FREE' | 'PRO';
 }
 
-export function registrableDomain(hostOrUrl: string): string {
-  let host = hostOrUrl.trim().toLowerCase();
-  try {
-    host = new URL(host.includes('://') ? host : `https://${host}`).hostname;
-  } catch {
-    // keep the raw value
-  }
-  const parts = host
-    .replace(/^www\./, '')
-    .split('.')
-    .filter(Boolean);
-  if (parts.length <= 2) return parts.join('.');
-  const second = parts[parts.length - 2] ?? '';
-  const take = SECOND_LEVEL.has(second) ? 3 : 2;
-  return parts.slice(-take).join('.');
-}
-
-/** A claimed source must match a grounding source by exact URL, or by domain / title (redirect links). */
-export function matchesGroundingSource(url: string, sources: GroundingSource[]): boolean {
-  const domain = registrableDomain(url);
-  return sources.some((s) => {
-    if (s.url === url) return true;
-    if (registrableDomain(s.url) === domain && !/vertexaisearch|googleusercontent/i.test(s.url)) {
-      return true;
-    }
-    return Boolean(s.title) && registrableDomain(s.title ?? '') === domain;
-  });
-}
+export { registrableDomain, matchesGroundingSource };
 
 export class CompanyVerificationService {
   constructor(
@@ -79,6 +54,7 @@ export class CompanyVerificationService {
     private readonly quota: AiQuotaService,
     private readonly companyRepo: CompanyRepository,
     private readonly verificationRepo: CompanyVerificationRepository,
+    private readonly evidence: CompanyEvidenceService,
   ) {}
 
   public async verify(
@@ -219,27 +195,54 @@ export class CompanyVerificationService {
       }
     }
 
-    // Step 3: grounded call + structuring call (inside the provider's two-call strategy).
+    // Step 3: real pages (web search or the company's own site) read by the extract model,
+    // then Google Search through Gemini when no pages were found and its quota allows it.
     let ai: VerificationAiOutput | null = null;
     let sources: GroundingSource[] = [];
+    let pages: EvidencePage[] = [];
     let searchCheckAvailable = true;
     let modelId = usage.model;
-    try {
+
+    const found = await this.evidence.gather(company.name, {
+      hint: stored.website ?? stored.country,
+      query: `${company.name} ${stored.country ?? ''} official website careers contact`.trim(),
+    });
+    if (found.pages.length > 0) {
       const res = await this.ai.generateJson<VerificationAiOutput>({
-        model: 'grounded',
-        system: VERIFICATION_SYSTEM_PROMPT,
-        content: JSON.stringify({ name: company.name, stored }),
+        model: 'extract',
+        system: VERIFICATION_EVIDENCE_SYSTEM_PROMPT,
+        content: JSON.stringify({
+          name: company.name,
+          stored,
+          pages: found.pages.map((p) => ({ url: p.url, title: p.title, text: p.text })),
+        }),
         jsonSchema: VERIFICATION_STRUCTURE_SCHEMA,
-        tools: ['google_search', 'url_context'],
-        timeoutMs: 60_000,
+        timeoutMs: 30_000,
       });
       usage.add(res.modelId, res.usage);
       ai = res.data;
-      sources = res.groundingSources;
+      sources = found.sources;
+      pages = found.pages;
       modelId = res.modelId;
-    } catch (err) {
-      if (!(err instanceof AiToolUnavailableError)) throw err;
-      searchCheckAvailable = false;
+    } else {
+      try {
+        const res = await this.ai.generateJson<VerificationAiOutput>({
+          model: 'grounded',
+          system: VERIFICATION_SYSTEM_PROMPT,
+          content: JSON.stringify({ name: company.name, stored }),
+          jsonSchema: VERIFICATION_STRUCTURE_SCHEMA,
+          tools: ['google_search', 'url_context'],
+          timeoutMs: 50_000,
+        });
+        usage.add(res.modelId, res.usage);
+        ai = res.data;
+        sources = res.groundingSources;
+        modelId = res.modelId;
+      } catch (err) {
+        if (!(err instanceof AiToolUnavailableError)) throw err;
+        // Only "not checked" when no search could run; a search that found nothing means "not found"
+        searchCheckAvailable = !found.searchUnavailable;
+      }
     }
 
     // Step 4: checks by our code.
@@ -259,10 +262,21 @@ export class CompanyVerificationService {
         : 'NOT_CHECKED';
       let foundValue: string | null = null;
 
+      // Pages we read ourselves must also contain the value the model reports
+      const backed =
+        pages.length === 0 ||
+        !claim?.foundValue ||
+        valueBackedByPages(
+          claim.foundValue,
+          validSources,
+          pages,
+          field === 'website' || field === 'careersUrl' ? 'url' : 'text',
+        );
       if (
         claim &&
         (claim.verdict === 'MATCH' || claim.verdict === 'DIFFERENT') &&
-        validSources.length > 0
+        validSources.length > 0 &&
+        backed
       ) {
         verdict = claim.verdict;
         foundValue = claim.foundValue ?? null;

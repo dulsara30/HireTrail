@@ -6,6 +6,8 @@ import {
   ChevronsLeft,
   ChevronsRight,
   Columns3,
+  Bell,
+  Orbit,
   LayoutDashboard,
   LogOut,
   Shield,
@@ -20,11 +22,14 @@ import { type MeDto } from '@hiretrail/shared';
 import { HireTrailLogo } from '../../atoms/HireTrailLogo';
 import { Badge } from '../../atoms/Badge';
 import { ROUTES } from '../../../constants/routes';
+import { useOrbitDue } from '../../../api/hooks/queries/useOrbitQueries';
 
 interface NavItem {
   label: string;
   href: string;
   icon: LucideIcon;
+  /** A small count shown next to the label, for example items due now. */
+  badge?: number;
 }
 
 interface AppSidebarProps {
@@ -35,6 +40,7 @@ interface AppSidebarProps {
   onCloseMobile: () => void;
   onSignOut: () => void;
   isSigningOut: boolean;
+  onOpenNotifications: () => void;
 }
 
 function initials(name: string): string {
@@ -56,13 +62,17 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
   onCloseMobile,
   onSignOut,
   isSigningOut,
+  onOpenNotifications,
 }) => {
   const pathname = usePathname();
+  const { data: due } = useOrbitDue();
+  const dueCount = due?.due.length ?? 0;
 
   const main: NavItem[] = [
     { label: 'Dashboard', href: ROUTES.dashboard, icon: LayoutDashboard },
     { label: 'Pipeline', href: ROUTES.pipeline, icon: Columns3 },
     { label: 'Applications', href: ROUTES.applications, icon: Table2 },
+    { label: 'Orbit', href: ROUTES.orbit, icon: Orbit },
     ...(user.role === 'ADMIN'
       ? [{ label: 'Companies', href: ROUTES.companies, icon: Building2 }]
       : []),
@@ -85,7 +95,7 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
         onClick={onCloseMobile}
         title={collapsed ? item.label : undefined}
         aria-current={active ? 'page' : undefined}
-        className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+        className={`relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
           collapsed ? 'md:justify-center md:px-0' : ''
         } ${
           active
@@ -95,6 +105,16 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
       >
         <Icon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
         <span className={collapsed ? 'md:sr-only' : ''}>{item.label}</span>
+        {item.badge ? (
+          <span
+            className={`ml-auto rounded-full bg-bg-danger px-1.5 py-0.5 text-[10px] font-bold leading-none text-text-inverse ${
+              collapsed ? 'md:absolute md:right-1 md:top-1 md:ml-0' : ''
+            }`}
+          >
+            <span aria-hidden="true">{item.badge > 9 ? '9+' : item.badge}</span>
+            <span className="sr-only">{item.badge} due now</span>
+          </span>
+        ) : null}
       </Link>
     );
   };
@@ -135,8 +155,32 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({
 
         <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
           <div className="space-y-1">
+            <button
+              type="button"
+              onClick={() => {
+                onCloseMobile();
+                onOpenNotifications();
+              }}
+              title={collapsed ? 'Notifications' : undefined}
+              className={`relative flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:bg-bg-accent-subtle hover:text-text-primary ${
+                collapsed ? 'md:justify-center md:px-0' : ''
+              }`}
+            >
+              <Bell className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+              <span className={collapsed ? 'md:sr-only' : ''}>Notifications</span>
+              {dueCount > 0 && (
+                <span
+                  className={`ml-auto rounded-full bg-bg-danger px-1.5 py-0.5 text-[10px] font-bold leading-none text-text-inverse ${
+                    collapsed ? 'md:absolute md:right-1 md:top-1 md:ml-0' : ''
+                  }`}
+                >
+                  <span aria-hidden="true">{dueCount > 9 ? '9+' : dueCount}</span>
+                  <span className="sr-only">{dueCount} due now</span>
+                </span>
+              )}
+            </button>
             <p
-              className={`px-3 pb-1 text-[11px] font-bold uppercase tracking-wide text-text-tertiary ${
+              className={`px-3 pb-1 pt-3 text-[11px] font-bold uppercase tracking-wide text-text-tertiary ${
                 collapsed ? 'md:hidden' : ''
               }`}
             >

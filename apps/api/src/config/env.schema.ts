@@ -77,6 +77,8 @@ export const envSchema = yup.object({
     .boolean()
     .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))
     .default(true),
+  // Shared secret for scheduled jobs (Orbit reminder and digest emails). Generate a long random string.
+  CRON_SECRET: yup.string().min(16, 'CRON_SECRET must be at least 16 characters').optional(),
   AI_ENABLED: yup
     .boolean()
     .transform((val, orig) => (typeof orig === 'string' ? orig === 'true' : val))
@@ -86,6 +88,7 @@ export const envSchema = yup.object({
   AI_QUOTA_COMPANY_VERIFY: yup.number().integer().positive().default(20),
   AI_QUOTA_COMPANY_LOOKUP: yup.number().integer().positive().default(20),
   AI_QUOTA_INSIGHTS: yup.number().integer().positive().default(1),
+  AI_QUOTA_ORBIT_PARSE: yup.number().integer().positive().default(40),
 
   EMAIL_API_KEY: yup.string().when('APP_ENV', {
     is: 'production',

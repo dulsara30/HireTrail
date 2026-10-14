@@ -13,6 +13,7 @@ import { useOptions } from '../../../api/hooks/queries/useOptions';
 import { useComments } from '../../../api/hooks/queries/useComments';
 import { useActivitiesInfinite } from '../../../api/hooks/queries/useActivitiesInfinite';
 import { useUpdateApplicationField } from '../../../api/hooks/mutations/useUpdateApplicationField';
+import { LinkedItems } from '../orbit/LinkedItems';
 import { DriveResumePicker } from '../../molecules/DriveResumePicker/DriveResumePicker';
 import { Button } from '../../atoms/Button';
 import { Spinner } from '../../atoms/Spinner';
@@ -620,6 +621,13 @@ export const ApplicationPanel: React.FC<ApplicationPanelProps> = ({
                       </p>
                     </div>
                   </div>
+
+                  {/* Tasks, reminders and calls linked to this application */}
+                  <LinkedItems
+                    applicationId={application.id}
+                    subject={`${application.roleTitle} at ${application.companyName}`}
+                    className="border-t border-border/40 pt-3"
+                  />
                 </div>
               </div>
 

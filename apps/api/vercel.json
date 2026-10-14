@@ -11,5 +11,11 @@
       "source": "/(.*)",
       "destination": "/api"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/v1/internal/orbit/digest",
+      "schedule": "30 3 * * *"
+    }
   ]
 }

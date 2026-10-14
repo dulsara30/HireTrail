@@ -192,6 +192,10 @@ CSV export (formula-safe), CSV import wizard (preview â†’ `imports` collection â
 
 k6 load test at 2,000 applications per user; OWASP ZAP baseline on preview; Sentry for both apps; uptime check on `/health`; privacy page (including the Gemini free-tier note) and terms; backup + restore test.
 
+## Phase 11: Orbit (tasks, reminders, command center)
+
+The plan is in `docs/11-orbit.md`: tasks and reminders linked to applications and companies, a widget board with spaces, the Orbit radar, Free and Pro limits, and Resend email (digest and reminders). It is built in four parts (foundation, board, Pro and email, polish).
+
 ## Later (backlog)
 
-Stripe payments (event-id idempotency, reconciliation, customer portal), email reminders for follow-ups (needs a scheduler or queue service), custom fields, browser extension "Save this job", import from the daily job-scout task, calendar sync, dark mode, shared boards.
+Stripe payments (event-id idempotency, reconciliation, customer portal), custom fields, browser extension "Save this job", import from the daily job-scout task, calendar sync, dark mode, shared boards.

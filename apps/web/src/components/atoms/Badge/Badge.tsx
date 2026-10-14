@@ -15,7 +15,7 @@ export const Badge: React.FC<BadgeProps> = ({
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 px-2 py-0.5 rounded-sm text-xs font-medium border select-none',
+        'inline-flex flex-shrink-0 items-center gap-1.5 whitespace-nowrap px-2 py-0.5 rounded-sm text-xs font-medium border select-none',
         styles.bg,
         styles.text,
         styles.border,
@@ -29,7 +29,7 @@ export const Badge: React.FC<BadgeProps> = ({
           aria-hidden="true"
         />
       )}
-      <span>{children}</span>
+      <span className="inline-flex items-center gap-1 whitespace-nowrap">{children}</span>
     </span>
   );
 };

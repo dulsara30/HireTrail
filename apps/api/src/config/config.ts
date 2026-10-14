@@ -7,6 +7,7 @@ export interface AppConfig {
   mongodbUri: string;
   mongodbDbName: string;
   webAppUrl: string;
+  cronSecret?: string;
   corsOrigins: string[];
   jwt: {
     accessSecret: string;
@@ -39,6 +40,7 @@ export interface AppConfig {
       companyVerify: number;
       companyLookup: number;
       insights: number;
+      orbitParse: number;
     };
   };
   email: {
@@ -71,6 +73,7 @@ export function loadConfig(rawEnv: NodeJS.ProcessEnv = process.env): AppConfig {
       mongodbUri: validated.MONGODB_URI,
       mongodbDbName: validated.MONGODB_DB_NAME,
       webAppUrl: validated.WEB_APP_URL,
+      cronSecret: validated.CRON_SECRET,
       corsOrigins: corsOrigins.length > 0 ? corsOrigins : [validated.WEB_APP_URL],
       jwt: {
         accessSecret: validated.JWT_ACCESS_SECRET,
@@ -107,6 +110,7 @@ export function loadConfig(rawEnv: NodeJS.ProcessEnv = process.env): AppConfig {
           companyVerify: validated.AI_QUOTA_COMPANY_VERIFY,
           companyLookup: validated.AI_QUOTA_COMPANY_LOOKUP,
           insights: validated.AI_QUOTA_INSIGHTS,
+          orbitParse: validated.AI_QUOTA_ORBIT_PARSE,
         },
       },
       email: {

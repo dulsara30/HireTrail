@@ -63,6 +63,19 @@ import { ProviderHealthRepository } from '../../modules/ai/repositories/provider
 import { ExternalUsageRepository } from '../../modules/ai/repositories/external-usage.repository';
 import { TavilyWebSearch } from '../../infrastructure/search/tavily.web-search';
 import { CompanyEvidenceService } from '../../modules/companies/services/company-evidence.service';
+import { OrbitTaskRepository } from '../../modules/orbit/repositories/orbit-task.repository';
+import { OrbitSpaceRepository } from '../../modules/orbit/repositories/orbit-space.repository';
+import { OrbitSettingsRepository } from '../../modules/orbit/repositories/orbit-settings.repository';
+import { OrbitLinkResolver } from '../../modules/orbit/services/orbit-link-resolver';
+import { OrbitTaskCommandService } from '../../modules/orbit/services/orbit-task-command.service';
+import { OrbitTaskQueryService } from '../../modules/orbit/services/orbit-task-query.service';
+import { OrbitSpaceService } from '../../modules/orbit/services/orbit-space.service';
+import { OrbitSettingsService } from '../../modules/orbit/services/orbit-settings.service';
+import { OrbitQuickParseService } from '../../modules/orbit/services/orbit-quick-parse.service';
+import { OrbitNotificationService } from '../../modules/orbit/services/orbit-notification.service';
+import { OrbitTaskController } from '../../modules/orbit/controllers/orbit-task.controller';
+import { OrbitSpaceController } from '../../modules/orbit/controllers/orbit-space.controller';
+import { OrbitCronController } from '../../modules/orbit/controllers/orbit-cron.controller';
 import { CompanyNoteRepository } from '../../modules/companies/repositories/company-note.repository';
 import { CompanyNoteService } from '../../modules/companies/services/company-note.service';
 import { CompanyNoteController } from '../../modules/companies/controllers/company-note.controller';
@@ -132,6 +145,9 @@ export class Container {
   public readonly companyAiController: CompanyAiController;
   public readonly companyNoteController: CompanyNoteController;
   public readonly providerHealth: ProviderHealthRepository;
+  public readonly orbitTaskController: OrbitTaskController;
+  public readonly orbitSpaceController: OrbitSpaceController;
+  public readonly orbitCronController: OrbitCronController;
   public readonly adminController: AdminController;
   public readonly applicationDataController: ApplicationDataController;
 
@@ -276,6 +292,7 @@ export class Container {
         [AiFeature.COMPANY_VERIFY]: config.ai.quotas.companyVerify,
         [AiFeature.COMPANY_LOOKUP]: config.ai.quotas.companyLookup,
         [AiFeature.INSIGHTS]: config.ai.quotas.insights,
+        [AiFeature.ORBIT_PARSE]: config.ai.quotas.orbitParse,
       },
     });
     const autofillService = new AutofillService(
@@ -333,6 +350,36 @@ export class Container {
       evidenceService,
     );
     this.companyAiController = new CompanyAiController(verificationService, lookupService);
+
+    const orbitTaskRepo = new OrbitTaskRepository();
+    const orbitSettingsRepo = new OrbitSettingsRepository();
+    const orbitLinks = new OrbitLinkResolver();
+    const orbitQueries = new OrbitTaskQueryService(orbitTaskRepo, orbitLinks, orbitSettingsRepo);
+    this.orbitTaskController = new OrbitTaskController(
+      new OrbitTaskCommandService(
+        orbitTaskRepo,
+        this.applicationRepo,
+        this.companyRepo,
+        orbitLinks,
+      ),
+      orbitQueries,
+      new OrbitQuickParseService(this.aiProvider, aiQuotaService),
+    );
+    this.orbitSpaceController = new OrbitSpaceController(
+      new OrbitSpaceService(new OrbitSpaceRepository()),
+      new OrbitSettingsService(orbitSettingsRepo),
+    );
+    this.orbitCronController = new OrbitCronController(
+      new OrbitNotificationService(
+        orbitTaskRepo,
+        orbitSettingsRepo,
+        this.userRepo,
+        orbitLinks,
+        orbitQueries,
+        this.mailer,
+        config.webAppUrl,
+      ),
+    );
 
     const auditRepo = new AuditLogRepository();
     this.adminController = new AdminController(

@@ -17,6 +17,7 @@ This folder is the full plan. It lives in the repo as `docs/`. The coding agent 
 | `07-frontend-and-design.md`   | Exact Figma tokens, board, the side panel layout and modes, forms, data fetching rules                         |
 | `08-quality-ci-cd.md`         | Standards, tests, GitHub Actions, Vercel, environments, env vars                                               |
 | `10-folder-structure.md`      | Exact folder trees for repo, shared, API and web; naming; repo docs                                            |
+| `11-orbit.md`                 | Orbit: tasks, reminders, widget board, Free and Pro limits, email                                              |
 | `../seed/companies.seed.json` | 173 companies from your two research PDFs, ready to import                                                     |
 
 ## Locked decisions

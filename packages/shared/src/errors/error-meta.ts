@@ -42,6 +42,10 @@ export const ERROR_METADATA: Record<ErrorCode, ErrorMetadata> = {
     status: 403,
     message: 'This feature requires a PRO subscription.',
   },
+  [ErrorCode.PLAN_LIMIT_REACHED]: {
+    status: 403,
+    message: 'You have reached the limit of your plan. Upgrade to PRO for more.',
+  },
   [ErrorCode.EMAIL_NOT_VERIFIED]: {
     status: 403,
     message: 'Please verify your email address to use this feature.',

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (Orbit: tasks, reminders and a command center)
+
+- **New page `/orbit`** in the sidebar: tasks, reminders, calls, meetings, interviews, follow-ups, deadlines and company watches in one place, linked to applications and companies. Each kind has its own colour everywhere.
+- **Orbit radar:** every dated item on a radar (closer to the middle means sooner, earlier on the left, later on the right). Centre it on today or any day, zoom 7, 14, 30 or 90 days (30 and 90 are PRO), hover for the name, click to open the side panel. Dates saved on applications (deadline, follow-up, next interview) appear by themselves.
+- **Widget board with spaces:** drag, resize and add widgets (Orbit, Today, Tasks, Reminders, Pulse, Deadlines, and PRO: Pipeline, Waiting the longest, Weekly goal, Scratchpad, Calendar, Company watch). Layouts are saved as spaces (Free: 1, PRO: 10 with ready-made templates).
+- **Quick add** understands sentences by matching words (kinds, dates, repeats, `@Company`, `#tag`, `!priority`, web addresses, "company watch Altrium every 2 weeks"). PRO accounts get a **Refine with AI** button (one sentence to the cheap model, preview only, daily quota `AI_QUOTA_ORBIT_PARSE`).
+- **Side panel** to edit everything, complete, snooze, duplicate and delete; filters and search across the board; Free and PRO limits enforced on the server (`PLAN_LIMIT_REACHED`, `PLAN_REQUIRED`).
+- **Notification center** (bell in the sidebar): what is due now and what is coming in 24 hours, with Done and Snooze; a toast when something becomes due; optional desktop alerts.
+- **Linked items** on the application details and the company page.
+- **Email (Resend, PRO):** a morning summary and due-reminder emails through scheduler routes protected by `CRON_SECRET`. A daily Vercel cron is configured in `apps/api/vercel.json`.
+- New env vars: `CRON_SECRET`, `AI_QUOTA_ORBIT_PARSE`; new dependency `chrono-node` (date reading in quick add).
+
+### Fixed
+
+- The PRO badge could break onto two lines in a narrow space; badges now keep their content on one line.
+
 ### Added (days since applied)
 
 - Applications table: a "Days Since Applied" column (in the column picker, next to the applied date; people who saved their columns get it automatically once). Pipeline cards show the count next to the applied date, for example "Applied 08/10/2026 · 5d". The side panel shows "5 days since you applied" under the applied date. It counts whole calendar days and ignores the time of day and time zone.

@@ -18,6 +18,8 @@ import { createAiRoutes } from './modules/ai/ai.routes';
 import { createCompanyRoutes } from './modules/companies/company.routes';
 import { createCommentRoutes } from './modules/comments/comment.routes';
 import { createApplicationRoutes } from './modules/applications/application.routes';
+import { createOrbitRoutes } from './modules/orbit/orbit.routes';
+import { createOrbitCronRoutes } from './modules/orbit/orbit-cron.routes';
 import { createDashboardRoutes } from './modules/dashboard/dashboard.routes';
 
 export function createApp(): Express {
@@ -96,6 +98,17 @@ export function createApp(): Express {
     '/api/v1/dashboard',
     container.authenticate,
     createDashboardRoutes(container.dashboardController),
+  );
+
+  app.use(
+    '/api/v1/orbit',
+    container.authenticate,
+    createOrbitRoutes(container.orbitTaskController, container.orbitSpaceController),
+  );
+  // Scheduled jobs: protected by CRON_SECRET, not by a user session
+  app.use(
+    '/api/v1/internal/orbit',
+    createOrbitCronRoutes(container.orbitCronController, config.cronSecret),
   );
 
   // 9. notFound: route not found envelope

@@ -113,6 +113,27 @@ Conventions:
 | GET    | `/dashboard/insights`         | 🔒 ⭐    | latest stored insights                                          |
 | POST   | `/dashboard/insights/refresh` | 🔒 ⭐ ✉️ | Synchronous, 200 with new insights; max once per day            |
 
+## Orbit (tasks, reminders, spaces; see `docs/11-orbit.md`)
+
+| Method   | Path                                              | Guard         | Notes                                                                                                         |
+| -------- | ------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------- |
+| GET      | `/orbit/tasks`                                    | 🔒            | `q, kind, status, priority, applicationId, companyId, tag, from, to, sort, cursor, limit`                     |
+| POST     | `/orbit/tasks`                                    | 🔒            | Free limits: 15 open tasks, 5 open reminders → 403 `PLAN_LIMIT_REACHED`; WATCH, repeats, checklists are PRO   |
+| GET      | `/orbit/tasks/:id`                                | 🔒            | another user's id → 404                                                                                       |
+| PATCH    | `/orbit/tasks/:id`                                | 🔒            | `{ ...fields, version }`, stale version → 409                                                                 |
+| POST     | `/orbit/tasks/:id/complete`                       | 🔒            | `{ version }`; a repeating item (PRO) also returns `next`                                                     |
+| POST     | `/orbit/tasks/:id/reopen`                         | 🔒            | `{ version }`                                                                                                 |
+| POST     | `/orbit/tasks/:id/snooze`                         | 🔒            | `{ until, version }` moves the due time and the reminder                                                      |
+| DELETE   | `/orbit/tasks/:id`                                | 🔒            | soft delete                                                                                                   |
+| GET      | `/orbit/timeline`                                 | 🔒            | `from, to` (max 400 days): the user's items plus deadline, follow-up and interview dates of open applications |
+| GET      | `/orbit/pulse`                                    | 🔒            | `tzOffset`: weekly numbers and streak                                                                         |
+| GET      | `/orbit/due`                                      | 🔒            | items due or reminding now, and the overdue count (drives the bell)                                           |
+| GET      | `/orbit/plan`                                     | 🔒            | plan limits and usage                                                                                         |
+| POST     | `/orbit/quick-parse`                              | 🔒 ⭐ ✉️      | `{ text, tzOffset }` AI reads one sentence; returns a preview only, nothing is saved; quota `ORBIT_PARSE`     |
+| GET/POST | `/orbit/spaces`, PATCH/DELETE `/orbit/spaces/:id` | 🔒            | saved layouts; a default space is created on first read; Free: 1 space, core widgets                          |
+| GET/PUT  | `/orbit/settings`                                 | 🔒            | time zone, weekly goal, email preferences (email is PRO)                                                      |
+| GET/POST | `/internal/orbit/digest`, `/internal/orbit/due`   | `CRON_SECRET` | scheduler only: `Authorization: Bearer <CRON_SECRET>`; sends the morning summary and due reminders            |
+
 ## Admin (🛡️ on all)
 
 | Method | Path                                            | Notes                                                                                                                                                                                                                                                                                                                                    |

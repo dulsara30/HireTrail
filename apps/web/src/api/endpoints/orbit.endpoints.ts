@@ -1,0 +1,15 @@
+export const ORBIT_ENDPOINTS = {
+  tasks: '/orbit/tasks',
+  task: (id: string) => `/orbit/tasks/${id}`,
+  complete: (id: string) => `/orbit/tasks/${id}/complete`,
+  reopen: (id: string) => `/orbit/tasks/${id}/reopen`,
+  snooze: (id: string) => `/orbit/tasks/${id}/snooze`,
+  quickParse: '/orbit/quick-parse',
+  timeline: '/orbit/timeline',
+  pulse: '/orbit/pulse',
+  due: '/orbit/due',
+  plan: '/orbit/plan',
+  spaces: '/orbit/spaces',
+  space: (id: string) => `/orbit/spaces/${id}`,
+  settings: '/orbit/settings',
+} as const;

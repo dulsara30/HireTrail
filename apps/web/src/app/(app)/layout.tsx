@@ -11,6 +11,8 @@ import { Button } from '../../components/atoms/Button';
 import { HireTrailLogo } from '../../components/atoms/HireTrailLogo';
 import { AppSidebar } from '../../components/organisms/navigation/AppSidebar';
 import { ROUTES } from '../../constants/routes';
+import { OrbitDueToasts } from '../../components/organisms/orbit/OrbitDueToasts';
+import { NotificationCenter } from '../../components/organisms/orbit/NotificationCenter';
 
 const COLLAPSE_KEY = 'ht_sidebar_collapsed';
 
@@ -21,6 +23,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const logoutMutation = useLogout();
   const [collapsed, setCollapsed] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [notificationsOpen, setNotificationsOpen] = React.useState(false);
 
   React.useEffect(() => {
     try {
@@ -79,6 +82,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         onCloseMobile={() => setMobileOpen(false)}
         onSignOut={() => logoutMutation.mutate()}
         isSigningOut={logoutMutation.isPending}
+        onOpenNotifications={() => setNotificationsOpen(true)}
       />
 
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
@@ -94,6 +98,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <HireTrailLogo size="sm" />
         </header>
 
+        <OrbitDueToasts />
+        {notificationsOpen && <NotificationCenter onClose={() => setNotificationsOpen(false)} />}
         <main className="w-full min-w-0 flex-1 p-4 md:min-h-0 md:overflow-y-auto md:p-6 lg:p-8">
           {children}
         </main>

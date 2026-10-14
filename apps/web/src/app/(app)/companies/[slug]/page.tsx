@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useCompany } from '../../../../api/hooks/queries/useCompany';
 import { CompanyNotes } from '../../../../components/organisms/companies/CompanyNotes';
+import { LinkedItems } from '../../../../components/organisms/orbit/LinkedItems';
 import { VerificationPanel } from '../../../../components/organisms/companies/VerificationPanel';
 import { Badge } from '../../../../components/atoms/Badge';
 import { Button } from '../../../../components/atoms/Button';
@@ -215,6 +216,11 @@ export default function CompanyDetailPage() {
                 You haven&apos;t added any applications for this company yet.
               </p>
             )}
+          </div>
+
+          {/* Tasks, reminders and company watches linked to this company */}
+          <div className="rounded-xl border border-border-default bg-bg-surface p-6">
+            <LinkedItems companyId={company.id} subject={company.name} />
           </div>
         </div>
 

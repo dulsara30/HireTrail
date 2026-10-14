@@ -2,6 +2,7 @@ export const ROUTES = {
   home: '/',
   dashboard: '/dashboard',
   pipeline: '/pipeline',
+  orbit: '/orbit',
   applications: '/applications',
   companies: '/companies',
   company: (slug: string) => `/companies/${slug}`,

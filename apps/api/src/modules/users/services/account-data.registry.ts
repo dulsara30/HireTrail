@@ -9,6 +9,9 @@ import { UserModel } from '../../auth/models/user.model';
 import { CommentModel } from '../../comments/models/comment.model';
 import { CompanyModel } from '../../companies/models/company.model';
 import { CompanyVerificationModel } from '../../companies/models/company-verification.model';
+import { OrbitTaskModel } from '../../orbit/models/orbit-task.model';
+import { OrbitSpaceModel } from '../../orbit/models/orbit-space.model';
+import { OrbitSettingsModel } from '../../orbit/models/orbit-settings.model';
 import { CompanyNoteModel } from '../../companies/models/company-note.model';
 import { UserCompanyNotesModel } from '../../companies/models/user-company-notes.model';
 import { AiInsightsModel } from '../../dashboard/models/ai-insights.model';
@@ -76,6 +79,24 @@ export const ACCOUNT_COLLECTIONS: AccountCollection[] = [
   {
     name: 'company-note-entries',
     model: asModel(CompanyNoteModel),
+    filter: (userId) => ({ userId }) as FilterQuery<never>,
+    exportable: true,
+  },
+  {
+    name: 'orbit-tasks',
+    model: asModel(OrbitTaskModel),
+    filter: (userId) => ({ userId }) as FilterQuery<never>,
+    exportable: true,
+  },
+  {
+    name: 'orbit-spaces',
+    model: asModel(OrbitSpaceModel),
+    filter: (userId) => ({ userId }) as FilterQuery<never>,
+    exportable: true,
+  },
+  {
+    name: 'orbit-settings',
+    model: asModel(OrbitSettingsModel),
     filter: (userId) => ({ userId }) as FilterQuery<never>,
     exportable: true,
   },

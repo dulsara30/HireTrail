@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - The PRO badge could break onto two lines in a narrow space; badges now keep their content on one line.
+- The Snooze menu in the Orbit item panel footer was cut off at the bottom of the window. It now floats above the page and opens upward when there is no room below.
 
 ### Added (days since applied)
 

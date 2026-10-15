@@ -6,6 +6,8 @@ import {
   type AdminAiUsageQuery,
   type AdminApplySuggestionsInput,
   type AdminAuditLogsQuery,
+  type AdminEmailPreviewInput,
+  type AdminSendEmailInput,
   type AdminChangePlanInput,
   type AdminChangeStatusInput,
   type AdminListCompaniesQuery,
@@ -18,6 +20,7 @@ import {
 import { type AdminUserService, type AdminActor } from '../services/admin-user.service';
 import { type AdminCompanyService } from '../services/admin-company.service';
 import { type AdminReportsService } from '../services/admin-reports.service';
+import { type AdminEmailService } from '../services/admin-email.service';
 
 type Handler = (req: Request, res: Response, next: NextFunction) => Promise<void>;
 
@@ -26,6 +29,7 @@ export class AdminController extends BaseController {
     private readonly users: AdminUserService,
     private readonly companies: AdminCompanyService,
     private readonly reports: AdminReportsService,
+    private readonly emails: AdminEmailService,
   ) {
     super();
   }
@@ -150,5 +154,13 @@ export class AdminController extends BaseController {
 
   public aiUsage = this.wrap(async (req, res) => {
     this.ok(res, await this.reports.aiUsage(this.query<AdminAiUsageQuery>(req)));
+  });
+
+  public previewEmail = this.wrap(async (req, res) => {
+    this.ok(res, this.emails.preview(this.body<AdminEmailPreviewInput>(req)));
+  });
+
+  public sendEmail = this.wrap(async (req, res) => {
+    this.ok(res, await this.emails.send(this.actor(req), this.body<AdminSendEmailInput>(req)));
   });
 }

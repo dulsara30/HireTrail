@@ -25,7 +25,7 @@ export const escapeHtml = (value: string): string =>
 
 const firstName = (name: string): string => name.trim().split(/\s+/)[0] || 'there';
 
-function rows(items: EmailItem[]): string {
+export function itemRows(items: EmailItem[]): string {
   return items
     .map((item) => {
       const meta = ORBIT_KIND_META[item.kind];
@@ -57,7 +57,7 @@ function shell(heading: string, intro: string, body: string, appUrl: string): st
   );
 }
 
-function plain(items: EmailItem[]): string {
+export function itemsPlain(items: EmailItem[]): string {
   return items
     .map(
       (i) =>
@@ -73,8 +73,8 @@ export function buildReminderEmail(name: string, items: EmailItem[], appUrl: str
     items.length === 1 && first ? `Reminder: ${first.title}` : `${items.length} reminders are due`;
   return {
     subject,
-    html: shell(`Hi ${firstName(name)}`, 'These are due now:', rows(items), appUrl),
-    text: `Hi ${firstName(name)}, these are due now:\n${plain(items)}\n\n${appUrl}/orbit`,
+    html: shell(`Hi ${firstName(name)}`, 'These are due now:', itemRows(items), appUrl),
+    text: `Hi ${firstName(name)}, these are due now:\n${itemsPlain(items)}\n\n${appUrl}/orbit`,
   };
 }
 
@@ -90,9 +90,9 @@ export function buildDigestEmail(name: string, items: EmailItem[], appUrl: strin
     html: shell(
       `Good morning ${firstName(name)}`,
       'Here is what needs you over the next few days:',
-      rows(items),
+      itemRows(items),
       appUrl,
     ),
-    text: `Good morning ${firstName(name)}. Here is what needs you:\n${plain(items)}\n\n${appUrl}/orbit`,
+    text: `Good morning ${firstName(name)}. Here is what needs you:\n${itemsPlain(items)}\n\n${appUrl}/orbit`,
   };
 }

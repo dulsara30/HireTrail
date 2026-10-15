@@ -119,6 +119,17 @@ export class OrbitNotificationService {
     return { emails };
   }
 
+  /** The items due or overdue right now for one person, ready for an email. Used by the admin "due tasks" template. */
+  public async dueItemsFor(userId: string, now = new Date()): Promise<EmailItem[]> {
+    const [docs, settings] = await Promise.all([
+      this.tasks.dueNow(userId, now, MAX_ITEMS),
+      this.settings.getOrCreate(userId),
+    ]);
+    if (docs.length === 0) return [];
+    const linkMap = await this.links.resolve(userId, docs);
+    return docs.map((doc) => this.toEmailItem(doc, settings.timezone, now, linkMap));
+  }
+
   /** Only active Pro users with a verified email, and only when they asked for this email. */
   private async eligibleRecipient(userId: string, wanted: boolean): Promise<Recipient | null> {
     if (!wanted) return null;

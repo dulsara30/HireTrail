@@ -90,3 +90,21 @@ export interface AiHealthDto {
   /** Models and services skipped for a while after failing. */
   cooldowns: Array<{ key: string; until: string; reason: string }>;
 }
+
+export type AdminEmailOutcome = 'SENT' | 'SKIPPED' | 'FAILED';
+
+export interface AdminEmailResultDto {
+  sent: number;
+  results: Array<{
+    userId: string;
+    email: string | null;
+    outcome: AdminEmailOutcome;
+    /** Why a person was skipped or the send failed. */
+    reason: string | null;
+  }>;
+}
+
+export interface AdminEmailPreviewDto {
+  subject: string;
+  html: string;
+}

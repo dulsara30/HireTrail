@@ -9,6 +9,7 @@ export const AUDIT_ACTIONS = [
   'COMPANY_MERGED',
   'COMPANIES_IMPORTED',
   'VERIFICATION_APPLIED',
+  'ADMIN_EMAIL_SENT',
 ] as const;
 export type AuditAction = (typeof AUDIT_ACTIONS)[number];
 

@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import { cursorPaginationSchema, objectIdSchema } from './common.schema';
+import { ADMIN_EMAIL_MAX_RECIPIENTS, ADMIN_EMAIL_TEMPLATES } from '../constants/admin-email';
 
 const reasonSchema = yup
   .string()
@@ -122,3 +123,52 @@ export type AdminUpdateCompanyInput = yup.InferType<typeof adminUpdateCompanySch
 export type AdminApplySuggestionsInput = yup.InferType<typeof adminApplySuggestionsSchema>;
 export type AdminAuditLogsQuery = yup.InferType<typeof adminAuditLogsQuerySchema>;
 export type AdminAiUsageQuery = yup.InferType<typeof adminAiUsageQuerySchema>;
+
+const adminEmailContent = {
+  template: yup
+    .string()
+    .oneOf([...ADMIN_EMAIL_TEMPLATES])
+    .required('Choose a template'),
+  subject: yup
+    .string()
+    .trim()
+    .min(1, 'A subject is required')
+    .max(150)
+    .required('A subject is required'),
+  heading: yup.string().trim().max(120).optional(),
+  message: yup
+    .string()
+    .trim()
+    .max(5000)
+    .when('template', {
+      is: (template: string) => template !== 'DUE_TASKS',
+      then: (schema) => schema.min(1, 'Write a message').required('Write a message'),
+      otherwise: (schema) => schema.optional(),
+    }),
+  ctaLabel: yup.string().trim().max(40).optional(),
+  ctaUrl: yup
+    .string()
+    .trim()
+    .max(500)
+    .matches(/^https?:\/\/\S+$/i, {
+      message: 'Must start with http:// or https://',
+      excludeEmptyString: true,
+    })
+    .optional(),
+};
+
+/** An admin sends one of the templates to chosen users. */
+export const adminSendEmailSchema = yup.object({
+  ...adminEmailContent,
+  userIds: yup
+    .array()
+    .of(objectIdSchema.required())
+    .min(1, 'Choose at least one person')
+    .max(ADMIN_EMAIL_MAX_RECIPIENTS, `At most ${ADMIN_EMAIL_MAX_RECIPIENTS} people at a time`)
+    .required('Choose at least one person'),
+});
+
+export const adminEmailPreviewSchema = yup.object(adminEmailContent);
+
+export type AdminSendEmailInput = yup.InferType<typeof adminSendEmailSchema>;
+export type AdminEmailPreviewInput = yup.InferType<typeof adminEmailPreviewSchema>;

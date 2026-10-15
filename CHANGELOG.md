@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added (Admin email)
+
+- **Admins can send emails to users** from Admin, Users: tick people, press Email, pick a template (General, Marketing, New feature, or Due tasks), edit the wording, check the live preview and send. "Send a test to me" mails the admin only, which is a quick way to check that email delivery works.
+- **Due tasks template:** every person gets their own overdue and due Orbit items; people with none are skipped.
+- Only active accounts with a verified email are mailed (at most 20 per send); each person gets a result (sent, skipped with a reason, or failed). Every send is written to the audit log as `ADMIN_EMAIL_SENT` without the message body.
+- New routes `POST /admin/emails/preview` and `POST /admin/emails/send` (ADMIN only).
+
 ### Added (Orbit: tasks, reminders and a command center)
 
 - **New page `/orbit`** in the sidebar: tasks, reminders, calls, meetings, interviews, follow-ups, deadlines and company watches in one place, linked to applications and companies. Each kind has its own colour everywhere.

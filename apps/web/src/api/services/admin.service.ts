@@ -6,6 +6,10 @@ import {
   type AdminChangePlanInput,
   type AdminChangeStatusInput,
   type AdminCompanyDto,
+  type AdminEmailPreviewDto,
+  type AdminEmailPreviewInput,
+  type AdminEmailResultDto,
+  type AdminSendEmailInput,
   type AdminCompanyDetailDto,
   type AdminUpdateCompanyInput,
   type AdminCreateCompanyInput,
@@ -123,6 +127,23 @@ export const adminService = {
     const res = await httpClient.get<ApiSuccess<AdminAiUsageDto>>(ADMIN_ENDPOINTS.aiUsage, {
       params: { days },
     });
+    return res.data.data;
+  },
+
+  async previewEmail(input: AdminEmailPreviewInput): Promise<AdminEmailPreviewDto> {
+    const res = await httpClient.post<ApiSuccess<AdminEmailPreviewDto>>(
+      ADMIN_ENDPOINTS.emailPreview,
+      input,
+    );
+    return res.data.data;
+  },
+
+  async sendEmail(input: AdminSendEmailInput): Promise<AdminEmailResultDto> {
+    const res = await httpClient.post<ApiSuccess<AdminEmailResultDto>>(
+      ADMIN_ENDPOINTS.emailSend,
+      input,
+      { timeout: 60_000 },
+    );
     return res.data.data;
   },
 };

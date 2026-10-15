@@ -13,6 +13,7 @@ const ACTIONS = [
   'USER_REACTIVATED',
   'COMPANY_MERGED',
   'VERIFICATION_APPLIED',
+  'ADMIN_EMAIL_SENT',
 ];
 
 function summarise(value: unknown): string {

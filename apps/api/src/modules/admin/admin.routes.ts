@@ -7,6 +7,8 @@ import {
   adminAuditLogsQuerySchema,
   adminChangePlanSchema,
   adminChangeStatusSchema,
+  adminEmailPreviewSchema,
+  adminSendEmailSchema,
   adminListCompaniesQuerySchema,
   adminListUsersQuerySchema,
   adminMergeCompanySchema,
@@ -57,6 +59,13 @@ export function createAdminRoutes(controller: AdminController): Router {
     validate({ body: adminApplySuggestionsSchema }),
     controller.applyVerification,
   );
+
+  router.post(
+    '/emails/preview',
+    validate({ body: adminEmailPreviewSchema }),
+    controller.previewEmail,
+  );
+  router.post('/emails/send', validate({ body: adminSendEmailSchema }), controller.sendEmail);
 
   router.get('/audit-logs', validate({ query: adminAuditLogsQuerySchema }), controller.auditLogs);
   router.get('/ai-health', controller.aiHealth);

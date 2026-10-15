@@ -10,6 +10,8 @@ export const ADMIN_ENDPOINTS = {
   auditLogs: '/admin/audit-logs',
   aiUsage: '/admin/ai-usage',
   aiHealth: '/admin/ai-health',
+  emailPreview: '/admin/emails/preview',
+  emailSend: '/admin/emails/send',
 } as const;
 
 export const DATA_ENDPOINTS = {

@@ -1,15 +1,18 @@
 'use client';
 
 import React from 'react';
-import { Search } from 'lucide-react';
+import { Mail, Search } from 'lucide-react';
+import { ADMIN_EMAIL_MAX_RECIPIENTS, type AdminUserDto } from '@hiretrail/shared';
 import { useAdminUsersInfinite } from '../../../../api/hooks/queries/useAdminUsersInfinite';
 import { useMe } from '../../../../api/hooks/queries/useMe';
 import { useDebouncedValue } from '../../../../hooks/useDebouncedValue';
 import { useInfiniteScroll } from '../../../../hooks/useInfiniteScroll';
 import { Badge } from '../../../../components/atoms/Badge';
+import { Button } from '../../../../components/atoms/Button';
 import { Spinner } from '../../../../components/atoms/Spinner';
 import { EmptyState } from '../../../../components/molecules/EmptyState';
 import { PlanQuickButton } from '../../../../components/organisms/admin/PlanQuickButton';
+import { AdminEmailDialog } from '../../../../components/organisms/admin/AdminEmailDialog';
 import { UserDetailPanel } from '../../../../components/organisms/admin/UserDetailPanel';
 
 const selectClass =
@@ -21,6 +24,8 @@ export default function AdminUsersPage() {
   const [plan, setPlan] = React.useState('');
   const [status, setStatus] = React.useState('');
   const [selected, setSelected] = React.useState<string | null>(null);
+  const [checked, setChecked] = React.useState<Map<string, AdminUserDto>>(() => new Map());
+  const [emailOpen, setEmailOpen] = React.useState(false);
   const q = useDebouncedValue(search, 300);
 
   const { data, isLoading, isError, hasNextPage, isFetchingNextPage, fetchNextPage } =
@@ -37,6 +42,14 @@ export default function AdminUsersPage() {
     },
   });
   const users = React.useMemo(() => data?.pages.flatMap((p) => p.items) ?? [], [data]);
+
+  const toggleChecked = (user: AdminUserDto) =>
+    setChecked((prev) => {
+      const next = new Map(prev);
+      if (next.has(user.id)) next.delete(user.id);
+      else if (next.size < ADMIN_EMAIL_MAX_RECIPIENTS) next.set(user.id, user);
+      return next;
+    });
 
   return (
     <div className="space-y-4">
@@ -74,7 +87,28 @@ export default function AdminUsersPage() {
           <option value="ACTIVE">ACTIVE</option>
           <option value="SUSPENDED">SUSPENDED</option>
         </select>
+        <Button
+          variant="accent"
+          size="md"
+          disabled={checked.size === 0}
+          onClick={() => setEmailOpen(true)}
+          leftIcon={<Mail className="h-4 w-4" aria-hidden="true" />}
+        >
+          Email {checked.size > 0 ? `(${checked.size})` : ''}
+        </Button>
       </div>
+      {checked.size > 0 && (
+        <p className="flex items-center gap-3 text-xs text-text-secondary">
+          {checked.size} selected (up to {ADMIN_EMAIL_MAX_RECIPIENTS} at a time).
+          <button
+            type="button"
+            onClick={() => setChecked(new Map())}
+            className="font-semibold text-text-accent hover:underline"
+          >
+            Clear selection
+          </button>
+        </p>
+      )}
 
       {isLoading ? (
         <div className="flex justify-center p-10">
@@ -88,9 +122,12 @@ export default function AdminUsersPage() {
         <EmptyState title="No users found" description="Try a different search or filter." />
       ) : (
         <div className="overflow-x-auto rounded-xl border border-border-default bg-bg-surface shadow-sm">
-          <table className="w-full min-w-[46rem] text-left text-sm">
+          <table className="w-full min-w-[50rem] text-left text-sm">
             <thead className="border-b border-border-default bg-bg-accent-subtle text-xs font-semibold uppercase text-text-accent">
               <tr>
+                <th className="w-10 px-4 py-3">
+                  <span className="sr-only">Select to email</span>
+                </th>
                 <th className="px-4 py-3">User</th>
                 <th className="px-4 py-3">Plan</th>
                 <th className="px-4 py-3">Role</th>
@@ -103,6 +140,15 @@ export default function AdminUsersPage() {
             <tbody className="divide-y divide-border-default">
               {users.map((u) => (
                 <tr key={u.id} className="hover:bg-bg-accent-subtle">
+                  <td className="px-4 py-3">
+                    <input
+                      type="checkbox"
+                      checked={checked.has(u.id)}
+                      onChange={() => toggleChecked(u)}
+                      aria-label={`Select ${u.email} to email`}
+                      className="h-4 w-4 cursor-pointer accent-[var(--color-bg-accent)]"
+                    />
+                  </td>
                   <td className="px-4 py-3">
                     <button
                       type="button"
@@ -139,6 +185,14 @@ export default function AdminUsersPage() {
             {isFetchingNextPage && <Spinner size="sm" />}
           </div>
         </div>
+      )}
+
+      {emailOpen && (
+        <AdminEmailDialog
+          recipients={[...checked.values()]}
+          adminId={me?.id}
+          onClose={() => setEmailOpen(false)}
+        />
       )}
 
       {selected && (

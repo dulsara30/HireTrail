@@ -84,6 +84,7 @@ import { CompanyAiController } from '../../modules/companies/controllers/company
 import { AuditLogRepository } from '../../modules/admin/repositories/audit-log.repository';
 import { AdminUserService } from '../../modules/admin/services/admin-user.service';
 import { AdminCompanyService } from '../../modules/admin/services/admin-company.service';
+import { AdminEmailService } from '../../modules/admin/services/admin-email.service';
 import { AdminReportsService } from '../../modules/admin/services/admin-reports.service';
 import { AdminController } from '../../modules/admin/controllers/admin.controller';
 import { ImportRepository } from '../../modules/applications/repositories/import.repository';
@@ -369,17 +370,16 @@ export class Container {
       new OrbitSpaceService(new OrbitSpaceRepository()),
       new OrbitSettingsService(orbitSettingsRepo),
     );
-    this.orbitCronController = new OrbitCronController(
-      new OrbitNotificationService(
-        orbitTaskRepo,
-        orbitSettingsRepo,
-        this.userRepo,
-        orbitLinks,
-        orbitQueries,
-        this.mailer,
-        config.webAppUrl,
-      ),
+    const orbitNotifications = new OrbitNotificationService(
+      orbitTaskRepo,
+      orbitSettingsRepo,
+      this.userRepo,
+      orbitLinks,
+      orbitQueries,
+      this.mailer,
+      config.webAppUrl,
     );
+    this.orbitCronController = new OrbitCronController(orbitNotifications);
 
     const auditRepo = new AuditLogRepository();
     this.adminController = new AdminController(
@@ -401,6 +401,13 @@ export class Container {
             budget: config.ai.tavilyMonthlyBudget,
           },
         },
+      ),
+      new AdminEmailService(
+        this.userRepo,
+        this.mailer,
+        orbitNotifications,
+        auditRepo,
+        config.webAppUrl,
       ),
     );
   }
